@@ -1,12 +1,12 @@
 package users.networking.server;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import networking.GenericServer;
 
-import message.Message;
-import message.MessageComparator;
-
-public class UserServer {
+public class UserServer extends GenericServer {
 	
-	public static final String URL_LOCATION = "/users";
+	public static final String URL_LOCATION = "users";
+	
+	public UserServer() {
+		super(URL_LOCATION, new UserService());
+	}
 }

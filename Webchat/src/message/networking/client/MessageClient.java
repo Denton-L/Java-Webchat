@@ -22,7 +22,7 @@ public class MessageClient {
 		this.messageThread = new Thread(new MessageRetriever(messageInterface));
 		
 		System.setSecurityManager(new RMISecurityManager());
-		this.messageInterface = (MessageInterface) Naming.lookup(serverIp
+		this.messageInterface = (MessageInterface) Naming.lookup(serverIp + "/"
 				+ MessageServer.URL_LOCATION);
 	}
 	
