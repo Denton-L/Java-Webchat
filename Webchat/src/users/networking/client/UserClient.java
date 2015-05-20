@@ -16,7 +16,7 @@ public class UserClient {
 			throws MalformedURLException, NotBoundException, RemoteException {
 		
 		System.setSecurityManager(new RMISecurityManager());
-		this.userInterface = (UserInterface) Naming.lookup(serverIp
+		this.userInterface = (UserInterface) Naming.lookup(serverIp + "/"
 				+ UserServer.URL_LOCATION);
 	}
 }

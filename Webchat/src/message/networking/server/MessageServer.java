@@ -1,12 +1,12 @@
 package message.networking.server;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import networking.GenericServer;
 
-import message.Message;
-import message.MessageComparator;
-
-public class MessageServer {
+public class MessageServer extends GenericServer {
 	
-	public static final String URL_LOCATION = "/messages";
+	public static final String URL_LOCATION = "messages";
+	
+	public MessageServer() {
+		super(URL_LOCATION, new MessageService());
+	}
 }

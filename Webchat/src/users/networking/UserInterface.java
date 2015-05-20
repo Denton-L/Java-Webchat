@@ -1,6 +1,8 @@
 package users.networking;
 
-public interface UserInterface {
+import java.rmi.Remote;
+
+public interface UserInterface extends Remote {
 	
 	boolean register(String username, byte[] password);
 	
