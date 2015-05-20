@@ -6,4 +6,6 @@ public interface UserInterface {
 	
 	public String signIn(String username, byte[] password);
 	
+	public void logout(String username, byte[] password);
+	
 }
