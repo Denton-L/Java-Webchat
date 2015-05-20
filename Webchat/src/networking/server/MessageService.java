@@ -1,25 +1,29 @@
 package networking.server;
 
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+import java.io.Serializable;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import networking.Message;
+import networking.MessageComparator;
 import networking.MessageInterface;
 
-public class MessageService extends UnicastRemoteObject implements MessageInterface{
-
-	public MessageService() throws RemoteException{
-		
+public class MessageService implements MessageInterface, Serializable {
+	
+	SortedSet<Message> messages;
+	
+	public MessageService() {
+		messages = new TreeSet<>(new MessageComparator());
 	}
 	
-	public void push (Message message){
-		
+	@Override
+	public SortedSet<Message> pull(Message lastMessageRecieved) {
+		return messages.tailSet(lastMessageRecieved);
+	}
+
+	@Override
+	public void push(Message message) {
+		// TODO Auto-generated method stub
 	}
 	
-	public Message pull (Message message){
-
-		return message;
-	}
-	
-
 }
