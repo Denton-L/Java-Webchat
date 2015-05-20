@@ -5,12 +5,12 @@ import java.util.SortedSet;
 import message.Message;
 import message.networking.MessageInterface;
 
-public class GetMessages implements Runnable {
+public class MessageRetriever implements Runnable {
 	
 	Message message;
 	MessageInterface messageInterface;
 	
-	public GetMessages(MessageInterface messageInterface) {
+	public MessageRetriever(MessageInterface messageInterface) {
 		this.message = null;
 		this.messageInterface = messageInterface;
 	}
