@@ -12,9 +12,9 @@ import message.networking.server.MessageServer;
 
 public class MessageClient {
 	
-	MessageInterface messageInterface;
-	Thread messageThread;
-	String userHash;
+	private MessageInterface messageInterface;
+	private Thread messageThread;
+	private String userHash;
 	
 	public MessageClient(String serverIp, String userHash)
 			throws MalformedURLException, NotBoundException, RemoteException {

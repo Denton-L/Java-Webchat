@@ -2,10 +2,10 @@ package users.networking;
 
 public interface UserInterface {
 	
-	public boolean register(String username, byte[] password);
+	boolean register(String username, byte[] password);
 	
-	public String signIn(String username, byte[] password);
+	String signIn(String username, byte[] password);
 	
-	public void logout(String username, byte[] password);
+	void logout(String username, byte[] password);
 	
 }

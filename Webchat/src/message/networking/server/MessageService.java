@@ -10,7 +10,7 @@ import message.networking.MessageInterface;
 
 public class MessageService implements MessageInterface, Serializable {
 	
-	SortedSet<Message> messages;
+	private SortedSet<Message> messages;
 	
 	public MessageService() {
 		messages = new TreeSet<>(new MessageComparator());
