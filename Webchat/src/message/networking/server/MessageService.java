@@ -1,4 +1,4 @@
-package networking.server;
+package message.networking.server;
 
 import java.io.Serializable;
 import java.util.SortedSet;
@@ -6,7 +6,7 @@ import java.util.TreeSet;
 
 import message.Message;
 import message.MessageComparator;
-import networking.MessageInterface;
+import message.networking.MessageInterface;
 
 public class MessageService implements MessageInterface, Serializable {
 	
