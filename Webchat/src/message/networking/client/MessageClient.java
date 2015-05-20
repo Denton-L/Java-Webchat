@@ -19,7 +19,7 @@ public class MessageClient {
 	public MessageClient(String serverIp, String userHash)
 			throws MalformedURLException, NotBoundException, RemoteException {
 		this.userHash = userHash;
-		this.messageThread = new Thread(new GetMessages(messageInterface));
+		this.messageThread = new Thread(new MessageRetriever(messageInterface));
 		
 		System.setSecurityManager(new RMISecurityManager());
 		this.messageInterface = (MessageInterface) Naming.lookup(serverIp
