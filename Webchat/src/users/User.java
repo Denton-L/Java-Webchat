@@ -6,7 +6,7 @@ public class User implements Serializable {
 	
 	private String username;
 	private byte[] passwordHash;
-	private byte[] instanceHash;
+	private byte[] userInstance;
 	
 	public User(String username, byte[] passwordHash) {
 		this.username = username;
@@ -21,12 +21,12 @@ public class User implements Serializable {
 		return passwordHash;
 	}
 
-	public byte[] getInstanceHash() {
-		return instanceHash;
+	public byte[] getuserInstance() {
+		return userInstance;
 	}
 
-	public void setInstanceHash(byte[] instanceHash) {
-		this.instanceHash = instanceHash;
+	public void setuserInstance(byte[] userInstance) {
+		this.userInstance = userInstance;
 	}
 	
 }
