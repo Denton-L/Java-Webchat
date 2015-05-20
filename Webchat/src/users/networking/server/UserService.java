@@ -22,13 +22,6 @@ public class UserService implements UserInterface, Serializable {
 	}
 
 	@Override
-	public void logout(String username, byte[] password) {
-		// TODO Auto-generated method stub
-		//remove the user's instancehash
-		
-	}
-
-	@Override
 	public void logout(String instanceHash) {
 		// TODO Auto-generated method stub
 		
