@@ -1,4 +1,4 @@
-package networking.server;
+package message.networking.server;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
