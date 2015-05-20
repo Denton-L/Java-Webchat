@@ -1,4 +1,4 @@
-package networking;
+package message.networking;
 
 import java.rmi.Remote;
 import java.util.SortedSet;

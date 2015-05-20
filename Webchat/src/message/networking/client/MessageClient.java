@@ -1,4 +1,4 @@
-package networking.client;
+package message.networking.client;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -7,8 +7,8 @@ import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 
 import message.Message;
-import networking.MessageInterface;
-import networking.server.MessageServer;
+import message.networking.MessageInterface;
+import message.networking.server.MessageServer;
 
 public class MessageClient {
 	
