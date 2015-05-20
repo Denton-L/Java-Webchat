@@ -8,6 +8,6 @@ public interface UserInterface extends Remote {
 	
 	String signIn(String username, byte[] password);
 	
-	void logout(String username, byte[] password);
+	void logout(String instanceHash);
 	
 }
