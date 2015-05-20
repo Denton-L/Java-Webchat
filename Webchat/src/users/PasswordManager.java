@@ -7,7 +7,7 @@ public class PasswordManager {
 	
 	public static final int NUMBER_OF_HASHES = 1000;
 	
-	private static void clearArray(byte[] cleared) {
+	public static void clearArray(byte[] cleared) {
 		for (int i = 0; i < cleared.length; i++) {
 			cleared[i] = 0;
 		}
