@@ -6,11 +6,11 @@ import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 
-import message.Message;
 import message.networking.MessageInterface;
 import message.networking.server.MessageServer;
+import networking.GenericClient;
 
-public class MessageClient {
+public class MessageClient extends GenericClient {
 	
 	private MessageInterface messageInterface;
 	private Thread messageThread;
@@ -18,12 +18,10 @@ public class MessageClient {
 	
 	public MessageClient(String serverIp, String userHash)
 			throws MalformedURLException, NotBoundException, RemoteException {
+		super(serverIp, MessageServer.URL_LOCATION);
+		this.messageInterface = (MessageInterface) remoteInterface;
 		this.userHash = userHash;
 		this.messageThread = new Thread(new MessageRetriever(messageInterface));
-		
-		System.setSecurityManager(new RMISecurityManager());
-		this.messageInterface = (MessageInterface) Naming.lookup(serverIp + "/"
-				+ MessageServer.URL_LOCATION);
 	}
 	
 	public void startClient() {
