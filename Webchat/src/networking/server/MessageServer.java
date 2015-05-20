@@ -3,8 +3,8 @@ package networking.server;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import networking.Message;
-import networking.MessageComparator;
+import message.Message;
+import message.MessageComparator;
 
 public class MessageServer {
 	
