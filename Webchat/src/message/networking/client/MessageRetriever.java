@@ -7,6 +7,8 @@ import message.networking.MessageInterface;
 
 public class MessageRetriever implements Runnable {
 	
+	public static final long REFRESH_RATE = 50;
+	
 	private Message message;
 	private MessageInterface messageInterface;
 	
@@ -22,7 +24,7 @@ public class MessageRetriever implements Runnable {
 			message = messages.last();
 			//TODO: GUI handler code here with messages
 			try {
-				Thread.sleep(50);
+				Thread.sleep(REFRESH_RATE);
 			} catch (InterruptedException e) {
 			}
 		}
