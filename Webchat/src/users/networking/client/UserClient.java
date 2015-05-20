@@ -11,7 +11,7 @@ import users.networking.server.UserServer;
 
 public class UserClient extends GenericClient {
 	private UserInterface userInterface;
-	private String instanceHash;
+	private byte[] userInstance;
 	
 	public UserClient(String serverIp) throws MalformedURLException,
 			NotBoundException, RemoteException {
@@ -24,13 +24,13 @@ public class UserClient extends GenericClient {
 		return userInterface.register(username, hashedPass);
 	}
 	
-	public String signIn(String username, byte[] password) {
+	public byte[] signIn(String username, byte[] password) {
 		byte[] hashedPass = PasswordManager.clientHash(password, username);
 		PasswordManager.clearArray(password);
-		return instanceHash = userInterface.signIn(username, hashedPass);
+		return userInstance = userInterface.signIn(username, hashedPass);
 	}
 	
-	public void logout(String instanceHash) {
-		userInterface.logout(instanceHash);
+	public void logout(byte[] userInstance) {
+		userInterface.logout(userInstance);
 	}
 }
