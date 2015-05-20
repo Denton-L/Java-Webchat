@@ -6,8 +6,8 @@ public interface UserInterface extends Remote {
 	
 	boolean register(String username, byte[] password);
 	
-	String signIn(String username, byte[] password);
+	byte[] signIn(String username, byte[] password);
 	
-	void logout(String instanceHash);
+	void logout(byte[] userInstance);
 	
 }
