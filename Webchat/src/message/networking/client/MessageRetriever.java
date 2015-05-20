@@ -7,8 +7,8 @@ import message.networking.MessageInterface;
 
 public class MessageRetriever implements Runnable {
 	
-	Message message;
-	MessageInterface messageInterface;
+	private Message message;
+	private MessageInterface messageInterface;
 	
 	public MessageRetriever(MessageInterface messageInterface) {
 		this.message = null;
