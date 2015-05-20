@@ -22,7 +22,7 @@ public class MessageService implements MessageInterface, Serializable {
 	}
 
 	@Override
-	public void push(String message, String userHash) {
+	public void push(String message, byte[] instanceHash) {
 		// TODO Auto-generated method stub
 		
 	}
