@@ -1,7 +1,10 @@
-package networking;
+package networking.server;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import networking.Message;
+import networking.MessageComparator;
 
 public class MessageServer {
 	
