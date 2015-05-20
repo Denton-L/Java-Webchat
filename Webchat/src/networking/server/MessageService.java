@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import networking.Message;
-import networking.MessageComparator;
+import message.Message;
+import message.MessageComparator;
 import networking.MessageInterface;
 
 public class MessageService implements MessageInterface, Serializable {
