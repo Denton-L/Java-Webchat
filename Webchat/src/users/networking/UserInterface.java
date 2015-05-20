@@ -1,4 +1,4 @@
-package networking;
+package users.networking;
 
 public interface UserInterface {
 	
