@@ -20,10 +20,14 @@ public class MessageService implements MessageInterface, Serializable {
 	public SortedSet<Message> pull(Message lastMessageRecieved) {
 		return messages.tailSet(lastMessageRecieved);
 	}
-
+	
 	@Override
-	public void push(String message, byte[] userInstance) {
-		// TODO Auto-generated method stub
+	public void push(String content, byte[] userInstance) {
+		// check if userInstance exists in database
+		Message message = new Message(content, null /* get from database */,
+				System.currentTimeMillis());
+		messages.add(message);
+		// add message to the database as well
 		
 	}
 	
