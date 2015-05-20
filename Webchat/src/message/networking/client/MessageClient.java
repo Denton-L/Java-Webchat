@@ -14,13 +14,13 @@ public class MessageClient extends GenericClient {
 	
 	private MessageInterface messageInterface;
 	private Thread messageThread;
-	private String userHash;
+	private byte[] instanceHash;
 	
-	public MessageClient(String serverIp, String userHash)
+	public MessageClient(String serverIp, byte[] instanceHash)
 			throws MalformedURLException, NotBoundException, RemoteException {
 		super(serverIp, MessageServer.URL_LOCATION);
 		this.messageInterface = (MessageInterface) remoteInterface;
-		this.userHash = userHash;
+		this.instanceHash = instanceHash;
 		this.messageThread = new Thread(new MessageRetriever(messageInterface));
 	}
 	
@@ -29,6 +29,6 @@ public class MessageClient extends GenericClient {
 	}
 	
 	public void sendMessage(String message) {
-		messageInterface.push(message, userHash);
+		messageInterface.push(message, instanceHash);
 	}
 }
