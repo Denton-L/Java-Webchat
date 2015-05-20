@@ -6,7 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 
-import networking.Message;
+import message.Message;
 import networking.MessageInterface;
 import networking.server.MessageServer;
 

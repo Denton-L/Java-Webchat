@@ -2,7 +2,7 @@ package networking.client;
 
 import java.util.SortedSet;
 
-import networking.Message;
+import message.Message;
 import networking.MessageInterface;
 
 public class GetMessages implements Runnable {
