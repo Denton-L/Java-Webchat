@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.ui.externaltools.ProgramLaunchConfigurationType">
+<stringAttribute key="bad_container_name" value="StartRMIServer"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${ee_home:JavaSE-1.7}/bin/rmiregistry.exe"/>
+</launchConfiguration>
