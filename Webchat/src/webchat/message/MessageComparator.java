@@ -1,4 +1,4 @@
-package message;
+package webchat.message;
 
 import java.util.Comparator;
 
