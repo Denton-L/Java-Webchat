@@ -6,27 +6,34 @@ import message.Message;
 import message.networking.MessageInterface;
 
 public class MessageRetriever implements Runnable {
-	
-	public static final long REFRESH_RATE = 50;
-	
+
 	private Message message;
 	private MessageInterface messageInterface;
-	
-	public MessageRetriever(MessageInterface messageInterface) {
+	private long period;
+	private volatile boolean threadRunning;
+
+	public MessageRetriever(MessageInterface messageInterface, long period) {
 		this.message = null;
 		this.messageInterface = messageInterface;
+		this.period = period;
+		this.threadRunning = true;
 	}
-	
+
 	@Override
 	public void run() {
-		while (true) {
+		while (threadRunning) {
 			SortedSet<Message> messages = messageInterface.pull(message);
 			message = messages.last();
-			//TODO: GUI handler code here with messages
+			// TODO: GUI handler code here with messages
 			try {
-				Thread.sleep(REFRESH_RATE);
+				Thread.sleep(period);
 			} catch (InterruptedException e) {
+				continue;
 			}
 		}
+	}
+	
+	public synchronized void stopThread() {
+		this.threadRunning = false;
 	}
 }
