@@ -28,12 +28,12 @@ public interface MessageInterface extends Remote {
 	/**
 	 * Pulls all messages received since the last message received.
 	 * 
-	 * @param lastMessageRecieved
+	 * @param lastMessageReceived
 	 *            The {@code Message} which was the last one received by the
 	 *            client. Pass {@code null} if no messages have been received
 	 *            yet.
 	 * @return A {@code SortedSet<Message>} ordered in ascending order of their
 	 *         timestamps from when the last message was received.
 	 */
-	SortedSet<Message> pull(Message lastMessageRecieved);
+	SortedSet<Message> pull(Message lastMessageReceived);
 }

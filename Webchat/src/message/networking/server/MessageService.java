@@ -17,8 +17,8 @@ public class MessageService implements MessageInterface, Serializable {
 	}
 	
 	@Override
-	public SortedSet<Message> pull(Message lastMessageRecieved) {
-		return messages.tailSet(lastMessageRecieved);
+	public SortedSet<Message> pull(Message lastMessageReceived) {
+		return messages.tailSet(lastMessageReceived);
 	}
 	
 	@Override
