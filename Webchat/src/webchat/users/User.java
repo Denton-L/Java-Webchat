@@ -1,4 +1,4 @@
-package users;
+package webchat.users;
 
 import java.io.Serializable;
 
