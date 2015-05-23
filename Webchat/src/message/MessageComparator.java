@@ -2,6 +2,12 @@ package message;
 
 import java.util.Comparator;
 
+/**
+ * A comparator which sorts {@code Message}s in ascending order by their {@code timestamp}.
+ * 
+ * @author Denton Liu
+ * @version 2015-05-23
+ */
 public class MessageComparator implements Comparator<Message> {
 	
 	/**
