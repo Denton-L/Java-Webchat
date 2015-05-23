@@ -4,10 +4,10 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import networking.GenericClient;
-import users.PasswordManager;
-import users.networking.UserInterface;
-import users.networking.server.UserServer;
+import webchat.networking.GenericClient;
+import webchat.users.PasswordManager;
+import webchat.users.networking.UserInterface;
+import webchat.users.networking.server.UserServer;
 
 public class UserClient extends GenericClient {
 	private UserInterface userInterface;

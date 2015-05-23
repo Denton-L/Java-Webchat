@@ -3,7 +3,7 @@ package webchat.message.networking;
 import java.rmi.Remote;
 import java.util.SortedSet;
 
-import message.Message;
+import webchat.message.Message;
 
 /**
  * An abstract interface which will allow messages to be sent between the client

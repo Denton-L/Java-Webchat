@@ -4,9 +4,9 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import message.networking.MessageInterface;
-import message.networking.server.MessageServer;
-import networking.GenericClient;
+import webchat.message.networking.MessageInterface;
+import webchat.message.networking.server.MessageServer;
+import webchat.networking.GenericClient;
 
 /**
  * The client which will communicate with {@code MessageServer}.
