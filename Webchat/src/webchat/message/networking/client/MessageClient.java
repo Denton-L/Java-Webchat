@@ -1,4 +1,4 @@
-package message.networking.client;
+package webchat.message.networking.client;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;

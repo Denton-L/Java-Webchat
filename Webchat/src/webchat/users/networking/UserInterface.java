@@ -1,4 +1,4 @@
-package users.networking;
+package webchat.users.networking;
 
 import java.rmi.Remote;
 

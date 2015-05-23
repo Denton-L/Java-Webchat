@@ -1,4 +1,4 @@
-package networking;
+package webchat.networking;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
