@@ -7,8 +7,6 @@ import java.rmi.RMISecurityManager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import message.networking.server.MessageServer;
-
 public class GenericClient {
 	
 	protected Remote remoteInterface;

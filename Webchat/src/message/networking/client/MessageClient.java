@@ -1,9 +1,7 @@
 package message.networking.client;
 
 import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
-import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 
 import message.networking.MessageInterface;
