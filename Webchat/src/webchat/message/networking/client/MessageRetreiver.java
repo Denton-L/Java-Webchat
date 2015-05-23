@@ -2,8 +2,8 @@ package webchat.message.networking.client;
 
 import java.util.SortedSet;
 
-import message.Message;
-import message.networking.MessageInterface;
+import webchat.message.Message;
+import webchat.message.networking.MessageInterface;
 
 /**
  * An implementation of {@code Runnable} which fetches messages from the server.

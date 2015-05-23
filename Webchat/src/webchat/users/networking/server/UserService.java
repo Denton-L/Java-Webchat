@@ -3,9 +3,9 @@ package webchat.users.networking.server;
 import java.io.Serializable;
 import java.security.SecureRandom;
 
-import users.PasswordManager;
-import users.User;
-import users.networking.UserInterface;
+import webchat.users.PasswordManager;
+import webchat.users.User;
+import webchat.users.networking.UserInterface;
 
 public class UserService implements UserInterface, Serializable {
 	
