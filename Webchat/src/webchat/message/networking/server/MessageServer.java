@@ -1,4 +1,4 @@
-package message.networking.server;
+package webchat.message.networking.server;
 
 import networking.GenericServer;
 

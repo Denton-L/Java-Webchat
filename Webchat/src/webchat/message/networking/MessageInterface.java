@@ -1,4 +1,4 @@
-package message.networking;
+package webchat.message.networking;
 
 import java.rmi.Remote;
 import java.util.SortedSet;

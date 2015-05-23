@@ -1,4 +1,4 @@
-package users.networking.server;
+package webchat.users.networking.server;
 
 import java.io.Serializable;
 import java.security.SecureRandom;
