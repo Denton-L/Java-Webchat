@@ -5,14 +5,14 @@ import java.util.SortedSet;
 import message.Message;
 import message.networking.MessageInterface;
 
-public class MessageRetriever implements Runnable {
+public class MessageRetreiver implements Runnable {
 
 	private Message message;
 	private MessageInterface messageInterface;
 	private long period;
 	private volatile boolean threadRunning;
 
-	public MessageRetriever(MessageInterface messageInterface, long period) {
+	public MessageRetreiver(MessageInterface messageInterface, long period) {
 		this.message = null;
 		this.messageInterface = messageInterface;
 		this.period = period;
