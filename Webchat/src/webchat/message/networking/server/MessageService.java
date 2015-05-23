@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import message.Message;
-import message.MessageComparator;
-import message.networking.MessageInterface;
+import webchat.message.Message;
+import webchat.message.MessageComparator;
+import webchat.message.networking.MessageInterface;
 
 public class MessageService implements MessageInterface, Serializable {
 	

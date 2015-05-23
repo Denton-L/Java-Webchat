@@ -1,6 +1,6 @@
 package webchat.message.networking.server;
 
-import networking.GenericServer;
+import webchat.networking.GenericServer;
 
 public class MessageServer extends GenericServer {
 	
