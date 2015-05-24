@@ -46,7 +46,11 @@ public class PasswordManager {
 		hash = messageDigest.digest();
 		
 		for (int hashNumber = 0; hashNumber < NUMBER_OF_HASHES; hashNumber++) {
-			hash = messageDigest.digest(hash);
+			hash = messageDigest.digest();
+			messageDigest.update(hash);
+			messageDigest.update(username.getBytes());
+			clearArray(hash);
+			hash = messageDigest.digest();
 		}
 		
 		return hash;
