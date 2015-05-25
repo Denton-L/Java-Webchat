@@ -1,4 +1,4 @@
-package ui;
+package webchat.ui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
