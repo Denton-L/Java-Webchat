@@ -1,4 +1,4 @@
-package ui;
+package webchat.ui;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;

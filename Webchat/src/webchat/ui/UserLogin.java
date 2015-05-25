@@ -1,4 +1,4 @@
-package ui;
+package webchat.ui;
 
 public class UserLogin {
 	String user, pw, serverIp;
