@@ -1,4 +1,4 @@
-package ui;
+package webchat.ui;
 
 import javafx.scene.Node;
 import javafx.scene.paint.Color;

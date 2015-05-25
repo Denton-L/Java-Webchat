@@ -1,4 +1,4 @@
-package ui;
+package webchat.ui;
 
 public class UserInfo {
 	String newUser;
