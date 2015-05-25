@@ -7,12 +7,12 @@ import java.rmi.RMISecurityManager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public class GenericServer {
+public abstract class GenericServer {
 	
 	private String location;
 	private Remote binding;
 	
-	public abstract GenericServer(String location, Remote binding) {
+	public GenericServer(String location, Remote binding) {
 		this.location = location;
 		this.binding = binding;
 	}
