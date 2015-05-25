@@ -1,4 +1,4 @@
-package ui;
+package webchat.ui;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

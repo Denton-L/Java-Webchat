@@ -1,4 +1,4 @@
-package ui;
+package webchat.ui;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -19,13 +19,13 @@ public class MainInterface extends Application {
 	MsgScene msgScene = new MsgScene();
 
 	static Font f = Font.loadFont(
-			MainInterface.class.getResource("/res/ufonts.com_segoe-ui-light.ttf")
+			MainInterface.class.getResource("/res/ufonts.com_segoe-webchat.ui-light.ttf")
 					.toExternalForm(), 17);
 	static Font fLarge = Font.loadFont(
-			MainInterface.class.getResource("/res/ufonts.com_segoe-ui-light.ttf")
+			MainInterface.class.getResource("/res/ufonts.com_segoe-webchat.ui-light.ttf")
 					.toExternalForm(), 25);
 	static Font fBig = Font.loadFont(
-			MainInterface.class.getResource("/res/ufonts.com_segoe-ui-light.ttf")
+			MainInterface.class.getResource("/res/ufonts.com_segoe-webchat.ui-light.ttf")
 					.toExternalForm(), 45);
 	UserUpdate userupd = new UserUpdate(msgScene);
 	Messenger messenger = new Messenger(msgScene);
