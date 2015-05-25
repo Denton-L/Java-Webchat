@@ -12,7 +12,7 @@ public class GenericServer {
 	private String location;
 	private Remote binding;
 	
-	public GenericServer(String location, Remote binding) {
+	public abstract GenericServer(String location, Remote binding) {
 		this.location = location;
 		this.binding = binding;
 	}
