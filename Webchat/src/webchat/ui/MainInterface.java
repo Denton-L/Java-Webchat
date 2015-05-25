@@ -14,35 +14,36 @@ public class MainInterface extends Application {
 	String user;
 	String newUser;
 	String newPass;
-	ChatScene chatScene = new ChatScene();
-	RegScene regScene = new RegScene();
-	MsgScene msgScene = new MsgScene();
+	final ChatScene chatScene = new ChatScene();
+	final RegScene regScene = new RegScene();
+	final MsgScene msgScene = new MsgScene();
 
 	static Font f = Font.loadFont(
-			MainInterface.class.getResource("/res/ufonts.com_segoe-webchat.ui-light.ttf")
+			MainInterface.class.getResource("/res/ufonts.com_segoe-ui-light.ttf")
 					.toExternalForm(), 17);
 	static Font fLarge = Font.loadFont(
-			MainInterface.class.getResource("/res/ufonts.com_segoe-webchat.ui-light.ttf")
+			MainInterface.class.getResource("/res/ufonts.com_segoe-ui-light.ttf")
 					.toExternalForm(), 25);
 	static Font fBig = Font.loadFont(
-			MainInterface.class.getResource("/res/ufonts.com_segoe-webchat.ui-light.ttf")
+			MainInterface.class.getResource("/res/ufonts.com_segoe-ui-light.ttf")
 					.toExternalForm(), 45);
+	
 	UserUpdate userupd = new UserUpdate(msgScene);
 	Messenger messenger = new Messenger(msgScene);
 
 	public static void main(String[] args) {
 		System.out.println("asdf");
 		launch(args);
-	}
+		}
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(final Stage primaryStage) {
 		Font.loadFont(MainInterface.class.getResource("/res/NexaLight.otf")
 				.toExternalForm(), 17);
 
-		Scene chat = chatScene.createChat();
-		Scene reg = regScene.createReg();
-		Scene msg = msgScene.createMsg();
+		final Scene chat = chatScene.createChat();
+		final Scene reg = regScene.createReg();
+		final Scene msg = msgScene.createMsg();
 
 		primaryStage.setTitle("Chat");
 		primaryStage.setScene(chat);
