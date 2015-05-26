@@ -17,38 +17,38 @@ public class MainInterface extends Application {
 	final ChatScene chatScene = new ChatScene();
 	final RegScene regScene = new RegScene();
 	final MsgScene msgScene = new MsgScene();
-
+	
 	static Font f = Font.loadFont(
-			MainInterface.class.getResource("/res/ufonts.com_segoe-ui-light.ttf")
-					.toExternalForm(), 17);
+			MainInterface.class.getResource(
+					"/res/ufonts.com_segoe-ui-light.ttf").toExternalForm(), 17);
 	static Font fLarge = Font.loadFont(
-			MainInterface.class.getResource("/res/ufonts.com_segoe-ui-light.ttf")
-					.toExternalForm(), 25);
+			MainInterface.class.getResource(
+					"/res/ufonts.com_segoe-ui-light.ttf").toExternalForm(), 25);
 	static Font fBig = Font.loadFont(
-			MainInterface.class.getResource("/res/ufonts.com_segoe-ui-light.ttf")
-					.toExternalForm(), 45);
+			MainInterface.class.getResource(
+					"/res/ufonts.com_segoe-ui-light.ttf").toExternalForm(), 45);
 	
 	UserUpdate userupd = new UserUpdate(msgScene);
 	Messenger messenger = new Messenger(msgScene);
-
+	
 	public static void main(String[] args) {
 		System.out.println("asdf");
 		launch(args);
-		}
-
+	}
+	
 	@Override
 	public void start(final Stage primaryStage) {
 		Font.loadFont(MainInterface.class.getResource("/res/NexaLight.otf")
 				.toExternalForm(), 17);
-
+		
 		final Scene chat = chatScene.createChat();
 		final Scene reg = regScene.createReg();
 		final Scene msg = msgScene.createMsg();
-
+		
 		primaryStage.setTitle("Chat");
 		primaryStage.setScene(chat);
 		primaryStage.show();
-
+		
 		userupd.writeUser("lucychoi");
 		userupd.writeUser("cindypiao");
 		messenger
@@ -57,7 +57,7 @@ public class MainInterface extends Application {
 						"lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mauris neque, imperdiet ac porta ut, feugiat a quam. Praesent laoreet sapien sem, et sodales arcu vulputate eget.",
 						"sample time");
 		userupd.userStatus("cindypiao", true);
-
+		
 		chatScene.register.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -65,12 +65,13 @@ public class MainInterface extends Application {
 				primaryStage.setScene(reg);
 			}
 		});
-
+		
 		chatScene.enter.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				UserLogin userlogin = new UserLogin(chatScene.userBox.getText(),
-						chatScene.pwBox.getText(), chatScene.ipBox.getText());
+				UserLogin userlogin = new UserLogin(
+						chatScene.userBox.getText(), chatScene.pwBox.getText(),
+						chatScene.ipBox.getText());
 				if (userlogin.infoCheck() == true) {
 					messenger.getUser(chatScene.userBox.getText());
 					System.out.println(chatScene.userBox.getText());
@@ -81,7 +82,7 @@ public class MainInterface extends Application {
 					chatScene.warning.setVisible(true);
 			}
 		});
-
+		
 		regScene.enter.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -95,23 +96,23 @@ public class MainInterface extends Application {
 					regScene.warning.setVisible(true);
 			}
 		});
-
+		
 		msgScene.logout.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				primaryStage.setScene(chat);
 				msgScene.clrAll();
 			}
-
+			
 		});
-
+		
 		msgScene.enter.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent actionEvent) {
 				messenger.deliverMsg();
 			}
 		});
-
+		
 		msgScene.input.addEventFilter(KeyEvent.KEY_PRESSED,
 				new EventHandler<KeyEvent>() {
 					@Override
@@ -123,17 +124,17 @@ public class MainInterface extends Application {
 						}
 					}
 				});
-
+		
 	}
-
+	
 	public static Font getFont() {
 		return f;
 	}
-
+	
 	public static Font getFont2() {
 		return fLarge;
 	}
-
+	
 	public static Font getFont3() {
 		return fBig;
 	}
