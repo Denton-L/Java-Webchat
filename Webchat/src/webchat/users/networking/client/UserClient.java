@@ -48,7 +48,12 @@ public class UserClient extends GenericClient {
 	public boolean register(String username, byte[] password) {
 		byte[] hashedPass = PasswordManager.clientHash(password, username);
 		PasswordManager.clearArray(password);
-		return userInterface.register(username, hashedPass);
+		try {
+			return userInterface.register(username, hashedPass);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	/**
@@ -64,7 +69,12 @@ public class UserClient extends GenericClient {
 	public byte[] signIn(String username, byte[] password) {
 		byte[] hashedPass = PasswordManager.clientHash(password, username);
 		PasswordManager.clearArray(password);
-		return userInterface.signIn(username, hashedPass);
+		try {
+			return userInterface.signIn(username, hashedPass);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	/**
@@ -74,6 +84,10 @@ public class UserClient extends GenericClient {
 	 *            The uniquely identifying {@code byte[]} to sign out.
 	 */
 	public void logout(byte[] userInstance) {
-		userInterface.logout(userInstance);
+		try {
+			userInterface.logout(userInstance);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 }

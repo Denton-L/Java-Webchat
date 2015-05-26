@@ -1,5 +1,6 @@
 package webchat.message.networking.client;
 
+import java.rmi.RemoteException;
 import java.util.SortedSet;
 
 import webchat.message.Message;
@@ -43,7 +44,13 @@ public class MessageRetreiver implements Runnable {
 	@Override
 	public void run() {
 		while (threadRunning) {
-			SortedSet<Message> messages = messageInterface.pull(lastMessage);
+			SortedSet<Message> messages;
+			try {
+				messages = messageInterface.pull(lastMessage);
+			} catch (RemoteException e) {
+				messages = null;
+				e.printStackTrace();
+			}
 			lastMessage = messages.last();
 			// TODO: GUI handler code here with messages
 			try {

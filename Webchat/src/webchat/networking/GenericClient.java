@@ -34,7 +34,7 @@ public abstract class GenericClient {
 			throws MalformedURLException, RemoteException, NotBoundException {
 		System.setSecurityManager(new RMISecurityManager());
 		
-		Registry registry = LocateRegistry.getRegistry(serverIp);
+		Registry registry = LocateRegistry.getRegistry(serverURL);
 		remoteInterface = (Remote) registry.lookup(sublocation);
 	}
 }
