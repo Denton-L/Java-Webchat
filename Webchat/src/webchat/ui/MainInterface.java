@@ -20,13 +20,13 @@ public class MainInterface extends Application {
 	
 	static Font f = Font.loadFont(
 			MainInterface.class.getResource(
-					"/res/ufonts.com_segoe-ui-light.ttf").toExternalForm(), 17);
+					"/ufonts.com_segoe-ui-light.ttf").toExternalForm(), 17);
 	static Font fLarge = Font.loadFont(
 			MainInterface.class.getResource(
-					"/res/ufonts.com_segoe-ui-light.ttf").toExternalForm(), 25);
+					"/ufonts.com_segoe-ui-light.ttf").toExternalForm(), 25);
 	static Font fBig = Font.loadFont(
 			MainInterface.class.getResource(
-					"/res/ufonts.com_segoe-ui-light.ttf").toExternalForm(), 45);
+					"/ufonts.com_segoe-ui-light.ttf").toExternalForm(), 45);
 	
 	UserUpdate userupd = new UserUpdate(msgScene);
 	Messenger messenger = new Messenger(msgScene);
@@ -38,7 +38,7 @@ public class MainInterface extends Application {
 	
 	@Override
 	public void start(final Stage primaryStage) {
-		Font.loadFont(MainInterface.class.getResource("/res/NexaLight.otf")
+		Font.loadFont(MainInterface.class.getResource("/NexaLight.otf")
 				.toExternalForm(), 17);
 		
 		final Scene chat = chatScene.createChat();
