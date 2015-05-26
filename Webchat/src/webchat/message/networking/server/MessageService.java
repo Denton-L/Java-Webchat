@@ -8,8 +8,15 @@ import webchat.message.Message;
 import webchat.message.MessageComparator;
 import webchat.message.networking.MessageInterface;
 
+/**
+ * A class which handles the logic of message processing.
+ * 
+ * @author Denton Liu
+ * @version 2015-05-25
+ */
 public class MessageService implements MessageInterface, Serializable {
 	
+	/** All of the {@code Message}s that have been sent. */
 	private SortedSet<Message> messages;
 	
 	public MessageService() {
