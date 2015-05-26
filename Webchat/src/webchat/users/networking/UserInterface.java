@@ -20,7 +20,7 @@ public interface UserInterface extends Remote {
 	 * @param passwordHash
 	 *            The password after it has been hashed.
 	 * @return {@code true} if the registration was successful, otherwise
-	 *         {@code false}
+	 *         {@code false}.
 	 */
 	boolean register(String username, byte[] passwordHash);
 	
