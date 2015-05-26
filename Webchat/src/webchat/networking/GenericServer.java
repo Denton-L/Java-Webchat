@@ -2,15 +2,17 @@ package webchat.networking;
 
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
-import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 /**
  * A generic RMI server from which other clients will inherit.
  * 
  * @author Denton Liu
+ * @author Filip Francetic
  * @version 2015-05-25
  */
 public abstract class GenericServer {
@@ -41,9 +43,10 @@ public abstract class GenericServer {
 	 */
 	public void startServer() throws MalformedURLException, RemoteException,
 			AlreadyBoundException {
+		
 		System.setSecurityManager(new RMISecurityManager());
-		
-		Naming.bind("rmi://localhost/" + URL_LOCATION, binding);
-		
+		LocateRegistry.createRegistry(1099);
+		Registry registry = LocateRegistry.getRegistry();
+		registry.rebind(location, binding);
 	}
 }
