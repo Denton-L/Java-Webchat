@@ -1,6 +1,7 @@
 package webchat.users.networking;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  * An abstract interface which will allow user related operations to
@@ -21,8 +22,9 @@ public interface UserInterface extends Remote {
 	 *            The password after it has been hashed.
 	 * @return {@code true} if the registration was successful, otherwise
 	 *         {@code false}.
+	 * @throws RemoteException TODO
 	 */
-	boolean register(String username, byte[] passwordHash);
+	boolean register(String username, byte[] passwordHash) throws RemoteException;
 	
 	/**
 	 * Signs in a user and returns a {@code byte[]} which will be
@@ -34,8 +36,9 @@ public interface UserInterface extends Remote {
 	 *            The password after it has been hashed.
 	 * @return {@code null} if invalid sign in otherwise a {@code byte[]} which
 	 *         uniquely identifies the user
+	 * @throws RemoteException TODO
 	 */
-	byte[] signIn(String username, byte[] passwordHash);
+	byte[] signIn(String username, byte[] passwordHash) throws RemoteException;
 	
 	/**
 	 * Causes the identifying {@code byte[]} to become removed from the database
@@ -43,7 +46,8 @@ public interface UserInterface extends Remote {
 	 * 
 	 * @param userInstance
 	 *            The {@code byte[]} which will identify a user.
+	 * @throws RemoteException TODO
 	 */
-	void logout(byte[] userInstance);
+	void logout(byte[] userInstance) throws RemoteException;
 	
 }
