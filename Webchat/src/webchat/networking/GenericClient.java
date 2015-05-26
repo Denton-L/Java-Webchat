@@ -20,8 +20,10 @@ public abstract class GenericClient {
 	
 	/**
 	 * 
-	 * @param serverURL The location of the server.
-	 * @param sublocation The location of the class on the server.
+	 * @param serverURL
+	 *            The location of the server.
+	 * @param sublocation
+	 *            The location of the class on the server.
 	 * @throws MalformedURLException
 	 * @throws RemoteException
 	 * @throws NotBoundException

@@ -12,7 +12,7 @@ import webchat.message.networking.MessageInterface;
  * @version 2015-05-23
  */
 public class MessageRetreiver implements Runnable {
-
+	
 	/** The last message received. */
 	private Message lastMessage;
 	/** The {@code MessageInterface} from the server which will be called. */
@@ -21,7 +21,7 @@ public class MessageRetreiver implements Runnable {
 	private long period;
 	/** Indicates whether the thread is running. */
 	private volatile boolean threadRunning;
-
+	
 	/**
 	 * 
 	 * @param messageInterface
@@ -35,7 +35,7 @@ public class MessageRetreiver implements Runnable {
 		this.period = period;
 		this.threadRunning = true;
 	}
-
+	
 	/**
 	 * Throwing an {@code InterruptedException} will cause the thread to refresh
 	 * instantaneously.
@@ -53,7 +53,7 @@ public class MessageRetreiver implements Runnable {
 			}
 		}
 	}
-
+	
 	/**
 	 * Halts the thread on the next loop iteration.
 	 */
