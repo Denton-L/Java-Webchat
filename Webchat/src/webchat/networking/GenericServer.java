@@ -15,6 +15,8 @@ import java.rmi.RemoteException;
  */
 public abstract class GenericServer {
 	
+	/** The subdomain location of the server. */
+	public static final String URL_LOCATION = null;
 	/** The location of the server. */
 	private String location;
 	/** The {@code Remote} that will be bound to this server. */
@@ -22,13 +24,10 @@ public abstract class GenericServer {
 	
 	/**
 	 * 
-	 * @param location
-	 *            The location of binding on the server.
 	 * @param binding
 	 *            The {@code Remote} that will be bound to this server.
 	 */
-	public GenericServer(String location, Remote binding) {
-		this.location = location;
+	public GenericServer(Remote binding) {
 		this.binding = binding;
 	}
 	
@@ -44,7 +43,7 @@ public abstract class GenericServer {
 			AlreadyBoundException {
 		System.setSecurityManager(new RMISecurityManager());
 		
-		Naming.bind("rmi://localhost/" + location, binding);
+		Naming.bind("rmi://localhost/" + URL_LOCATION, binding);
 		
 	}
 }
