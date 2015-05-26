@@ -54,7 +54,7 @@ public class MsgScene {
 		setMsgs();
 		
 		Scene scene = new Scene(pane, 800, 600);
-		scene.getStylesheets().add("/res/custom.css");
+		scene.getStylesheets().add("/custom.css");
 		return scene;
 	}
 	
@@ -116,7 +116,7 @@ public class MsgScene {
 		VBox.setMargin(sp, new Insets(15, 10, 15, 15));
 		VBox.setMargin(sp2, new Insets(15, 10, 15, 15));
 		
-		Image image1 = new Image("/res/plshelp.jpg", true);
+		Image image1 = new Image("/plshelp.jpg", true);
 		BackgroundSize bgsize = new BackgroundSize(800, 600, false, false,
 				true, true);
 		

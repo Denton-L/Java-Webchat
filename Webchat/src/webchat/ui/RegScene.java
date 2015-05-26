@@ -30,7 +30,7 @@ public class RegScene {
 	
 	public Scene createReg() {
 		// background
-		Image image1 = new Image("/res/plshelp.jpg", true);
+		Image image1 = new Image("/plshelp.jpg", true);
 		BackgroundSize bgsize = new BackgroundSize(800, 600, false, false,
 				true, true);
 		
@@ -72,7 +72,7 @@ public class RegScene {
 		
 		// create scene
 		Scene scene = new Scene(pane, 800, 600);
-		scene.getStylesheets().add("/res/custom.css");
+		scene.getStylesheets().add("/custom.css");
 		return scene;
 	}
 	
