@@ -1,6 +1,7 @@
 package webchat.message.networking.server;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -24,12 +25,12 @@ public class MessageService implements MessageInterface, Serializable {
 	}
 	
 	@Override
-	public SortedSet<Message> pull(Message lastMessageReceived) {
+	public SortedSet<Message> pull(Message lastMessageReceived) throws RemoteException {
 		return messages.tailSet(lastMessageReceived);
 	}
 	
 	@Override
-	public void push(String content, byte[] userInstance) {
+	public void push(String content, byte[] userInstance) throws RemoteException {
 		// check if userInstance exists in database
 		Message message = new Message(content, null /* get from database */,
 				System.currentTimeMillis());
