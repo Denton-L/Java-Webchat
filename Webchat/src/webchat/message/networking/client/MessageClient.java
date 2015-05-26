@@ -76,6 +76,10 @@ public class MessageClient extends GenericClient {
 	 *            The content of the message which will be pushed.
 	 */
 	public void sendMessage(String message) {
-		messageInterface.push(message, userInstance);
+		try {
+			messageInterface.push(message, userInstance);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 }
