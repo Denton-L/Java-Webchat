@@ -13,9 +13,9 @@ public class UserClient extends GenericClient {
 	private UserInterface userInterface;
 	private byte[] userInstance;
 	
-	public UserClient(String serverIp) throws MalformedURLException,
+	public UserClient(String serverURL) throws MalformedURLException,
 			NotBoundException, RemoteException {
-		super(serverIp, UserServer.URL_LOCATION);
+		super(serverURL, UserServer.URL_LOCATION);
 	}
 	
 	public boolean register(String username, byte[] password) {

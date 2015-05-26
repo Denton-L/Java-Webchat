@@ -7,6 +7,11 @@ import java.rmi.RMISecurityManager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+/**
+ * 
+ * @author Denton Liu
+ * @2015-05-25
+ */
 public abstract class GenericServer {
 	
 	private String location;
