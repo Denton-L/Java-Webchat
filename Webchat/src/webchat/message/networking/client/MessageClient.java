@@ -16,7 +16,7 @@ import webchat.networking.GenericClient;
  * @verion 2015-05-23
  */
 public class MessageClient extends GenericClient {
-
+	
 	/**
 	 * The {@code MessageInterface} which will be used to communicate with the
 	 * server.
@@ -31,10 +31,10 @@ public class MessageClient extends GenericClient {
 	 * server.
 	 */
 	private byte[] userInstance;
-
+	
 	/** The time in milliseconds between sucessive message pulls. */
 	public static final long REFRESH_RATE = 50;
-
+	
 	/**
 	 * 
 	 * @param serverURL
@@ -54,25 +54,26 @@ public class MessageClient extends GenericClient {
 		messageRetreiver = new MessageRetreiver(messageInterface, REFRESH_RATE);
 		this.messageThread = new Thread(messageRetreiver);
 	}
-
+	
 	/**
 	 * Starts the client's thread.
 	 */
 	public void startClient() {
 		messageThread.start();
 	}
-
+	
 	/**
 	 * Stops the client's thread safely.
 	 */
 	public void stopClient() {
 		messageRetreiver.stopThread();
 	}
-
+	
 	/**
 	 * Pushes a message to the server.
 	 * 
-	 * @param message The content of the message which will be pushed.
+	 * @param message
+	 *            The content of the message which will be pushed.
 	 */
 	public void sendMessage(String message) {
 		messageInterface.push(message, userInstance);
