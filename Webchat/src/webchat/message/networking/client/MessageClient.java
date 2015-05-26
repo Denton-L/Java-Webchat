@@ -37,7 +37,7 @@ public class MessageClient extends GenericClient {
 
 	/**
 	 * 
-	 * @param serverIp
+	 * @param serverURL
 	 *            The URL of the server.
 	 * @param userInstance
 	 *            A {@code byte[]} containing the user's unique identifier to
@@ -46,9 +46,9 @@ public class MessageClient extends GenericClient {
 	 * @throws NotBoundException
 	 * @throws RemoteException
 	 */
-	public MessageClient(String serverIp, byte[] userInstance)
+	public MessageClient(String serverURL, byte[] userInstance)
 			throws MalformedURLException, NotBoundException, RemoteException {
-		super(serverIp, MessageServer.URL_LOCATION);
+		super(serverURL, MessageServer.URL_LOCATION);
 		this.messageInterface = (MessageInterface) remoteInterface;
 		this.userInstance = userInstance;
 		messageRetreiver = new MessageRetreiver(messageInterface, REFRESH_RATE);
