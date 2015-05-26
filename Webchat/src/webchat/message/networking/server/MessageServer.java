@@ -10,10 +10,9 @@ import webchat.networking.GenericServer;
  */
 public class MessageServer extends GenericServer {
 	
-	/** The subdomain location of the server. */
 	public static final String URL_LOCATION = "messages";
 	
 	public MessageServer() {
-		super(URL_LOCATION, new MessageService());
+		super(new MessageService());
 	}
 }
