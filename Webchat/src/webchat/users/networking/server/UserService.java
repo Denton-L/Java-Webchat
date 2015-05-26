@@ -1,6 +1,7 @@
 package webchat.users.networking.server;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.security.SecureRandom;
 
 import webchat.users.PasswordManager;
@@ -34,7 +35,7 @@ public class UserService implements UserInterface, Serializable {
 	}
 	
 	@Override
-	public boolean register(String username, byte[] passwordHash) {
+	public boolean register(String username, byte[] passwordHash) throws RemoteException {
 		User user = userFromNameAndPassword(username, passwordHash);
 		if (true /* doesn't exist in database */) {
 			// add to database
@@ -46,7 +47,7 @@ public class UserService implements UserInterface, Serializable {
 	}
 	
 	@Override
-	public byte[] signIn(String username, byte[] passwordHash) {
+	public byte[] signIn(String username, byte[] passwordHash) throws RemoteException {
 		User user = userFromNameAndPassword(username, passwordHash);
 		byte[] userInstance = new byte[USER_INSTANCE_LENGTH];
 		// get user from database
@@ -56,7 +57,7 @@ public class UserService implements UserInterface, Serializable {
 	}
 	
 	@Override
-	public void logout(byte[] userInstance) {
+	public void logout(byte[] userInstance) throws RemoteException {
 		// remove userInstance from database
 		
 	}
