@@ -19,7 +19,7 @@ public class MessageClient extends GenericClient {
 
 	/**
 	 * The {@code MessageInterface} which will be used to communicate with the
-	 * client.
+	 * server.
 	 */
 	private MessageInterface messageInterface;
 	/** The Runnable which will contain the logic to fetching messages. */
