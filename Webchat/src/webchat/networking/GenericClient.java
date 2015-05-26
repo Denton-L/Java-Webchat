@@ -7,10 +7,25 @@ import java.rmi.RMISecurityManager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+/**
+ * A generic RMI client from which other clients will inherit.
+ * 
+ * @author Denton Liu
+ * @version 2015-05-25
+ */
 public abstract class GenericClient {
 	
+	/** The {@code Remote} class which this client will accept. */
 	protected Remote remoteInterface;
 	
+	/**
+	 * 
+	 * @param serverIp The location of the server.
+	 * @param sublocation The location of the class on the server.
+	 * @throws MalformedURLException
+	 * @throws RemoteException
+	 * @throws NotBoundException
+	 */
 	public GenericClient(String serverIp, String sublocation)
 			throws MalformedURLException, RemoteException, NotBoundException {
 		System.setSecurityManager(new RMISecurityManager());
