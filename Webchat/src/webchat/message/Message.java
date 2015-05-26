@@ -20,17 +20,21 @@ public class Message implements Serializable {
 	private long timestamp;
 	
 	/**
-	 * @param content A {@code String} containing the message content.
-	 * @param username A {@code String} containing the username of the message sender.
-	 * @param timestamp The time when the server receives this transmission. 
+	 * @param content
+	 *            A {@code String} containing the message content.
+	 * @param username
+	 *            A {@code String} containing the username of the message
+	 *            sender.
+	 * @param timestamp
+	 *            The time when the server receives this transmission.
 	 */
 	public Message(String content, String username, long timestamp) {
 		this.content = content;
 		this.username = username;
 		this.timestamp = timestamp;
 	}
-
-	 /** 
+	
+	/**
 	 * 
 	 * @return A {@code String} containing the message content.
 	 */
@@ -45,7 +49,7 @@ public class Message implements Serializable {
 	public String getUsername() {
 		return username;
 	}
-
+	
 	/**
 	 * 
 	 * @return The time when the server receives this transmission.
@@ -53,5 +57,5 @@ public class Message implements Serializable {
 	public long getTimestamp() {
 		return timestamp;
 	}
-
+	
 }

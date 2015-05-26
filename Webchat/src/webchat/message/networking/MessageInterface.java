@@ -14,7 +14,7 @@ import webchat.message.Message;
  * @version 2015-05-23
  */
 public interface MessageInterface extends Remote {
-
+	
 	/**
 	 * Pushes a message to the server.
 	 * 
@@ -24,7 +24,7 @@ public interface MessageInterface extends Remote {
 	 *            The {@code byte[]} which uniquely identifies a user.
 	 */
 	void push(String content, byte[] userInstance);
-
+	
 	/**
 	 * Pulls all messages received since the last message received.
 	 * 
