@@ -20,15 +20,15 @@ public abstract class GenericClient {
 	
 	/**
 	 * 
-	 * @param serverIp The location of the server.
+	 * @param serverURL The location of the server.
 	 * @param sublocation The location of the class on the server.
 	 * @throws MalformedURLException
 	 * @throws RemoteException
 	 * @throws NotBoundException
 	 */
-	public GenericClient(String serverIp, String sublocation)
+	public GenericClient(String serverURL, String sublocation)
 			throws MalformedURLException, RemoteException, NotBoundException {
 		System.setSecurityManager(new RMISecurityManager());
-		remoteInterface = (Remote) Naming.lookup(serverIp + "/" + sublocation);
+		remoteInterface = (Remote) Naming.lookup(serverURL + "/" + sublocation);
 	}
 }
