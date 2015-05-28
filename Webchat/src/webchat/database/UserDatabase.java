@@ -47,9 +47,14 @@ public class UserDatabase {
 	public UserDatabase(File file) throws FileNotFoundException, IOException,
 			ClassNotFoundException {
 
-		try (ObjectInputStream objectInputStream = new ObjectInputStream(
-				new FileInputStream(file))) {
-			this.users = (Collection<User>) objectInputStream.readObject();
+		ObjectInputStream objectInputStream = new ObjectInputStream(
+				new FileInputStream(file));
+		this.users = (Collection<User>) objectInputStream.readObject();
+		objectInputStream.close();
+		
+		//clears userInstances
+		for (Iterator<User> user = users.iterator(); user.hasNext();) {
+			user.next().setUserInstance(null);
 		}
 	}
 
@@ -64,10 +69,10 @@ public class UserDatabase {
 	 */
 	public void saveDatabase(File file) throws FileNotFoundException,
 			IOException {
-		try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-				new FileOutputStream(file))) {
-			objectOutputStream.writeObject(this.users);
-		}
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+				new FileOutputStream(file));
+		objectOutputStream.writeObject(this.users);
+		objectOutputStream.close();
 	}
 
 	/**
