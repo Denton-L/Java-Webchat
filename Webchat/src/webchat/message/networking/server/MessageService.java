@@ -19,6 +19,8 @@ import webchat.message.networking.MessageInterface;
 public class MessageService extends UnicastRemoteObject implements
 		MessageInterface {
 
+	/** The maximum number of messages that can be stored. */
+	public static final int MESSAGE_BUFFER = 0xFFF;
 	/** All of the {@code Message}s that have been sent. */
 	private SortedSet<Message> messages;
 	/** Holds all of the users. */
@@ -49,6 +51,10 @@ public class MessageService extends UnicastRemoteObject implements
 		Message message = new Message(content, username,
 				System.currentTimeMillis());
 		messages.add(message);
+
+		while (messages.size() > MESSAGE_BUFFER) {
+			messages.remove(messages.first());
+		}
 
 	}
 }
