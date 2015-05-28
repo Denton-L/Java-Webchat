@@ -1,5 +1,6 @@
 package webchat.message;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Comparator;
  * @author Denton Liu
  * @version 2015-05-23
  */
-public class MessageComparator implements Comparator<Message> {
+public class MessageComparator implements Comparator<Message>, Serializable {
 	
 	/**
 	 * Note: this comparator imposes orderings that are inconsistent with
