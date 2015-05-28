@@ -21,7 +21,7 @@ public class PasswordManager {
 	 * Fills an array that is passed to it with zeros.
 	 * 
 	 * @param cleared
-	 *            The {@code byte[]} to be cleared.s
+	 *            The {@code byte[]} to be cleared.
 	 */
 	public static void clearArray(byte[] cleared) {
 		for (int i = 0; i < cleared.length; i++) {
@@ -35,7 +35,7 @@ public class PasswordManager {
 	 * 
 	 * @param password
 	 * @param username
-	 * @return A {@code byte[]} containg the hashed data.
+	 * @return A {@code byte[]} containing the hashed data.
 	 */
 	public static byte[] clientHash(byte[] password, String username) {
 		MessageDigest messageDigest;
@@ -60,7 +60,7 @@ public class PasswordManager {
 	 * 
 	 * @param password
 	 * @param username
-	 * @return A {@code byte[]} containg the hashed data.
+	 * @return A {@code byte[]} containing the hashed data.
 	 */
 	public static byte[] serverHash(byte[] password, String username) {
 		MessageDigest messageDigest;
