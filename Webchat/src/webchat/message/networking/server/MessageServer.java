@@ -1,5 +1,9 @@
 package webchat.message.networking.server;
 
+import java.net.MalformedURLException;
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+
 import webchat.database.UserDatabase;
 import webchat.networking.GenericServer;
 
