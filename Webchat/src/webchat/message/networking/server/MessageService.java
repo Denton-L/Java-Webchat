@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import webchat.database.UserDatabase;
 import webchat.message.Message;
 import webchat.message.MessageComparator;
 import webchat.message.networking.MessageInterface;
@@ -16,27 +17,37 @@ import webchat.message.networking.MessageInterface;
  * @version 2015-05-25
  */
 public class MessageService implements MessageInterface, Serializable {
-	
+
 	/** All of the {@code Message}s that have been sent. */
 	private SortedSet<Message> messages;
-	
-	public MessageService() {
-		messages = new TreeSet<>(new MessageComparator());
+	/** Holds all of the users. */
+	private UserDatabase userDatabase;
+
+	public MessageService(UserDatabase userDatabase) {
+		this.userDatabase = userDatabase;
+		this.messages = new TreeSet<>(new MessageComparator());
 	}
-	
+
 	@Override
-	public SortedSet<Message> pull(Message lastMessageReceived) throws RemoteException {
+	public SortedSet<Message> pull(Message lastMessageReceived)
+			throws RemoteException {
 		return messages.tailSet(lastMessageReceived);
 	}
-	
+
 	@Override
-	public void push(String content, byte[] userInstance) throws RemoteException {
-		// check if userInstance exists in database
-		Message message = new Message(content, null /* get from database */,
+	public void push(String content, byte[] userInstance)
+			throws RemoteException {
+
+		String username = userDatabase
+				.getUsernameFromUserInstance(userInstance);
+
+		if (username == null) {
+			return;
+		}
+
+		Message message = new Message(content, username,
 				System.currentTimeMillis());
 		messages.add(message);
-		// add message to the database as well
-		
+
 	}
-	
 }
