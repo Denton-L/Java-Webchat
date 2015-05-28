@@ -1,5 +1,6 @@
 package webchat.message.networking.server;
 
+import webchat.database.UserDatabase;
 import webchat.networking.GenericServer;
 
 /**
@@ -12,7 +13,7 @@ public class MessageServer extends GenericServer {
 	
 	public static final String URL_LOCATION = "messages";
 	
-	public MessageServer() {
-		super(new MessageService());
+	public MessageServer(UserDatabase userDatabase) {
+		super(new MessageService(userDatabase));
 	}
 }
