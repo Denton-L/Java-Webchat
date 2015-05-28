@@ -1,7 +1,7 @@
 package webchat.users.networking.server;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.security.SecureRandom;
 
 import webchat.database.UserDatabase;
@@ -15,7 +15,7 @@ import webchat.users.networking.UserInterface;
  * @author Denton Liu
  * @version 2015-05-25
  */
-public class UserService implements UserInterface, Serializable {
+public class UserService extends UnicastRemoteObject implements UserInterface {
 
 	/** The length of the uniquely identifying {@code byte[]}. */
 	private final static int USER_INSTANCE_LENGTH = 0xFF;
@@ -29,7 +29,7 @@ public class UserService implements UserInterface, Serializable {
 	 *            The {@code UserDatabase} which this {@code UserService} is
 	 *            based on.
 	 */
-	public UserService(UserDatabase userDatabase) {
+	public UserService(UserDatabase userDatabase) throws RemoteException {
 		this.userDatabase = userDatabase;
 	}
 
