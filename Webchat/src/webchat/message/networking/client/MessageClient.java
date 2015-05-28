@@ -13,7 +13,7 @@ import webchat.networking.GenericClient;
  * 
  * @author Filip Francetic
  * @author Denton Liu
- * @verion 2015-05-23
+ * @version 2015-05-23
  */
 public class MessageClient extends GenericClient {
 	
