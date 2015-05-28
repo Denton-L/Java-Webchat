@@ -42,11 +42,11 @@ public class User implements Serializable {
 		return passwordHash;
 	}
 	
-	public byte[] getuserInstance() {
+	public byte[] getUserInstance() {
 		return userInstance;
 	}
 	
-	public void setuserInstance(byte[] userInstance) {
+	public void setUserInstance(byte[] userInstance) {
 		this.userInstance = userInstance;
 	}
 	
