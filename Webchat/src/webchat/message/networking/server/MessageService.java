@@ -1,7 +1,7 @@
 package webchat.message.networking.server;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -16,14 +16,15 @@ import webchat.message.networking.MessageInterface;
  * @author Denton Liu
  * @version 2015-05-25
  */
-public class MessageService implements MessageInterface, Serializable {
+public class MessageService extends UnicastRemoteObject implements
+		MessageInterface {
 
 	/** All of the {@code Message}s that have been sent. */
 	private SortedSet<Message> messages;
 	/** Holds all of the users. */
 	private UserDatabase userDatabase;
 
-	public MessageService(UserDatabase userDatabase) {
+	public MessageService(UserDatabase userDatabase) throws RemoteException {
 		this.userDatabase = userDatabase;
 		this.messages = new TreeSet<>(new MessageComparator());
 	}
