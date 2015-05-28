@@ -1,5 +1,7 @@
 package webchat.users.networking.server;
 
+import java.rmi.RemoteException;
+
 import webchat.database.UserDatabase;
 import webchat.networking.GenericServer;
 
@@ -20,7 +22,7 @@ public class UserServer extends GenericServer {
 	 * @param userDatabase
 	 *            The {@code UserDatabase} which this server is based on.
 	 */
-	public UserServer(UserDatabase userDatabase) {
+	public UserServer(UserDatabase userDatabase) throws RemoteException {
 		super(new UserService(userDatabase));
 	}
 }
