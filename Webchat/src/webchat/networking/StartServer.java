@@ -19,14 +19,15 @@ import webchat.users.networking.server.UserServer;
 public class StartServer {
 
 	public static void main(String[] args) {
-		if (args.length != 1) {
-			System.err
-					.println("Please enter the path of the database location as an argument.");
-			System.exit(1);
-		}
+//		if (args.length != 1) {
+//			System.err
+//					.println("Please enter the path of the database location as an argument.");
+//			System.exit(1);
+//		}
 		
 		try {
-			UserDatabase userDatabase = new UserDatabase(new File(args[0]));
+			//TODO fix this
+			UserDatabase userDatabase = new UserDatabase(new File("D:/wtf.txt"));
 			new MessageServer(userDatabase).startServer();
 			new UserServer(userDatabase).startServer();
 		} catch (FileNotFoundException e) {
