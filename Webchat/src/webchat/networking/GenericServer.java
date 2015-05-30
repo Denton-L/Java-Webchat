@@ -17,8 +17,6 @@ import java.rmi.registry.Registry;
  */
 public abstract class GenericServer {
 	
-	/** The subdomain location of the server. */
-	public static final String URL_LOCATION = null;
 	/** The location of the server. */
 	private String location;
 	/** The {@code Remote} that will be bound to this server. */
@@ -31,6 +29,7 @@ public abstract class GenericServer {
 	 */
 	public GenericServer(Remote binding) {
 		this.binding = binding;
+		this.location = null;
 	}
 	
 	/**
@@ -48,5 +47,23 @@ public abstract class GenericServer {
 		LocateRegistry.createRegistry(1099);
 		Registry registry = LocateRegistry.getRegistry();
 		registry.rebind(location, binding);
+	}
+	
+	/**
+	 * Sets the sublocation of the server.
+	 * 
+	 * @param location The sublocation of the server.
+	 */
+	protected void setLocation(String location) {
+		this.location = location;
+	}
+	
+	/**
+	 * Gets the sublocation of the server.
+	 * 
+	 * @return The sublocation of the server.
+	 */
+	public String getLocation() {
+		return this.location;
 	}
 }

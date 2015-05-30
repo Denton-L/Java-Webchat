@@ -13,9 +13,8 @@ import webchat.networking.GenericServer;
  */
 public class MessageServer extends GenericServer {
 
-	public static final String URL_LOCATION = "messages";
-
 	public MessageServer(UserDatabase userDatabase) throws RemoteException {
 		super(new MessageService(userDatabase));
+		setLocation("messages");
 	}
 }
