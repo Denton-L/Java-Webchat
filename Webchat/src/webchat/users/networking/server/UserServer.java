@@ -13,8 +13,6 @@ import webchat.networking.GenericServer;
  */
 public class UserServer extends GenericServer {
 
-	public static final String URL_LOCATION = "users";
-
 	/**
 	 * Creates a new {@code} UserServer with the {@code UserDatabase} as
 	 * specified.
@@ -24,5 +22,6 @@ public class UserServer extends GenericServer {
 	 */
 	public UserServer(UserDatabase userDatabase) throws RemoteException {
 		super(new UserService(userDatabase));
+		setLocation("users");
 	}
 }
