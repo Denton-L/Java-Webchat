@@ -7,8 +7,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import webchat.networking.StartServer;
 import javafx.application.Application;
@@ -20,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -33,7 +32,7 @@ public class ServerWindow extends Application {
 	final Desktop desktop = Desktop.getDesktop();
 	final FileChooser fileChooser = new FileChooser();
 	final Button openDatabase = new Button("Open database file");
-	Button createDatabse = new Button("Create databse");
+	Button createDatabase = new Button("Create database");
 	Button startServer = new Button("Start the server");
 
 	Text fileText;
@@ -42,6 +41,10 @@ public class ServerWindow extends Application {
 	File database;
 
 	public void start(final Stage primaryStage) {
+		
+		//TODO check if this works for runnable jars
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/src/res"));
+		
 		StackPane group = new StackPane();
 		imview.setImage(image1);
 		imview.setFitHeight(600);
@@ -49,7 +52,15 @@ public class ServerWindow extends Application {
 
 		VBox vbox = new VBox();
 		vbox.setSpacing(15);
+		
+		HBox hbox1 = new HBox();
+		hbox1.setSpacing(15);
+		
+		HBox hbox2 = new HBox();
+		hbox2.setSpacing(15);
 
+		
+		
 		GridPane pane = new GridPane();
 		pane.setAlignment(Pos.CENTER);
 		pane.add(vbox, 1, 1);
@@ -67,14 +78,15 @@ public class ServerWindow extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		addFileChooser(primaryStage, vbox);
+		addFileChooser(primaryStage, hbox1, hbox2);
 
 		fileText = new Text("No file selected");
 		fileText.setId("textstyle2");
-		vbox.getChildren().add(fileText);
+		hbox1.getChildren().add(fileText);
+		
+		vbox.getChildren().addAll(hbox1,hbox2,startServer);
 
-		vbox.getChildren().add(startServer);
-
+		
 		startServer.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
@@ -109,7 +121,7 @@ public class ServerWindow extends Application {
 		primaryStage.show();
 	}
 
-	private void addFileChooser(final Stage stage, VBox vbox) {
+	private void addFileChooser(final Stage stage, HBox hbox1, HBox hbox2) {
 
 		openDatabase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -120,7 +132,8 @@ public class ServerWindow extends Application {
 			}
 		});
 
-		vbox.getChildren().add(openDatabase);
+		hbox1.getChildren().add(openDatabase);
+		hbox2.getChildren().add(createDatabase);
 	}
 
 	public static void main(String[] args) {
