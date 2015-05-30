@@ -18,29 +18,9 @@ import webchat.users.networking.server.UserServer;
  */
 public class StartServer {
 
-	public static void main(String[] args) {
-//		if (args.length != 1) {
-//			System.err
-//					.println("Please enter the path of the database location as an argument.");
-//			System.exit(1);
-//		}
-		
-		try {
-			//TODO fix this
-			UserDatabase userDatabase = new UserDatabase(new File("D:/wtf.txt"));
+	public static void start(File file) throws FileNotFoundException, ClassNotFoundException, IOException, AlreadyBoundException {
+			UserDatabase userDatabase = new UserDatabase(file);
 			new MessageServer(userDatabase).startServer();
 			new UserServer(userDatabase).startServer();
-		} catch (FileNotFoundException e) {
-			System.err.println("Database could not be found.");
-			System.exit(1);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.err.println("Database could not be loaded.");
-			System.exit(1);
-		} catch (AlreadyBoundException e) {
-			System.err.println("Server could not be started.");
-			System.exit(1);
-		}
 	}
 }
