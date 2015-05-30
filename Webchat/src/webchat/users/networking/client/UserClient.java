@@ -45,7 +45,7 @@ public class UserClient extends GenericClient {
 	 * @return {@code true} if the registration was successful, otherwise
 	 *         {@code false}.
 	 */
-	public boolean register(String username, byte[] password) {
+	public boolean register(String username, byte[] password) throws RemoteException{
 		byte[] hashedPass = PasswordManager.clientHash(password, username);
 		PasswordManager.clearArray(password);
 		try {
@@ -66,7 +66,7 @@ public class UserClient extends GenericClient {
 	 * @return {@code null} if the sign in was unsuccessful, otherwise a
 	 *         uniquely identifying {@code byte[]}.
 	 */
-	public byte[] signIn(String username, byte[] password) {
+	public byte[] signIn(String username, byte[] password) throws RemoteException{
 		byte[] hashedPass = PasswordManager.clientHash(password, username);
 		PasswordManager.clearArray(password);
 		try {
@@ -83,7 +83,7 @@ public class UserClient extends GenericClient {
 	 * @param userInstance
 	 *            The uniquely identifying {@code byte[]} to sign out.
 	 */
-	public void logout(byte[] userInstance) {
+	public void logout(byte[] userInstance) throws RemoteException{
 		try {
 			userInterface.logout(userInstance);
 		} catch (RemoteException e) {
