@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,21 +12,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-/**
-* ChatScene object
-* 
-* Creates and deals with the login scene. 
-*  
-* @author Jing Yi Xie
-* @version 1.0
-*/
-
-public class ChatScene {
-	
+public class ServScene 
+{
 	Text title = new Text("welcome");
-	Text warning = new Text("Username and/or password incorrect");
-	TextField userBox = new TextField();
-	PasswordField pwBox = new PasswordField();
+	Text warning = new Text("Incorrect server IP");
+	TextField ipBox = new TextField();
 	Button enter = new Button();
 	Button register = new Button();
 	VBox box = new VBox();
@@ -39,7 +28,7 @@ public class ChatScene {
 	 * This method adds and styles the necessary elements to create the login screen. 
 	 * @return the Scene object, Login Screen 
 	 */
-	public Scene createChat() {		
+	public Scene createServ() {		
 		StackPane group = new StackPane();		
         imview.setImage(image1);
         imview.setFitHeight(600);
@@ -55,23 +44,16 @@ public class ChatScene {
 		warning.setId("textstyle2");
 		grid.add(title, 0, 0, 2, 1);
 
-		userBox.setPrefHeight(45);
-		userBox.setPromptText("Username");
-		userBox.setPrefWidth(400);
-		grid.add(userBox, 1, 1);
-
-		pwBox.setPrefHeight(45);
-		pwBox.setPromptText("Password");
-		grid.add(pwBox, 1, 2);
+		ipBox.setPrefHeight(45);
+		ipBox.setPromptText("Server IP");
+		ipBox.setPrefWidth(400);
+		grid.add(ipBox, 1, 1);
 
 		enter.setText(">");
 		enter.setPrefSize(50, 50);
-		register.setText("R");
-		register.setPrefSize(50, 50);
 
-		grid.add(enter, 2, 2);
-		grid.add(register, 2, 1);
-		grid.add(warning, 1, 4);
+		grid.add(enter, 2, 1);
+		grid.add(warning, 1, 2);
 
 		warning.setVisible(false);
 
@@ -88,7 +70,6 @@ public class ChatScene {
 	 * Method clears all input boxes
 	 */
 	public void clrAll() {
-		userBox.clear();
-		pwBox.clear();
+		ipBox.clear();
 	}
 }
