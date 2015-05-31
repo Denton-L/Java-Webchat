@@ -3,6 +3,7 @@ package webchat.test.users.networking.client;
 import java.io.File;
 import java.net.InetAddress;
 
+import webchat.database.UserDatabase;
 import webchat.networking.StartServer;
 import webchat.users.networking.client.UserClient;
 import webchat.users.networking.server.UserServer;
@@ -15,7 +16,9 @@ public class UserClientTest extends TestCase {
 	
 	protected void setUp() throws Exception {
 		if (setUpIsDone){
-			StartServer.start(new File("/res/database.ser"));
+			UserDatabase database = new UserDatabase(new File("/res/database.ser"));
+			UserServer server = new UserServer(database);
+			server.startServer();
 			client = new UserClient(InetAddress.getLocalHost().getHostAddress());
 		}
 		
