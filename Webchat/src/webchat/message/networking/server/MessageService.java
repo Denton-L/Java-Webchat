@@ -34,7 +34,17 @@ public class MessageService extends UnicastRemoteObject implements
 	@Override
 	public SortedSet<Message> pull(Message lastMessageReceived)
 			throws RemoteException {
-		return messages.tailSet(lastMessageReceived);
+		SortedSet<Message> newMessages = messages.tailSet(lastMessageReceived);
+		for (Message message : newMessages)
+			System.out.print(message.getContent() + " ");
+		if (newMessages != null){
+			if (newMessages.size()>0){
+				newMessages.remove(newMessages.first());
+				return newMessages;
+			}
+			else return null;
+		}
+		else return null;
 	}
 
 	@Override
