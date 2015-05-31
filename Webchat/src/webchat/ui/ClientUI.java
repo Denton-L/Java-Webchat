@@ -9,6 +9,7 @@ import webchat.message.Message;
 import webchat.message.networking.client.MessageClient;
 import webchat.users.networking.client.UserClient;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -59,7 +60,12 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	UserUpdate userupd = new UserUpdate(msgScene);
 	Messenger messenger = new Messenger(msgScene);
 	UserInfo userinfo = new UserInfo();
-
+	
+	Text blank;
+	Text userName;
+	Text msgText;
+	Text time;
+	
 	Scene serv;
 	Scene chat;
 	Scene reg;
@@ -81,20 +87,26 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 
 	public void writeMsg(SortedSet<Message> messages) {
 		for (Message message : messages) {
-			System.out.println(message.getContent() + "ui");
-			Text blank = new Text();
-			Text user = new Text(message.getUsername() + " said");
-			Text msg = new Text("\"" + message.getContent() + "\"");
-			msg.setWrappingWidth(527);
-			Text time = new Text("" + message.getTimestamp());
+			try{
+			System.out.println(message.getContent() + " ui");
+			blank = new Text();
+			userName = new Text(message.getUsername() + " said");
+			msgText = new Text("\"" + message.getContent() + "\"");
+			msgText.setWrappingWidth(527);
+			time = new Text("" + message.getTimestamp());
 			time.setFill(Color.GREY);
-			user.setFill(Color.GREY);
+			userName.setFill(Color.GREY);
 			time.setId("textstyle3");
-			user.setId("textstyle3");
+			userName.setId("textstyle3");
 
-			msg.setId("messagetext");
-
-			msgScene.msgs.getChildren().addAll(user, msg, time, blank);
+			msgText.setId("messagetext");
+			System.out.println("test1");
+			msgScene.msgs.getChildren().addAll(userName, msgText, time, blank);
+			}
+			catch (Exception e)
+			  {
+			    reportAndLogException(e);
+			  }
 		}
 	}
 
@@ -105,6 +117,16 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	public void reportAndLogException(final Throwable t)
+	  {
+	    Platform.runLater(new Runnable() {
+	      @Override public void run() {
+	    	  msgScene.msgs.getChildren().addAll(userName, msgText, time, blank); 
+	    	  System.out.println("test2");
+	      }
+	    });
+	  }
 
 	/**
 	 * This is used to set up the application by adding event handlers to the

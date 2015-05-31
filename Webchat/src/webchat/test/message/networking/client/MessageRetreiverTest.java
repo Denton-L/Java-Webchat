@@ -1,10 +1,10 @@
 package webchat.test.message.networking.client;
 
-import webchat.message.networking.client.MessageRetreiver;
+import webchat.message.networking.client.MessageRetriever;
 import junit.framework.TestCase;
 
 public class MessageRetreiverTest extends TestCase {
-	MessageRetreiver retrieve;
+	MessageRetriever retrieve;
 	
 	protected void setUp() throws Exception{
 		
