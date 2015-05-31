@@ -20,8 +20,8 @@ public class UserTest extends TestCase {
 	}
 	
 	public void testUserInstance(){
-		user.setuserInstance(userInstance);
-		assertEquals(userInstance,user.getuserInstance());
+		user.setUserInstance(userInstance);
+		assertEquals(userInstance,user.getUserInstance());
 	}
 	
 
