@@ -156,6 +156,11 @@ public class UserDatabase {
 		return null;
 	}
 	
+	/**
+	 * Returns a {@code String[]} listing all users who have a non-{@code null} {@code userInstance}. 
+	 * 
+	 * @return A {@code String[]} with usernames.s
+	 */
 	public String[] getUsersWithUserInstance() {
 		List<String> online = new ArrayList<>();
 		for (Iterator<User> iterator = users.iterator(); iterator.hasNext();) {
