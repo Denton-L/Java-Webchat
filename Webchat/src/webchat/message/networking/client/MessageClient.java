@@ -17,13 +17,16 @@ import webchat.networking.GenericClient;
  */
 public class MessageClient extends GenericClient {
 	
+	/** The time in milliseconds between sucessive message pulls. */
+	public static final long REFRESH_RATE = 50;
+	
 	/**
 	 * The {@code MessageInterface} which will be used to communicate with the
 	 * server.
 	 */
 	private MessageInterface messageInterface;
-	/** The Runnable which will contain the logic to fetching messages. */
-	private MessageRetreiver messageRetreiver;
+	/** The {@code Runnable} which will contain the logic to fetching messages. */
+	private MessageRetriever messageRetriever;
 	/** A {@code Thread} which will be running to fetch messages. */
 	private Thread messageThread;
 	/**
@@ -31,9 +34,6 @@ public class MessageClient extends GenericClient {
 	 * server.
 	 */
 	private byte[] userInstance;
-	
-	/** The time in milliseconds between sucessive message pulls. */
-	public static final long REFRESH_RATE = 50;
 	
 	/**
 	 * 
@@ -51,8 +51,8 @@ public class MessageClient extends GenericClient {
 		super(serverURL, MessageServer.URL_LOCATION);
 		this.messageInterface = (MessageInterface) remoteInterface;
 		this.userInstance = userInstance;
-		messageRetreiver = new MessageRetreiver(messageInterface, REFRESH_RATE);
-		this.messageThread = new Thread(messageRetreiver);
+		this.messageRetriever = new MessageRetriever(messageInterface, REFRESH_RATE);
+		this.messageThread = new Thread(messageRetriever);
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class MessageClient extends GenericClient {
 	 * Stops the client's thread safely.
 	 */
 	public void stopClient() {
-		messageRetreiver.stopThread();
+		messageRetriever.stopThread();
 	}
 	
 	/**

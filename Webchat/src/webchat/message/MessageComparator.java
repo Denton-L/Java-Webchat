@@ -18,6 +18,10 @@ public class MessageComparator implements Comparator<Message>, Serializable {
 	 */
 	@Override
 	public int compare(Message m1, Message m2) {
+		if (m1 == null) {
+			return -1;
+		}
+		
 		return (int) (m1.getTimestamp() - m2.getTimestamp());
 	}
 }

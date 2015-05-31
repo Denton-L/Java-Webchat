@@ -16,11 +16,19 @@ import webchat.users.networking.server.UserServer;
  * @version 2015-05-25
  */
 public class UserClient extends GenericClient {
+	
+	/** The time in milliseconds between sucessive message pulls. */
+	public static final long REFRESH_RATE = 5000;
+	
 	/**
 	 * The {@code UserInterface} which will be used to communicate with the
 	 * server.
 	 */
 	private UserInterface userInterface;
+	/** The {@code Runnable} which will contain the logic to find online users. */
+	private OnlineUserRetriever onlineUserRetriever;
+	/** A {@code Thread} which will be running to get online users. */
+	private Thread userThread;
 	
 	/**
 	 * 
@@ -34,6 +42,9 @@ public class UserClient extends GenericClient {
 			NotBoundException, RemoteException {
 		super(serverURL, UserServer.URL_LOCATION);
 		this.userInterface = (UserInterface) remoteInterface;
+		this.onlineUserRetriever = new OnlineUserRetriever(userInterface,
+				REFRESH_RATE);
+		this.userThread = new Thread(onlineUserRetriever);
 	}
 	
 	/**
@@ -46,7 +57,8 @@ public class UserClient extends GenericClient {
 	 * @return {@code true} if the registration was successful, otherwise
 	 *         {@code false}.
 	 */
-	public boolean register(String username, byte[] password) throws RemoteException{
+	public boolean register(String username, byte[] password)
+			throws RemoteException {
 		byte[] hashedPass = PasswordManager.clientHash(password, username);
 		PasswordManager.clearArray(password);
 		try {
@@ -67,7 +79,8 @@ public class UserClient extends GenericClient {
 	 * @return {@code null} if the sign in was unsuccessful, otherwise a
 	 *         uniquely identifying {@code byte[]}.
 	 */
-	public byte[] signIn(String username, byte[] password) throws RemoteException{
+	public byte[] signIn(String username, byte[] password)
+			throws RemoteException {
 		byte[] hashedPass = PasswordManager.clientHash(password, username);
 		PasswordManager.clearArray(password);
 		try {
@@ -84,11 +97,12 @@ public class UserClient extends GenericClient {
 	 * @param userInstance
 	 *            The uniquely identifying {@code byte[]} to sign out.
 	 */
-	public void logout(byte[] userInstance) throws RemoteException{
+	public void logout(byte[] userInstance) throws RemoteException {
 		try {
 			userInterface.logout(userInstance);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}
+	
 }
