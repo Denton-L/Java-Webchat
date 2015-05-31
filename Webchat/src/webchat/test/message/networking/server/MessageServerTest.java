@@ -15,7 +15,7 @@ public class MessageServerTest extends TestCase {
 
 	protected void setUp() throws Exception{
 		try {
-			UserDatabase database = new UserDatabase(new File("/res/database.ser"));
+			UserDatabase database = new UserDatabase(new File("/database.ser"));
 			server = new MessageServer(database);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
