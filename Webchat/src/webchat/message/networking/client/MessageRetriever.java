@@ -43,10 +43,9 @@ public class MessageRetriever extends GenericRetriever {
 		} catch (RemoteException e) {
 			messages = null;
 			e.printStackTrace();
-			System.out.println("test");
 		}
 		if (messages != null) {
-			if (messages.size() > 0) {
+			if (!messages.isEmpty()) {
 				lastMessage = messages.last();
 				ui.writeMsg(messages);
 			}

@@ -3,6 +3,9 @@ package webchat.ui;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.SortedSet;
 
 import webchat.message.Message;
@@ -65,11 +68,14 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	Text userName;
 	Text msgText;
 	Text time;
+	Text onlineUser;
 
 	Scene serv;
 	Scene chat;
 	Scene reg;
 	Scene msg;
+
+	String[] usersOnline = null;
 
 	public UserClient client;
 	MessageClient msgclient;
@@ -88,25 +94,56 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	public void writeMsg(SortedSet<Message> messages) {
 		for (Message message : messages) {
 			try {
-				System.out.println(message.getContent());
 				blank = new Text();
 				userName = new Text(message.getUsername() + " said");
 				msgText = new Text("\"" + message.getContent() + "\"");
 				msgText.setWrappingWidth(527);
-				time = new Text("" + message.getTimestamp()); //TODO make this actual time
+				time = new Text("" + message.getTimestamp()); // TODO make this
+																// actual time
 				time.setFill(Color.GREY);
 				userName.setFill(Color.GREY);
 				time.setId("textstyle3");
 				userName.setId("textstyle3");
 
 				msgText.setId("messagetext");
-				System.out.println("test1");
 				msgScene.msgs.getChildren().addAll(userName, msgText, time,
 						blank);
 			} catch (Exception e) {
-				reportAndLogException(e);
+				reportMessageException(e);
 			}
 		}
+	}
+
+	public void writeUsers(String[] users) {
+		for (String userName : users) {
+			try {
+				onlineUser = new Text(userName);
+				onlineUser.setFill(Color.WHITE);
+				onlineUser
+						.setStyle("-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.8) , 5, 0.0 , 0 , 1);"
+								+ "-fx-font-family: AvenirLTStd-Light;"
+								+ "-fx-font-size: 30;");
+				onlineUser.setId(userName);
+				
+				if (usersOnline != null) {
+					Collection<String> collection = new ArrayList<String>();
+					collection.addAll(Arrays.asList(usersOnline));
+					collection.addAll(Arrays.asList(users));
+					usersOnline = collection.toArray(new String[] {});
+				} else
+					usersOnline = users;
+				
+				msgScene.box2.getChildren().add(onlineUser);
+
+				
+			} catch (Exception e) {
+				reportUserNameException(e);
+			}
+		}
+	}
+
+	public String[] getUsers() {
+		return usersOnline;
 	}
 
 	public ClientUI getUI() {
@@ -117,13 +154,21 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		launch(args);
 	}
 
-	public void reportAndLogException(final Throwable t) {
+	public void reportMessageException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				msgScene.msgs.getChildren().addAll(userName, msgText, time,
 						blank);
-				System.out.println("test2");
+			}
+		});
+	}
+
+	public void reportUserNameException(final Throwable t) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				msgScene.box2.getChildren().add(onlineUser);
 			}
 		});
 	}
@@ -170,20 +215,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 
 		chatScene.enter.setOnAction(this);
 
-		servScene.enter.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				try {
-					ip = servScene.ipBox.getText();
-					client = new UserClient(ip);
-					servScene.clrAll();
-					primaryStage.setScene(chat);
-				} catch (MalformedURLException | RemoteException
-						| NotBoundException e) {
-					servScene.warning.setVisible(true);
-				}
-			}
-		});
+		servScene.enter.setOnAction(this);
 
 		regScene.enter.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -276,6 +308,18 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				chatScene.warning.setVisible(true);
 			} catch (MalformedURLException | NotBoundException o) {
 				o.printStackTrace();
+			}
+		}
+		if (e.getSource() == servScene.enter) {
+			try {
+				ip = servScene.ipBox.getText();
+				client = new UserClient(ip, this);
+				client.startClient();
+				servScene.clrAll();
+				stage.setScene(chat);
+			} catch (MalformedURLException | RemoteException
+					| NotBoundException o) {
+				servScene.warning.setVisible(true);
 			}
 		}
 
