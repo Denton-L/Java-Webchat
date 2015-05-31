@@ -58,6 +58,6 @@ public interface UserInterface extends Remote {
 	 * @return The names of all users online.
 	 * @throws RemoteException
 	 */
-	String[] getOnlineUsers() throws RemoteException;
+	String[] getOtherOnlineUsers(String[] users) throws RemoteException;
 	
 }

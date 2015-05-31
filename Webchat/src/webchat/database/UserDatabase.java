@@ -162,15 +162,18 @@ public class UserDatabase {
 	 * 
 	 * @return A {@code String[]} with usernames.s
 	 */
-	public String[] getUsersWithUserInstance() {
+	public String[] getOtherUsersWithUserInstance(String[] onlineUsers) {
 		List<String> online = new ArrayList<>();
 		for (Iterator<User> iterator = users.iterator(); iterator.hasNext();) {
 			User user = iterator.next();
 			if (user.getUserInstance() != null) {
-				online.add(user.getUsername());
+				if (onlineUsers == null)
+					online.add(user.getUsername());
+				else if (!Arrays.asList(onlineUsers).contains(user.getUsername()))
+					online.add(user.getUsername());
 			}
 		}
-		
+		//System.out.println("Database");
 		return online.toArray(new String[0]);
 	}
 }
