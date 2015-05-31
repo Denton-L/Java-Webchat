@@ -68,9 +68,8 @@ public class UserService extends UnicastRemoteObject implements UserInterface {
 		
 	}
 	
-	public static void main(String[] args) throws RemoteException {
-		UserService us = new UserService(new UserDatabase());
-		us.register("asdf", new byte[] { 1, 2, 3, 4 });
-		System.out.println(us.signIn("asdf", new byte[] { 1, 2, 3, 4 }));
+	@Override
+	public String[] getOnlineUsers() {
+		return userDatabase.getUsersWithUserInstance();
 	}
 }

@@ -3,6 +3,8 @@ package webchat.users.networking;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import webchat.users.User;
+
 /**
  * An abstract interface which will allow user related operations to
  * occur through the RMI protocol.
@@ -49,5 +51,13 @@ public interface UserInterface extends Remote {
 	 * @throws RemoteException TODO
 	 */
 	void logout(byte[] userInstance) throws RemoteException;
+	
+	/**
+	 * Gets a list of users online.
+	 * 
+	 * @return The names of all users online.
+	 * @throws RemoteException
+	 */
+	String[] getOnlineUsers() throws RemoteException;
 	
 }

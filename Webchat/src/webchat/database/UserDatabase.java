@@ -7,11 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import webchat.users.User;
 
@@ -129,9 +129,9 @@ public class UserDatabase {
 	 */
 	public void setUserInstance(String username, byte[] userInstance) {
 		for (Iterator<User> iterator = users.iterator(); iterator.hasNext();) {
-			User user = iterator.next();
-			if (user.getUsername().equals(username)) {
-				user.setUserInstance(userInstance);
+			User online = iterator.next();
+			if (online.getUsername().equals(username)) {
+				online.setUserInstance(userInstance);
 				break;
 			}
 		}
@@ -154,5 +154,17 @@ public class UserDatabase {
 		}
 		
 		return null;
+	}
+	
+	public String[] getUsersWithUserInstance() {
+		List<String> online = new ArrayList<>();
+		for (Iterator<User> iterator = users.iterator(); iterator.hasNext();) {
+			User user = iterator.next();
+			if (user.getUserInstance() != null) {
+				online.add(user.getUsername());
+			}
+		}
+		
+		return (String[]) online.toArray();
 	}
 }
