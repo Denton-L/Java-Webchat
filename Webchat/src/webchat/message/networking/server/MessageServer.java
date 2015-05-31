@@ -12,11 +12,15 @@ import webchat.networking.GenericServer;
  * @version 2015-05-25
  */
 public class MessageServer extends GenericServer {
-	public static final String URL_LOCATION = "messages";
 	
-	
+	/**
+	 * Creates a new {@code MessageServer} with the {@code UserDatabase} as
+	 * specified.
+	 * 
+	 * @param userDatabase
+	 *            The {@code UserDatabase} which this server is based on.
+	 */
 	public MessageServer(UserDatabase userDatabase) throws RemoteException {
-		super(new MessageService(userDatabase));
-		setLocation(URL_LOCATION);
+		super("messages", new MessageService(userDatabase));
 	}
 }
