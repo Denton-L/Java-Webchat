@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import webchat.message.networking.MessageInterface;
 import webchat.message.networking.server.MessageServer;
 import webchat.networking.GenericClient;
+import webchat.ui.ClientUI;
 
 /**
  * The client which will communicate with {@code MessageServer}.
@@ -46,12 +47,12 @@ public class MessageClient extends GenericClient {
 	 * @throws NotBoundException
 	 * @throws RemoteException
 	 */
-	public MessageClient(String serverURL, byte[] userInstance)
+	public MessageClient(String serverURL, byte[] userInstance, ClientUI ui)
 			throws MalformedURLException, NotBoundException, RemoteException {
 		super(serverURL, MessageServer.URL_LOCATION);
 		this.messageInterface = (MessageInterface) remoteInterface;
 		this.userInstance = userInstance;
-		messageRetreiver = new MessageRetreiver(messageInterface, REFRESH_RATE);
+		messageRetreiver = new MessageRetreiver(messageInterface, REFRESH_RATE, ui);
 		this.messageThread = new Thread(messageRetreiver);
 	}
 	
@@ -75,7 +76,7 @@ public class MessageClient extends GenericClient {
 	 * @param message
 	 *            The content of the message which will be pushed.
 	 */
-	public void sendMessage(String message) {
+	public void sendMessage(String message) throws RemoteException{
 		try {
 			messageInterface.push(message, userInstance);
 		} catch (RemoteException e) {
