@@ -33,6 +33,7 @@ public class UserClient extends GenericClient {
 	public UserClient(String serverURL) throws MalformedURLException,
 			NotBoundException, RemoteException {
 		super(serverURL, UserServer.URL_LOCATION);
+		this.userInterface = (UserInterface) remoteInterface;
 	}
 	
 	/**
