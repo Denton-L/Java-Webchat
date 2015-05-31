@@ -32,7 +32,7 @@ public class ChatScene {
 	Button register = new Button();
 	VBox box = new VBox();
 	GridPane grid = new GridPane();
-	Image image1 = new Image("/res/plshelp.jpg", true);
+	Image image1 = new Image("/plshelp.jpg", true);
 	ImageView imview = new ImageView();
 
 	/**
@@ -79,7 +79,7 @@ public class ChatScene {
 		
 		// create scene
 		Scene scene = new Scene(group, 800, 600);
-		scene.getStylesheets().add("/res/custom.css");
+		scene.getStylesheets().add("/custom.css");
 
 		return scene;
 	}
