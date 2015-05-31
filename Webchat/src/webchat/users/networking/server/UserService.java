@@ -36,8 +36,11 @@ public class UserService extends UnicastRemoteObject implements UserInterface {
 	@Override
 	public boolean register(String username, byte[] passwordHash)
 			throws RemoteException {
-		return userDatabase.addUser(username,
-				PasswordManager.serverHash(passwordHash, username));
+		byte[] hashedPassword = PasswordManager.serverHash(passwordHash,
+				username);
+		boolean result = userDatabase.addUser(username, hashedPassword);
+		PasswordManager.clearArray(hashedPassword);
+		return result;
 		
 	}
 	
@@ -46,13 +49,15 @@ public class UserService extends UnicastRemoteObject implements UserInterface {
 			throws RemoteException {
 		
 		byte[] userInstance = new byte[USER_INSTANCE_LENGTH];
-		
-		if (userDatabase.isCorrectUserAndPassword(username,
-				PasswordManager.serverHash(passwordHash, username))) {
+		byte[] hashedPassword = PasswordManager.serverHash(passwordHash,
+				username);
+		if (userDatabase.isCorrectUserAndPassword(username, hashedPassword)) {
+			PasswordManager.clearArray(hashedPassword);
 			new SecureRandom().nextBytes(userInstance);
 			userDatabase.setUserInstance(username, userInstance);
 			return userInstance;
 		} else {
+			PasswordManager.clearArray(hashedPassword);
 			return null;
 		}
 	}
