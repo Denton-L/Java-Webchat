@@ -23,17 +23,17 @@ import webchat.users.User;
  *
  */
 public class UserDatabase {
-
+	
 	/** The collection of all the {@code User} objects. */
 	private Collection<User> users;
-
+	
 	/**
 	 * Creates a new database with no {@code User}s.
 	 */
 	public UserDatabase() {
 		users = new ArrayList<>();
 	}
-
+	
 	/**
 	 * Creates a new {@code UserDatabase} from a serialized
 	 * {@code Collection<User>} which is specified by {@code file}.
@@ -46,18 +46,18 @@ public class UserDatabase {
 	 */
 	public UserDatabase(File file) throws FileNotFoundException, IOException,
 			ClassNotFoundException {
-
+		
 		ObjectInputStream objectInputStream = new ObjectInputStream(
 				new FileInputStream(file));
 		this.users = (Collection<User>) objectInputStream.readObject();
 		objectInputStream.close();
 		
-		//clears userInstances
+		// clears userInstances
 		for (Iterator<User> user = users.iterator(); user.hasNext();) {
 			user.next().setUserInstance(null);
 		}
 	}
-
+	
 	/**
 	 * Saves the internal {@code Collection<User>} to a file as specified by
 	 * {@code file}.
@@ -74,7 +74,7 @@ public class UserDatabase {
 		objectOutputStream.writeObject(this.users);
 		objectOutputStream.close();
 	}
-
+	
 	/**
 	 * Adds a new user to the database.
 	 * 
@@ -94,7 +94,7 @@ public class UserDatabase {
 		users.add(new User(username, passwordHash));
 		return true;
 	}
-
+	
 	/**
 	 * Verifies that a username and password are correct.
 	 * 
@@ -113,10 +113,10 @@ public class UserDatabase {
 				return Arrays.equals(user.getPasswordHash(), passwordHash);
 			}
 		}
-
+		
 		return false;
 	}
-
+	
 	/**
 	 * Sets the {@code userInstance} of a {@code User} in the database to the
 	 * one specified.
@@ -136,7 +136,7 @@ public class UserDatabase {
 			}
 		}
 	}
-
+	
 	/**
 	 * Returns the username which is associated with a particular
 	 * {@code userInstance}.
@@ -152,7 +152,7 @@ public class UserDatabase {
 				return user.getUsername();
 			}
 		}
-
+		
 		return null;
 	}
 }
