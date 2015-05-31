@@ -29,7 +29,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class ServerWindow extends Application {
+public class ServerUI extends Application {
 
 	Image image1 = new Image("/res/plshelp.jpg", true);
 	ImageView imview = new ImageView();
