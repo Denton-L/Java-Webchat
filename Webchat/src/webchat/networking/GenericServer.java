@@ -18,7 +18,7 @@ import java.rmi.server.ExportException;
  */
 public abstract class GenericServer {
 	
-	/** The location of the server. */
+	/** The location of the class on the server. */
 	private String location;
 	/** The {@code Remote} that will be bound to this server. */
 	private Remote binding;
@@ -57,14 +57,5 @@ public abstract class GenericServer {
 		}
 		Registry registry = LocateRegistry.getRegistry();
 		registry.rebind(location, binding);
-	}
-	
-	/**
-	 * Gets the sublocation of the server.
-	 * 
-	 * @return The sublocation of the server.
-	 */
-	public String getLocation() {
-		return this.location;
 	}
 }
