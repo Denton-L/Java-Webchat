@@ -15,12 +15,12 @@ import webchat.ui.ClientUI;
  * @version 2015-05-23
  */
 public class MessageRetriever extends GenericRetriever {
-	
+
 	/** The last message received. */
 	private Message lastMessage;
 	/** The {@code MessageInterface} from the server which will be called. */
 	private MessageInterface messageInterface;
-	
+
 	/**
 	 * 
 	 * @param messageInterface
@@ -28,12 +28,13 @@ public class MessageRetriever extends GenericRetriever {
 	 * @param period
 	 *            The time in milliseconds between successive message fetches.
 	 */
-	public MessageRetriever(MessageInterface messageInterface, long period, ClientUI ui) {
+	public MessageRetriever(MessageInterface messageInterface, long period,
+			ClientUI ui) {
 		super(period, ui);
 		this.messageInterface = messageInterface;
 		this.lastMessage = null;
 	}
-	
+
 	@Override
 	public void retrieve() {
 		SortedSet<Message> messages;
@@ -42,11 +43,14 @@ public class MessageRetriever extends GenericRetriever {
 		} catch (RemoteException e) {
 			messages = null;
 			e.printStackTrace();
+			System.out.println("test");
 		}
-		if (messages.size() > 0) {
-			lastMessage = messages.last();
-			ui.writeMsg(messages);
+		if (messages != null) {
+			if (messages.size() > 0) {
+				lastMessage = messages.last();
+				ui.writeMsg(messages);
+			}
 		}
 	}
-	
+
 }
