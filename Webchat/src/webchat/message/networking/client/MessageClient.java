@@ -24,7 +24,7 @@ public class MessageClient extends GenericClient {
 	 */
 	private MessageInterface messageInterface;
 	/** The Runnable which will contain the logic to fetching messages. */
-	private MessageRetreiver messageRetreiver;
+	private MessageRetriever messageRetreiver;
 	/** A {@code Thread} which will be running to fetch messages. */
 	private Thread messageThread;
 	/**
@@ -52,7 +52,7 @@ public class MessageClient extends GenericClient {
 		super(serverURL, MessageServer.URL_LOCATION);
 		this.messageInterface = (MessageInterface) remoteInterface;
 		this.userInstance = userInstance;
-		messageRetreiver = new MessageRetreiver(messageInterface, REFRESH_RATE, ui);
+		messageRetreiver = new MessageRetriever(messageInterface, REFRESH_RATE, ui);
 		this.messageThread = new Thread(messageRetreiver);
 	}
 	
