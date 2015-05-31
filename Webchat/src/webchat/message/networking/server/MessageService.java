@@ -40,7 +40,6 @@ public class MessageService extends UnicastRemoteObject implements
 	@Override
 	public void push(String content, byte[] userInstance)
 			throws RemoteException {
-		System.out.println(content);
 		String username = userDatabase
 				.getUsernameFromUserInstance(userInstance);
 
