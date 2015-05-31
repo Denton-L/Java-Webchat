@@ -91,7 +91,7 @@ public class UserDatabase {
 				return false;
 			}
 		}
-		users.add(new User(username, passwordHash));
+		users.add(new User(username, passwordHash.clone()));
 		return true;
 	}
 	
