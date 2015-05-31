@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import webchat.message.Message;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -28,21 +29,15 @@ public class Messenger {
 		myUser = username;
 	}
 
-	public void writeMsg(String user1, String msg1, String time1) {
-		user = user1;
-		msg = msg1;
-		time = time1;
+	public void writeMsg(Message message) {
 
-		if (user1.equals("you")) {
-			System.out.println(myUser);
-			user = myUser;
-		}
+
 
 		Text blank = new Text();
-		Text user = new Text(user1 + " said");
-		Text msg = new Text("\"" + msg1 + "\"");
+		Text user = new Text(message.getUsername() + " said");
+		Text msg = new Text("\"" + message.getContent() + "\"");
 		msg.setWrappingWidth(527);
-		Text time = new Text(time1);
+		Text time = new Text(""+message.getTimestamp());
 		time.setFill(Color.GREY);
 		user.setFill(Color.GREY);
 		time.setId("textstyle3");
@@ -53,16 +48,4 @@ public class Messenger {
 		msgScene.msgs.getChildren().addAll(user, msg, time, blank);
 	}
 
-	public String deliverMsg() {
-		String msg = msgScene.input.getText();
-		msgScene.input.clear();
-		String time;
-
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		time = new SimpleDateFormat("HH:mm").format(timestamp);
-
-		writeMsg("you", msg, time);
-		
-		return msg;
-	}
 }

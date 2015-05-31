@@ -47,7 +47,6 @@ public class UserService extends UnicastRemoteObject implements UserInterface {
 	@Override
 	public byte[] signIn(String username, byte[] passwordHash)
 			throws RemoteException {
-		
 		byte[] userInstance = new byte[USER_INSTANCE_LENGTH];
 		byte[] hashedPassword = PasswordManager.serverHash(passwordHash,
 				username);

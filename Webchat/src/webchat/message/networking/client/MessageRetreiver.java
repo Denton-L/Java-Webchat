@@ -5,6 +5,7 @@ import java.util.SortedSet;
 
 import webchat.message.Message;
 import webchat.message.networking.MessageInterface;
+import webchat.ui.ClientUI;
 
 /**
  * An implementation of {@code Runnable} which fetches messages from the server.
@@ -23,6 +24,8 @@ public class MessageRetreiver implements Runnable {
 	/** Indicates whether the thread is running. */
 	private volatile boolean threadRunning;
 	
+	private ClientUI ui;
+	
 	/**
 	 * 
 	 * @param messageInterface
@@ -30,11 +33,12 @@ public class MessageRetreiver implements Runnable {
 	 * @param period
 	 *            The time in milliseconds between successive message fetches.
 	 */
-	public MessageRetreiver(MessageInterface messageInterface, long period) {
+	public MessageRetreiver(MessageInterface messageInterface, long period, ClientUI ui) {
 		this.lastMessage = null;
 		this.messageInterface = messageInterface;
 		this.period = period;
 		this.threadRunning = true;
+		this.ui = ui;
 	}
 	
 	/**
@@ -42,7 +46,7 @@ public class MessageRetreiver implements Runnable {
 	 * instantaneously.
 	 */
 	@Override
-	public void run() {
+	public void run(){
 		while (threadRunning) {
 			SortedSet<Message> messages;
 			try {
@@ -52,7 +56,8 @@ public class MessageRetreiver implements Runnable {
 				e.printStackTrace();
 			}
 			lastMessage = messages.last();
-			// TODO: GUI handler code here with messages
+			ui.writeMsg(messages);
+			System.out.println(lastMessage.getContent());
 			try {
 				Thread.sleep(period);
 			} catch (InterruptedException e) {
@@ -60,6 +65,8 @@ public class MessageRetreiver implements Runnable {
 			}
 		}
 	}
+	
+	
 	
 	/**
 	 * Halts the thread on the next loop iteration.
