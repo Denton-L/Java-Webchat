@@ -2,6 +2,8 @@ package webchat.message.networking.server;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -18,52 +20,48 @@ import webchat.message.networking.MessageInterface;
  */
 public class MessageService extends UnicastRemoteObject implements
 		MessageInterface {
-
+	
 	/** The maximum number of messages that can be stored. */
 	public static final int MESSAGE_BUFFER = 0xFFF;
 	/** All of the {@code Message}s that have been sent. */
 	private SortedSet<Message> messages;
 	/** Holds all of the users. */
 	private UserDatabase userDatabase;
-
-	private boolean hasNotRunYet = true;
-
+	
 	public MessageService(UserDatabase userDatabase) throws RemoteException {
 		this.userDatabase = userDatabase;
-		this.messages = new TreeSet<>(new MessageComparator());
+		this.messages = Collections.synchronizedSortedSet(new TreeSet<>(
+				new MessageComparator()));
 	}
-
+	
 	@Override
 	public SortedSet<Message> pull(Message lastMessageReceived)
 			throws RemoteException {
 		SortedSet<Message> newMessages = messages.tailSet(lastMessageReceived);
-		if (newMessages != null) {
-			if (!newMessages.isEmpty()) {
-					newMessages.remove(newMessages.first());
-				return newMessages;
-			} else
-				return null;
-		} else
-			return null;
+		if (!(newMessages.isEmpty() || lastMessageReceived == null)) {
+			newMessages.remove(newMessages.first());
+		}
+		return newMessages;
 	}
-
+	
 	@Override
 	public void push(String content, byte[] userInstance)
 			throws RemoteException {
+		
 		String username = userDatabase
 				.getUsernameFromUserInstance(userInstance);
-
+		
 		if (username == null) {
 			return;
 		}
-
-		Message message = new Message(content, username,
-				System.currentTimeMillis());
-		messages.add(message);
-
+		
+		while (!messages.add(new Message(content, username, System
+				.currentTimeMillis())))
+			;
+		
 		while (messages.size() > MESSAGE_BUFFER) {
 			messages.remove(messages.first());
 		}
-
+		
 	}
 }
