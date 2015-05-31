@@ -7,6 +7,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.ExportException;
 
 /**
  * A generic RMI server from which other clients will inherit.
@@ -22,6 +23,7 @@ public abstract class GenericServer {
 	/** The {@code Remote} that will be bound to this server. */
 	private Remote binding;
 	
+	private static boolean registryNotStarted = true;
 	/**
 	 * 
 	 * @param binding
@@ -44,7 +46,15 @@ public abstract class GenericServer {
 			AlreadyBoundException {
 		
 		System.setSecurityManager(new RMISecurityManager());
-		LocateRegistry.createRegistry(1099);
+		try{
+			if (registryNotStarted){
+				LocateRegistry.createRegistry(1099);
+//				registryNotStarted = false;
+			}
+		}
+		catch (ExportException e){
+			registryNotStarted = false;
+		}
 		Registry registry = LocateRegistry.getRegistry();
 		registry.rebind(location, binding);
 	}
