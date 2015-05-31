@@ -26,6 +26,8 @@ public class MessageService extends UnicastRemoteObject implements
 	/** Holds all of the users. */
 	private UserDatabase userDatabase;
 
+	private boolean hasNotRunYet = true;
+
 	public MessageService(UserDatabase userDatabase) throws RemoteException {
 		this.userDatabase = userDatabase;
 		this.messages = new TreeSet<>(new MessageComparator());
@@ -35,16 +37,14 @@ public class MessageService extends UnicastRemoteObject implements
 	public SortedSet<Message> pull(Message lastMessageReceived)
 			throws RemoteException {
 		SortedSet<Message> newMessages = messages.tailSet(lastMessageReceived);
-		for (Message message : newMessages)
-			System.out.print(message.getContent() + " ");
-		if (newMessages != null){
-			if (newMessages.size()>0){
-				newMessages.remove(newMessages.first());
+		if (newMessages != null) {
+			if (!newMessages.isEmpty()) {
+					newMessages.remove(newMessages.first());
 				return newMessages;
-			}
-			else return null;
-		}
-		else return null;
+			} else
+				return null;
+		} else
+			return null;
 	}
 
 	@Override

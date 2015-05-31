@@ -19,7 +19,8 @@ public class UserClientTest extends TestCase {
 			UserDatabase database = new UserDatabase(new File("/res/database.ser"));
 			UserServer server = new UserServer(database);
 			server.startServer();
-			client = new UserClient(InetAddress.getLocalHost().getHostAddress());
+			//client = new UserClient(InetAddress.getLocalHost().getHostAddress());
+			//TODO fix this
 		}
 		
 		setUpIsDone = false;

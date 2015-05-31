@@ -17,9 +17,8 @@ public class OnlineUserRetriever extends GenericRetriever {
 	
 	@Override
 	protected void retrieve() {
-		//TODO: GUI code, do something with the below!!
 		try {
-			userInterface.getOnlineUsers();
+			ui.writeUsers(userInterface.getOtherOnlineUsers(ui.getUsers()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
