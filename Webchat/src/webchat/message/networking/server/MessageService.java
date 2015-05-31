@@ -38,6 +38,7 @@ public class MessageService extends UnicastRemoteObject implements
 	public SortedSet<Message> pull(Message lastMessageReceived)
 			throws RemoteException {
 		SortedSet<Message> newMessages = messages.tailSet(lastMessageReceived);
+		//System.out.println(newMessages.isEmpty());
 		if (!(newMessages.isEmpty() || lastMessageReceived == null)) {
 			newMessages.remove(newMessages.first());
 		}
