@@ -146,7 +146,7 @@ public class ServerUI extends Application {
 	private void addFileChooser(final Stage stage, HBox hbox1, HBox hbox2) {
 		// TODO check if this works for runnable jars
 		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")
-				+ "/src/res"));
+				+ "/res/"));
 		fileChooser.getExtensionFilters().add(
 				new FileChooser.ExtensionFilter("SER file", "*.ser"));
 
