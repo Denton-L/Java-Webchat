@@ -60,12 +60,12 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	UserUpdate userupd = new UserUpdate(msgScene);
 	Messenger messenger = new Messenger(msgScene);
 	UserInfo userinfo = new UserInfo();
-	
+
 	Text blank;
 	Text userName;
 	Text msgText;
 	Text time;
-	
+
 	Scene serv;
 	Scene chat;
 	Scene reg;
@@ -87,26 +87,25 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 
 	public void writeMsg(SortedSet<Message> messages) {
 		for (Message message : messages) {
-			try{
-			System.out.println(message.getContent() + " ui");
-			blank = new Text();
-			userName = new Text(message.getUsername() + " said");
-			msgText = new Text("\"" + message.getContent() + "\"");
-			msgText.setWrappingWidth(527);
-			time = new Text("" + message.getTimestamp());
-			time.setFill(Color.GREY);
-			userName.setFill(Color.GREY);
-			time.setId("textstyle3");
-			userName.setId("textstyle3");
+			try {
+				System.out.println(message.getContent());
+				blank = new Text();
+				userName = new Text(message.getUsername() + " said");
+				msgText = new Text("\"" + message.getContent() + "\"");
+				msgText.setWrappingWidth(527);
+				time = new Text("" + message.getTimestamp()); //TODO make this actual time
+				time.setFill(Color.GREY);
+				userName.setFill(Color.GREY);
+				time.setId("textstyle3");
+				userName.setId("textstyle3");
 
-			msgText.setId("messagetext");
-			System.out.println("test1");
-			msgScene.msgs.getChildren().addAll(userName, msgText, time, blank);
+				msgText.setId("messagetext");
+				System.out.println("test1");
+				msgScene.msgs.getChildren().addAll(userName, msgText, time,
+						blank);
+			} catch (Exception e) {
+				reportAndLogException(e);
 			}
-			catch (Exception e)
-			  {
-			    reportAndLogException(e);
-			  }
 		}
 	}
 
@@ -117,16 +116,17 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	public void reportAndLogException(final Throwable t)
-	  {
-	    Platform.runLater(new Runnable() {
-	      @Override public void run() {
-	    	  msgScene.msgs.getChildren().addAll(userName, msgText, time, blank); 
-	    	  System.out.println("test2");
-	      }
-	    });
-	  }
+
+	public void reportAndLogException(final Throwable t) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				msgScene.msgs.getChildren().addAll(userName, msgText, time,
+						blank);
+				System.out.println("test2");
+			}
+		});
+	}
 
 	/**
 	 * This is used to set up the application by adding event handlers to the
@@ -261,7 +261,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent e) {
-		System.out.println(e);
 		if (e.getSource() == chatScene.enter) {
 			try {
 				userInstance = client.signIn(chatScene.userBox.getText(),
