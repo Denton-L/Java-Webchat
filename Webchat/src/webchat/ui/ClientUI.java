@@ -45,19 +45,19 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	final MsgScene msgScene = new MsgScene();
 
 	static Font f = Font.loadFont(
-			ClientUI.class.getResource("/res/SegoeUILight.ttf")
+			ClientUI.class.getResource("/SegoeUILight.ttf")
 					.toExternalForm(), 17);
 	static Font fLarge = Font.loadFont(
-			ClientUI.class.getResource("/res/SegoeUILight.ttf")
+			ClientUI.class.getResource("/SegoeUILight.ttf")
 					.toExternalForm(), 25);
 	static Font fBig = Font.loadFont(
-			ClientUI.class.getResource("/res/SegoeUILight.ttf")
+			ClientUI.class.getResource("/SegoeUILight.ttf")
 					.toExternalForm(), 45);
 	static Font font = Font.loadFont(
-			ClientUI.class.getResource("/res/AvenirLTStd-Light.otf")
+			ClientUI.class.getResource("/AvenirLTStd-Light.otf")
 					.toExternalForm(), 17);
 	static Font font2 = Font.loadFont(
-			ClientUI.class.getResource("/res/NexaLight.otf").toExternalForm(),
+			ClientUI.class.getResource("/NexaLight.otf").toExternalForm(),
 			17);
 
 	UserUpdate userupd = new UserUpdate(msgScene);

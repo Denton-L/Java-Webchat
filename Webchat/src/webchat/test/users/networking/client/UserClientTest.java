@@ -16,7 +16,7 @@ public class UserClientTest extends TestCase {
 	
 	protected void setUp() throws Exception {
 		if (setUpIsDone){
-			UserDatabase database = new UserDatabase(new File("/res/database.ser"));
+			UserDatabase database = new UserDatabase(new File("/database.ser"));
 			UserServer server = new UserServer(database);
 			server.startServer();
 			//client = new UserClient(InetAddress.getLocalHost().getHostAddress());

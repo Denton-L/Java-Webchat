@@ -14,7 +14,7 @@ public class MessageServiceTest extends TestCase {
 	MessageService service;
 
 	protected void setUp() throws RemoteException, Exception{
-		UserDatabase database = new UserDatabase(new File("/res/database.ser"));
+		UserDatabase database = new UserDatabase(new File("/database.ser"));
 		service = new MessageService(database);
 	}
 	

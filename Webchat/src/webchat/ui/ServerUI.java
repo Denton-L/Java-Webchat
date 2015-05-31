@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 
 public class ServerUI extends Application {
 
-	Image image1 = new Image("/res/plshelp.jpg", true);
+	Image image1 = new Image("/plshelp.jpg", true);
 	ImageView imview = new ImageView();
 	final Desktop desktop = Desktop.getDesktop();
 	final FileChooser fileChooser = new FileChooser();
@@ -137,7 +137,7 @@ public class ServerUI extends Application {
 
 		final Scene scene = new Scene(group, 500, 250);
 
-		scene.getStylesheets().add("/res/custom.css");
+		scene.getStylesheets().add("/custom.css");
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
