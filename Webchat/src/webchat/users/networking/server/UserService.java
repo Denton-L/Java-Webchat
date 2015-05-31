@@ -52,14 +52,13 @@ public class UserService extends UnicastRemoteObject implements UserInterface {
 		byte[] hashedPassword = PasswordManager.serverHash(passwordHash,
 				username);
 		if (userDatabase.isCorrectUserAndPassword(username, hashedPassword)) {
-			PasswordManager.clearArray(hashedPassword);
 			new SecureRandom().nextBytes(userInstance);
 			userDatabase.setUserInstance(username, userInstance);
-			return userInstance;
 		} else {
-			PasswordManager.clearArray(hashedPassword);
-			return null;
+			userInstance = null;
 		}
+		PasswordManager.clearArray(hashedPassword);
+		return userInstance;
 	}
 	
 	@Override
@@ -67,5 +66,11 @@ public class UserService extends UnicastRemoteObject implements UserInterface {
 		userDatabase.setUserInstance(
 				userDatabase.getUsernameFromUserInstance(userInstance), null);
 		
+	}
+	
+	public static void main(String[] args) throws RemoteException {
+		UserService us = new UserService(new UserDatabase());
+		us.register("asdf", new byte[] { 1, 2, 3, 4 });
+		System.out.println(us.signIn("asdf", new byte[] { 1, 2, 3, 4 }));
 	}
 }
