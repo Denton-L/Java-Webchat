@@ -59,4 +59,14 @@ public class UserDatabaseTest extends TestCase {
 				1 }));
 	}
 	
+	public void testGetUsersWithUserInstance() {
+		UserDatabase userDatabase = new UserDatabase();
+		userDatabase.addUser("asdf", "password".getBytes());
+		userDatabase.addUser("asdf2", "password".getBytes());
+		userDatabase.addUser("asdf3", "password".getBytes());
+		userDatabase.setUserInstance("asdf", new byte[] { 1, 3 });
+		userDatabase.setUserInstance("asdf3", new byte[] { 1, 5, 7 });
+		assertEquals(2, userDatabase.getUsersWithUserInstance().length);
+	}
+	
 }

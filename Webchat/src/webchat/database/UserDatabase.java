@@ -157,7 +157,8 @@ public class UserDatabase {
 	}
 	
 	/**
-	 * Returns a {@code String[]} listing all users who have a non-{@code null} {@code userInstance}. 
+	 * Returns a {@code String[]} listing all users who have a non-{@code null}
+	 * {@code userInstance}.
 	 * 
 	 * @return A {@code String[]} with usernames.s
 	 */
@@ -170,6 +171,6 @@ public class UserDatabase {
 			}
 		}
 		
-		return (String[]) online.toArray();
+		return online.toArray(new String[0]);
 	}
 }
