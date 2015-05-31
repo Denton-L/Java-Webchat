@@ -13,7 +13,6 @@ public class UserUpdate {
 
 	public void writeUser(String user1) 
 	{
-		System.out.println("yay");
 		Text user = new Text(user1);
 		user.setFill(Color.WHITE);
 		user.setStyle("-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.8) , 5, 0.0 , 0 , 1);"
