@@ -13,6 +13,9 @@ import webchat.networking.GenericServer;
  */
 public class MessageServer extends GenericServer {
 	
+	/** The location of this class on the server. */
+	public static final String URL_LOCATION = "messages";
+	
 	/**
 	 * Creates a new {@code MessageServer} with the {@code UserDatabase} as
 	 * specified.
@@ -21,6 +24,6 @@ public class MessageServer extends GenericServer {
 	 *            The {@code UserDatabase} which this server is based on.
 	 */
 	public MessageServer(UserDatabase userDatabase) throws RemoteException {
-		super("messages", new MessageService(userDatabase));
+		super(URL_LOCATION, new MessageService(userDatabase));
 	}
 }
