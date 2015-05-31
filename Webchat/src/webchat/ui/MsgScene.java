@@ -28,7 +28,7 @@ import javafx.scene.text.Text;
 
 public class MsgScene {
 	StackPane group = new StackPane();		
-	Image image1 = new Image("/res/plshelp.jpg", true);
+	Image image1 = new Image("/plshelp.jpg", true);
 	ImageView imview = new ImageView();
 	
 	BorderPane pane = new BorderPane();
@@ -70,7 +70,7 @@ public class MsgScene {
 		setMsgs();
 		
 		Scene scene = new Scene(group, 800, 600);
-		scene.getStylesheets().add("/res/custom.css");
+		scene.getStylesheets().add("/custom.css");
 		return scene;
 	}
 	
