@@ -139,6 +139,9 @@ public class MainInterface extends Application {
 				try {
 					userInstance = client.signIn(chatScene.userBox.getText(),
 							chatScene.pwBox.getText().getBytes());
+					System.out.println(userInstance);
+					System.out.println(chatScene.userBox.getText());
+					System.out.println(chatScene.pwBox.getText());
 					if (userInstance != null) {
 						primaryStage.setScene(msg);
 						chatScene.clrAll();
