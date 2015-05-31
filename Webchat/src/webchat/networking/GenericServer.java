@@ -18,20 +18,21 @@ import java.rmi.server.ExportException;
  */
 public abstract class GenericServer {
 	
-	/** The location of the server. */
+	/** The location of the class on the server. */
 	private String location;
 	/** The {@code Remote} that will be bound to this server. */
 	private Remote binding;
 	
 	private static boolean registryNotStarted = true;
+	
 	/**
 	 * 
 	 * @param binding
 	 *            The {@code Remote} that will be bound to this server.
 	 */
-	public GenericServer(Remote binding) {
+	public GenericServer(String location, Remote binding) {
+		this.location = location;
 		this.binding = binding;
-		this.location = null;
 	}
 	
 	/**
@@ -46,34 +47,15 @@ public abstract class GenericServer {
 			AlreadyBoundException {
 		
 		System.setSecurityManager(new RMISecurityManager());
-		try{
-			if (registryNotStarted){
+		try {
+			if (registryNotStarted) {
 				LocateRegistry.createRegistry(1099);
-//				registryNotStarted = false;
+				registryNotStarted = false;
 			}
-		}
-		catch (ExportException e){
+		} catch (ExportException e) {
 			registryNotStarted = false;
 		}
 		Registry registry = LocateRegistry.getRegistry();
 		registry.rebind(location, binding);
-	}
-	
-	/**
-	 * Sets the sublocation of the server.
-	 * 
-	 * @param location The sublocation of the server.
-	 */
-	protected void setLocation(String location) {
-		this.location = location;
-	}
-	
-	/**
-	 * Gets the sublocation of the server.
-	 * 
-	 * @return The sublocation of the server.
-	 */
-	public String getLocation() {
-		return this.location;
 	}
 }
