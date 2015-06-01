@@ -10,11 +10,13 @@ import java.rmi.AlreadyBoundException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -22,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import webchat.database.UserDatabase;
 import webchat.networking.StartServer;
 
@@ -39,10 +42,13 @@ public class ServerUI extends Application {
 	private Text selectText;
 	private Text createText;
 	private File database;
+	private double xvar;
+	private double yvar;
 	
 	@Override
 	public void start(final Stage primaryStage) {
 		primaryStage.setTitle("Server Starter");
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		final StackPane group = new StackPane();
 		this.imview.setImage(this.image1);
 		this.imview.setFitHeight(600);
@@ -61,11 +67,59 @@ public class ServerUI extends Application {
 		hbox3.setSpacing(15);
 		
 		final GridPane pane = new GridPane();
-		pane.setAlignment(Pos.CENTER);
+		//pane.setAlignment(Pos.CENTER);
+		pane.setPadding(new Insets(0,0,15,15));
 		pane.add(vbox, 1, 1);
-		
+
 		group.getChildren().add(this.imview);
 		group.getChildren().add(pane);
+
+		Text close = new Text("x");
+		Text min = new Text("_");
+		close.setId("welcome");
+		min.setId("welcome");
+		close.setStyle("-fx-font-size: 30");
+		min.setStyle("-fx-font-size: 30");
+		HBox titlebar = new HBox();
+		HBox.setMargin(close, new Insets(0,10,0,15));
+		HBox.setMargin(min, new Insets(0,0,0,15));
+		titlebar.setAlignment(Pos.CENTER_RIGHT);
+		titlebar.setPrefWidth(250);
+		titlebar.getChildren().addAll(min,close);
+
+		close.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				primaryStage.close();
+			}
+
+		});
+
+		min.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				primaryStage.setIconified(true);
+			}
+
+		});
+		
+		group.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xvar= event.getSceneX();
+				yvar= event.getSceneY();
+			}
+		});
+
+		group.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				primaryStage.setX(event.getScreenX() - xvar);
+				primaryStage.setY(event.getScreenY() - yvar);
+			}
+		});
+
+		pane.add(titlebar,1,0);
 		
 		Text ipaddress;
 		try {
@@ -132,7 +186,7 @@ public class ServerUI extends Application {
 		
 		vbox.getChildren().add(this.selectText);
 		
-		final Scene scene = new Scene(group, 500, 250);
+		final Scene scene = new Scene(group, 380, 280);
 		
 		scene.getStylesheets().add("/custom.css");
 		
