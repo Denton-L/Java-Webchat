@@ -5,6 +5,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import webchat.message.networking.MessageInterface;
+import webchat.message.networking.NotLoggedInException;
 import webchat.message.networking.server.MessageServer;
 import webchat.networking.GenericClient;
 import webchat.ui.ClientUI;
@@ -75,8 +76,9 @@ public class MessageClient extends GenericClient {
 	 * 
 	 * @param message
 	 *            The content of the message which will be pushed.
+	 * @throws NotLoggedInException 
 	 */
-	public void sendMessage(String message) throws RemoteException{
+	public void sendMessage(String message) throws RemoteException, NotLoggedInException{
 		try {
 			messageInterface.push(message, userInstance);
 		} catch (RemoteException e) {
