@@ -13,7 +13,7 @@ public class PasswordManagerTest extends TestCase {
 			122, 80, -101, -116, -4, -60, -4, 67 };
 	String username = "test";
 	boolean testbool;
-
+	
 	@Override
 	protected void setUp() throws Exception {
 		for (int i = 0; i < this.password.length; i++) {
@@ -21,7 +21,7 @@ public class PasswordManagerTest extends TestCase {
 		}
 		this.testbool = true;
 	}
-
+	
 	public void testClearArray() {
 		PasswordManager.clearArray(this.testArray);
 		for (int i = 0; i < this.cleared.length; i++) {
@@ -30,7 +30,7 @@ public class PasswordManagerTest extends TestCase {
 			}
 		}
 	}
-
+	
 	public void testServerHashing() throws Exception {
 		final byte[] result1 = PasswordManager.serverHash(this.password,
 				this.username);
@@ -49,9 +49,9 @@ public class PasswordManagerTest extends TestCase {
 		if (this.testbool) {
 			fail("Hash wasn't properly generated");
 		}
-
+		
 	}
-
+	
 	public void testClientHashing() throws Exception {
 		final byte[] result1 = PasswordManager.clientHash(this.password,
 				this.username);
@@ -72,7 +72,7 @@ public class PasswordManagerTest extends TestCase {
 		if (this.testbool) {
 			fail("Hash wasn't properly generated");
 		}
-
+		
 	}
-
+	
 }

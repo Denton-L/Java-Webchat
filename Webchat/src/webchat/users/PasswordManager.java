@@ -11,12 +11,12 @@ import java.security.NoSuchAlgorithmException;
  * @version 2015-05-25
  */
 public class PasswordManager {
-
+	
 	/** The hash function used by this class. */
 	private static final String HASH_FUNCTION = "SHA-256";
 	/** The number of hashes done by the server. */
 	private static final int NUMBER_OF_SERVER_HASHES = 1000;
-
+	
 	/**
 	 * Fills an array that is passed to it with zeros.
 	 *
@@ -28,7 +28,7 @@ public class PasswordManager {
 			cleared[i] = 0;
 		}
 	}
-
+	
 	/**
 	 * Hashes a password salted with the username. Note that the password array
 	 * will be cleared after it has been passed.
@@ -41,19 +41,19 @@ public class PasswordManager {
 		MessageDigest messageDigest;
 		try {
 			messageDigest = MessageDigest.getInstance(HASH_FUNCTION);
-
+			
 		} catch (final NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			return null;
 		}
 		messageDigest.update(password);
 		messageDigest.update(username.getBytes());
-
+		
 		clearArray(password);
-
+		
 		return messageDigest.digest();
 	}
-
+	
 	/**
 	 * Hashes a password salted with the username many times. Note that the
 	 * password array will be cleared after it has been passed.
@@ -65,26 +65,26 @@ public class PasswordManager {
 	public static byte[] serverHash(byte[] password, String username) {
 		MessageDigest messageDigest;
 		byte[] hash;
-
+		
 		try {
 			messageDigest = MessageDigest.getInstance(HASH_FUNCTION);
 		} catch (final NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			return null;
 		}
-
+		
 		messageDigest.update(password);
 		messageDigest.update(username.getBytes());
 		hash = messageDigest.digest();
 		clearArray(password);
-
+		
 		for (int hashNumber = 0; hashNumber < NUMBER_OF_SERVER_HASHES; hashNumber++) {
 			messageDigest.update(hash);
 			messageDigest.update(username.getBytes());
 			clearArray(hash);
 			hash = messageDigest.digest();
 		}
-
+		
 		return hash;
 	}
 }
