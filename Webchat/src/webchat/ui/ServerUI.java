@@ -46,7 +46,7 @@ public class ServerUI extends Application {
 	File database;
 
 	public void start(final Stage primaryStage) {
-
+		primaryStage.setTitle("Server Starter");
 		StackPane group = new StackPane();
 		imview.setImage(image1);
 		imview.setFitHeight(600);
