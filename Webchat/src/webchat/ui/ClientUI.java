@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.SortedSet;
 
 import javafx.application.Application;
@@ -66,10 +67,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				this.userName = new Text(message.getUsername() + " said");
 				this.msgText = new Text("\"" + message.getContent() + "\"");
 				this.msgText.setWrappingWidth(527);
-				this.time = new Text("" + message.getTimestamp()); // TODO make
-				// this
-				// actual
-				// time
+				this.time = new Text("" + new Date(message.getTimestamp()).toString());
 				this.time.setFill(Color.GREY);
 				this.userName.setFill(Color.GREY);
 				this.time.setId("textstyle3");
