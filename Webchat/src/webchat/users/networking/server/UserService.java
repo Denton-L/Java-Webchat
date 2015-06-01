@@ -74,7 +74,7 @@ public class UserService extends UnicastRemoteObject implements UserInterface {
 	}
 	
 	@Override
-	public String[] getOtherOnlineUsers(String[] users) {
-		return this.userDatabase.getOtherUsersWithUserInstance(users);
+	public String[] getOnlineUsers() {
+		return this.userDatabase.getUsersWithUserInstance();
 	}
 }
