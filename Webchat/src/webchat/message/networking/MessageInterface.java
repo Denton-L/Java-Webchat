@@ -24,8 +24,9 @@ public interface MessageInterface extends Remote {
 	 * @param userInstance
 	 *            The {@code byte[]} which uniquely identifies a user.
 	 * @throws RemoteException TODO
+	 * @throws NotLoggedInException 
 	 */
-	void push(String content, byte[] userInstance) throws RemoteException;
+	void push(String content, byte[] userInstance) throws RemoteException, NotLoggedInException;
 	
 	/**
 	 * Pulls all messages received since the last message received.
