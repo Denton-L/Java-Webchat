@@ -59,10 +59,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	private byte[] userInstance;
 	private Stage stage;
 
-	/**
-	 * Main method used to run the applications.
-	 */
-
 	public void writeMsg(SortedSet<Message> messages) {
 		for (final Message message : messages) {
 			try {
@@ -229,7 +225,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 							.sendMessage(ClientUI.this.msgScene
 													.getInput().getText());
 								} catch (final RemoteException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								} catch (final NotLoggedInException e) {
 									try {
@@ -242,7 +237,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 										ClientUI.this.msgScene.clrAll();
 										ClientUI.this.msgclient.stopClient();
 									} catch (final RemoteException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								}
@@ -262,7 +256,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 					ClientUI.this.client = null;
 					ClientUI.this.msgclient = null;
 				} catch (final RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -328,7 +321,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 					this.msgclient.sendMessage(this.msgScene.getInput()
 							.getText());
 				} catch (final RemoteException o) {
-					// TODO Auto-generated catch block
 					o.printStackTrace();
 				} catch (final NotLoggedInException o) {
 					try {
@@ -339,7 +331,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 						this.msgScene.clrAll();
 						this.msgclient.stopClient();
 					} catch (final RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}

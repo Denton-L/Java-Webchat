@@ -22,6 +22,7 @@ public class MessageServer extends GenericServer {
 	 *
 	 * @param userDatabase
 	 *            The {@code UserDatabase} which this server is based on.
+	 * @throws RemoteException
 	 */
 	public MessageServer(UserDatabase userDatabase) throws RemoteException {
 		super(URL_LOCATION, new MessageService(userDatabase));

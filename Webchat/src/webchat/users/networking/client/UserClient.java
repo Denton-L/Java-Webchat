@@ -35,6 +35,8 @@ public class UserClient extends GenericClient {
 	 *
 	 * @param serverURL
 	 *            The URL of the server.
+	 * @param ui
+	 *            The UI which will be updated.
 	 * @throws MalformedURLException
 	 * @throws NotBoundException
 	 * @throws RemoteException
@@ -71,6 +73,7 @@ public class UserClient extends GenericClient {
 	 *            The password.
 	 * @return {@code true} if the registration was successful, otherwise
 	 *         {@code false}.
+	 * @throws RemoteException
 	 */
 	public boolean register(String username, byte[] password)
 			throws RemoteException {
@@ -89,6 +92,7 @@ public class UserClient extends GenericClient {
 	 *            The password of the user.
 	 * @return {@code null} if the sign in was unsuccessful, otherwise a
 	 *         uniquely identifying {@code byte[]}.
+	 * @throws RemoteException
 	 */
 	public byte[] signIn(String username, byte[] password)
 			throws RemoteException {
@@ -103,6 +107,7 @@ public class UserClient extends GenericClient {
 	 *
 	 * @param userInstance
 	 *            The uniquely identifying {@code byte[]} to sign out.
+	 * @throws RemoteException
 	 */
 	public void logout(byte[] userInstance) throws RemoteException {
 		this.userInterface.logout(userInstance);

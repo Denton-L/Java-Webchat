@@ -26,7 +26,8 @@ public abstract class GenericServer {
 	private static boolean registryNotStarted = true;
 	
 	/**
-	 *
+	 * @param location
+	 *            The location of the class on the domain.
 	 * @param binding
 	 *            The {@code Remote} that will be bound to this server.
 	 */
