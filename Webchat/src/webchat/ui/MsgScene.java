@@ -60,7 +60,7 @@ public class MsgScene {
 	private Text logout = new Text("exit");
 	
 	private TextArea input = new TextArea();
-	private VBox msgs = new VBox();
+	public VBox msgs = new VBox();
 	
 	private Button enter = new Button(">");
 	

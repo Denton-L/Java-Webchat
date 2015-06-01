@@ -18,6 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -155,12 +156,15 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	 */
 	@Override
 	public void start(final Stage primaryStage) {
+		Font.loadFont(ClientUI.class.getResource("/AvenirLTStd-Light.otf").toExternalForm(), 10);
+		Font.loadFont(ClientUI.class.getResource("/NexaLight.otf").toExternalForm(), 10);
+		
 		this.serv = this.servScene.createServ();
 		this.chat = this.chatScene.createChat();
 		this.reg = this.regScene.createReg();
 		this.msg = this.msgScene.createMsg();
 
-		final StageModifier stagemod = new StageModifier(this.servScene,
+		final StageModifier stagemod = new StageModifier(this.serv, this.chat, this.reg, this.servScene,
 				this.msgScene, this.chatScene, this.regScene, primaryStage);
 		stagemod.draggable();
 		stagemod.testmethod();
@@ -168,7 +172,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		this.stage = primaryStage;
 
 		primaryStage.setTitle("Web Chat");
-		primaryStage.setScene(this.serv);
+		primaryStage.setScene(this.reg);
 		primaryStage.setResizable(false);
 		primaryStage.setWidth(this.serv.getWidth());
 		primaryStage.setHeight(this.serv.getHeight());
@@ -335,6 +339,5 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				this.msgScene.getInput().clear();
 			}
 		}
-
 	}
 }
