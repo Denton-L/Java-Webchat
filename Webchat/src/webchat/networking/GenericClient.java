@@ -18,7 +18,7 @@ import java.rmi.registry.Registry;
 public abstract class GenericClient {
 	
 	/** The {@code Remote} class which this client will accept. */
-	protected Remote remoteInterface;
+	private Remote remoteInterface;
 	
 	/**
 	 * 
@@ -36,5 +36,9 @@ public abstract class GenericClient {
 		
 		Registry registry = LocateRegistry.getRegistry(serverURL);
 		remoteInterface = (Remote) registry.lookup(sublocation);
+	}
+	
+	protected Remote getRemoteInterface() {
+		return remoteInterface;
 	}
 }
