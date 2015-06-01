@@ -61,10 +61,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 
 	/**
 	 * Main method used to run the applications.
-	 *
-	 * @param Unused
-	 *            .
-	 * @return Nothing.
 	 */
 
 	public void writeMsg(SortedSet<Message> messages) {
