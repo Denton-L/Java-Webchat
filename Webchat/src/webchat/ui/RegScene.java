@@ -31,7 +31,7 @@ public class RegScene {
 	private Button enter = new Button();
 	private BorderPane bpane = new BorderPane();
 	private final GridPane pane = new GridPane();
-	private final Image image1 = new Image("/plshelp.jpg", true);
+	private final Image image1 = new Image("/background.jpg", true);
 	private final ImageView imview = new ImageView();
 	private StackPane group = new StackPane();
 	
