@@ -44,6 +44,8 @@ public class MessageClient extends GenericClient {
 	 * @param userInstance
 	 *            A {@code byte[]} containing the user's unique identifier to
 	 *            the server.
+	 * @param ui
+	 *            The UI which will be updated.
 	 * @throws MalformedURLException
 	 * @throws NotBoundException
 	 * @throws RemoteException
@@ -78,6 +80,9 @@ public class MessageClient extends GenericClient {
 	 * @param message
 	 *            The content of the message which will be pushed.
 	 * @throws NotLoggedInException
+	 *             Thrown if {@code userInstance} does not match between this
+	 *             client and the server.
+	 * @throws RemoteException
 	 */
 	public void sendMessage(String message) throws RemoteException,
 			NotLoggedInException {
