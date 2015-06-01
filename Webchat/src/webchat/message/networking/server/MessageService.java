@@ -14,52 +14,57 @@ import webchat.message.networking.NotLoggedInException;
 
 /**
  * A class which handles the logic of message processing.
- * 
+ *
  * @author Denton Liu
  * @version 2015-05-25
  */
 public class MessageService extends UnicastRemoteObject implements
-		MessageInterface {
-	
+MessageInterface {
+
+	/** Auto-generated. */
+	private static final long serialVersionUID = -1058480823173079414L;
 	/** The maximum number of messages that can be stored. */
 	public static final int MESSAGE_BUFFER = 0xFFF;
 	/** All of the {@code Message}s that have been sent. */
-	private SortedSet<Message> messages;
+	private final SortedSet<Message> messages;
 	/** Holds all of the users. */
-	private UserDatabase userDatabase;
-	
+	private final UserDatabase userDatabase;
+
 	public MessageService(UserDatabase userDatabase) throws RemoteException {
 		this.userDatabase = userDatabase;
 		this.messages = Collections.synchronizedSortedSet(new TreeSet<>(
 				new MessageComparator()));
 	}
-	
+
+	@Override
 	public SortedSet<Message> pull(Message lastMessageReceived)
 			throws RemoteException {
-		SortedSet<Message> newMessages = messages.tailSet(lastMessageReceived);
+		final SortedSet<Message> newMessages = this.messages
+				.tailSet(lastMessageReceived);
 		newMessages.remove(lastMessageReceived);
-		
+
 		return newMessages;
 	}
-	
+
 	@Override
 	public void push(String content, byte[] userInstance)
 			throws RemoteException, NotLoggedInException {
-		
-		String username = userDatabase
+
+		final String username = this.userDatabase
 				.getUsernameFromUserInstance(userInstance);
-		
+
 		if (username == null) {
 			throw new NotLoggedInException();
 		}
-		
-		while (!messages.add(new Message(content, username, System
-				.currentTimeMillis())))
+
+		while (!this.messages.add(new Message(content, username, System
+				.currentTimeMillis()))) {
 			;
-		
-		while (messages.size() > MESSAGE_BUFFER) {
-			messages.remove(messages.first());
 		}
-		
+
+		while (this.messages.size() > MESSAGE_BUFFER) {
+			this.messages.remove(this.messages.first());
+		}
+
 	}
 }
