@@ -39,6 +39,8 @@ public class ServerUI extends Application {
 	private Text selectText;
 	private Text createText;
 	private File database;
+	
+	
 
 	@Override
 	public void start(final Stage primaryStage) {
