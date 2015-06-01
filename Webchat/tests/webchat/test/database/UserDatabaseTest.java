@@ -25,7 +25,7 @@ public class UserDatabaseTest extends TestCase {
 		assertTrue(userDatabase.addUser("asdf2", "passewoasdd".getBytes()));
 	}
 	
-	public void testIsCorrectUserAndPassword() {
+	public void testIsCorrectUserAndPassword() {		
 		final UserDatabase userDatabase = new UserDatabase();
 		userDatabase.addUser("asdf", "password".getBytes());
 		userDatabase.addUser("fdsa", "random".getBytes());
