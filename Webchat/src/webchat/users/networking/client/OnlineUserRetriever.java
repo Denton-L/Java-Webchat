@@ -7,23 +7,24 @@ import webchat.ui.ClientUI;
 import webchat.users.networking.UserInterface;
 
 public class OnlineUserRetriever extends GenericRetriever {
-	
-	private UserInterface userInterface;
-	
+
+	private final UserInterface userInterface;
+
 	public OnlineUserRetriever(UserInterface userInterface, long period,
 			ClientUI ui) {
 		super(period, ui);
 		this.userInterface = userInterface;
 	}
-	
+
 	@Override
 	protected void retrieve() {
 		try {
-			ui.writeUsers(userInterface.getOtherOnlineUsers(ui.getUsers()));
-		} catch (RemoteException e) {
+			this.ui.writeUsers(this.userInterface.getOtherOnlineUsers(this.ui
+					.getUsers()));
+		} catch (final RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }

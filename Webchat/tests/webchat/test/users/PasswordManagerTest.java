@@ -1,8 +1,7 @@
 package webchat.test.users;
 
-import webchat.users.PasswordManager;
 import junit.framework.TestCase;
-import junit.framework.Assert;
+import webchat.users.PasswordManager;
 
 public class PasswordManagerTest extends TestCase {
 	byte[] password = { 1, 1, 1, 1, 1 };
@@ -14,51 +13,66 @@ public class PasswordManagerTest extends TestCase {
 			122, 80, -101, -116, -4, -60, -4, 67 };
 	String username = "test";
 	boolean testbool;
-	
+
+	@Override
 	protected void setUp() throws Exception {
-		for (int i = 0; i < password.length; i++)
-			password[i] = 1;
-		testbool = true;
+		for (int i = 0; i < this.password.length; i++) {
+			this.password[i] = 1;
+		}
+		this.testbool = true;
 	}
-	
+
 	public void testClearArray() {
-		PasswordManager.clearArray(testArray);
-		for (int i = 0; i < cleared.length; i++)
-			if (cleared[i] != testArray[i])
+		PasswordManager.clearArray(this.testArray);
+		for (int i = 0; i < this.cleared.length; i++) {
+			if (this.cleared[i] != this.testArray[i]) {
 				fail();
+			}
+		}
 	}
-	
+
 	public void testServerHashing() throws Exception {
-		byte[] result1 = PasswordManager.serverHash(password, username);
+		final byte[] result1 = PasswordManager.serverHash(this.password,
+				this.username);
 		setUp();
-		byte[] result2 = PasswordManager.serverHash(password, username);
-		byte[] result3 = PasswordManager.serverHash(cleared, username);
+		final byte[] result2 = PasswordManager.serverHash(this.password,
+				this.username);
+		final byte[] result3 = PasswordManager.serverHash(this.cleared,
+				this.username);
 		for (int i = 0; i < result1.length; i++) {
-			if (result1[i] != result2[i])
+			if (result1[i] != result2[i]) {
 				fail(result1[i] + " " + result2[i] + " " + i);
-			else if (result1[i] != result3[i])
-				testbool = false;
+			} else if (result1[i] != result3[i]) {
+				this.testbool = false;
+			}
 		}
-		if (testbool)
+		if (this.testbool) {
 			fail("Hash wasn't properly generated");
-		
+		}
+
 	}
-	
+
 	public void testClientHashing() throws Exception {
-		byte[] result1 = PasswordManager.clientHash(password, username);
+		final byte[] result1 = PasswordManager.clientHash(this.password,
+				this.username);
 		setUp();
-		byte[] result2 = PasswordManager.clientHash(password, username);
-		byte[] result3 = PasswordManager.clientHash(cleared, username);
+		final byte[] result2 = PasswordManager.clientHash(this.password,
+				this.username);
+		final byte[] result3 = PasswordManager.clientHash(this.cleared,
+				this.username);
 		for (int i = 0; i < result1.length; i++) {
-			if (result1[i] != result2[i] || result1[i] != expectedClientHash[i])
+			if (result1[i] != result2[i]
+					|| result1[i] != this.expectedClientHash[i]) {
 				fail(result1[i] + " " + result2[i] + " "
-						+ expectedClientHash[i] + " " + i);
-			else if (result1[i] != result3[i])
-				testbool = false;
+						+ this.expectedClientHash[i] + " " + i);
+			} else if (result1[i] != result3[i]) {
+				this.testbool = false;
+			}
 		}
-		if (testbool)
+		if (this.testbool) {
 			fail("Hash wasn't properly generated");
-		
+		}
+
 	}
-	
+
 }
