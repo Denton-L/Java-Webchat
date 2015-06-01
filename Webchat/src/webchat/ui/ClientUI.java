@@ -117,6 +117,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				reportUserNameException(e);
 			}
 		}
+		throw new RuntimeException("Hey Fil, fix this!");
 	}
 
 	public String[] getUsers() {
