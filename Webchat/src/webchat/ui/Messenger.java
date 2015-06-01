@@ -12,9 +12,6 @@ public class Messenger {
 		this.msgScene = rscene;
 	}
 	
-	public void getUser(String username) {
-	}
-	
 	public void writeMsg(Message message) {
 		
 		final Text blank = new Text();
