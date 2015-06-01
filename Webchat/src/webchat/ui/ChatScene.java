@@ -32,7 +32,7 @@ public class ChatScene {
 	private Button register = new Button();
 	private final GridPane grid = new GridPane();
 	private BorderPane pane = new BorderPane();
-	private final Image image1 = new Image("/plshelp.jpg", true);
+	private final Image image1 = new Image("/background.jpg", true);
 	private final ImageView imview = new ImageView();
 	private StackPane group = new StackPane();
 	
