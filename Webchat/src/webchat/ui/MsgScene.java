@@ -35,7 +35,7 @@ public class MsgScene {
 	/**
 	 * Loads and places images
 	 */
-	private final Image image1 = new Image("/plshelp.jpg", true);
+	private final Image image1 = new Image("/background.jpg", true);
 	private final ImageView imview = new ImageView();
 	/**
 	 * Creates borderpane layout
