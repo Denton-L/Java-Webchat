@@ -42,16 +42,22 @@ public class UserClient extends GenericClient {
 	public UserClient(String serverURL, ClientUI ui)
 			throws MalformedURLException, NotBoundException, RemoteException {
 		super(serverURL, UserServer.URL_LOCATION);
-		this.userInterface = (UserInterface) remoteInterface;
+		this.userInterface = (UserInterface) getRemoteInterface();
 		this.onlineUserRetriever = new OnlineUserRetriever(userInterface,
 				REFRESH_RATE, ui);
 		this.userThread = new Thread(onlineUserRetriever);
 	}
 	
+	/**
+	 * Starts the client's thread.
+	 */
 	public void startClient() {
 		userThread.start();
 	}
 	
+	/**
+	 * Stops the client's thread safely.
+	 */
 	public void stopClient() {
 		onlineUserRetriever.stopThread();
 	}
@@ -70,12 +76,7 @@ public class UserClient extends GenericClient {
 			throws RemoteException {
 		byte[] hashedPass = PasswordManager.clientHash(password, username);
 		PasswordManager.clearArray(password);
-		try {
-			return userInterface.register(username, hashedPass);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return false;
-		}
+		return userInterface.register(username, hashedPass);
 	}
 	
 	/**
@@ -92,12 +93,7 @@ public class UserClient extends GenericClient {
 			throws RemoteException {
 		byte[] hashedPass = PasswordManager.clientHash(password, username);
 		PasswordManager.clearArray(password);
-		try {
-			return userInterface.signIn(username, hashedPass);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return null;
-		}
+		return userInterface.signIn(username, hashedPass);
 	}
 	
 	/**
@@ -107,11 +103,7 @@ public class UserClient extends GenericClient {
 	 *            The uniquely identifying {@code byte[]} to sign out.
 	 */
 	public void logout(byte[] userInstance) throws RemoteException {
-		try {
-			userInterface.logout(userInstance);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		userInterface.logout(userInstance);
 	}
 	
 }
