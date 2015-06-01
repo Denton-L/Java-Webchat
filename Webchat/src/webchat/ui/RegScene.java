@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -32,9 +33,11 @@ public class RegScene {
 	PasswordField pwBox = new PasswordField();
 	PasswordField pwBox2 = new PasswordField();
 	Button enter = new Button();
+	BorderPane bpane = new BorderPane();
 	GridPane pane = new GridPane();
 	Image image1 = new Image("/plshelp.jpg", true);
 	ImageView imview = new ImageView();
+	StackPane group = new StackPane();		
 
 	/**
 	 * Sets up elements as necessary in order to create the registration scene.
@@ -42,7 +45,6 @@ public class RegScene {
 	 */
 	public Scene createReg() {
 		
-		StackPane group = new StackPane();		
 		imview.setFitHeight(600);
 	    imview.setFitWidth(800);
         imview.setImage(image1);
@@ -78,7 +80,8 @@ public class RegScene {
 
 		warning.setVisible(false);
 		
-		group.getChildren().add(pane);
+		bpane.setCenter(pane);
+		group.getChildren().add(bpane);
 
 		// create scene
 		Scene scene = new Scene(group, 800, 600);
