@@ -51,6 +51,8 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	private Scene chat;
 	private Scene reg;
 	private Scene msg;
+	
+	private ArrayList<Text> userList;
 
 	private String[] usersOnline = null;
 
@@ -80,7 +82,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 						.addAll(this.userName, this.msgText, this.time,
 								this.blank);
 			} catch (final Exception e) {
-				reportMessageException(e);
+				reportMessageException(e, 7);
 			}
 		}
 	}
@@ -111,7 +113,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				reportUserNameException(e);
 			}
 		}
-		throw new RuntimeException("Hey Fil, fix this!");
 	}
 
 	public String[] getUsers() {
@@ -126,7 +127,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		launch(args);
 	}
 
-	public void reportMessageException(final Throwable t) {
+	public void reportMessageException(final Throwable t, int x) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
