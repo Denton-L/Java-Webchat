@@ -19,7 +19,7 @@ import javafx.scene.text.Text;
 public class ServScene 
 {
 	Text title = new Text("welcome");
-	Text warning = new Text("Incorrect address");
+	Text warning = new Text("Incorrect server location");
 	TextField ipBox = new TextField();
 	Button enter = new Button();
 	Button register = new Button();
@@ -50,7 +50,7 @@ public class ServScene
 		grid.add(title, 0, 0, 2, 1);
 
 		ipBox.setPrefHeight(45);
-		ipBox.setPromptText("Server IP");
+		ipBox.setPromptText("Server location");
 		ipBox.setPrefWidth(400);
 		grid.add(ipBox, 1, 1);
 
