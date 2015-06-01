@@ -36,7 +36,9 @@ public class OnlineUserRetriever extends GenericRetriever {
 	@Override
 	protected void retrieve() {
 		try {
-			this.ui.writeUsers(this.userInterface.getOnlineUsers());
+			if (this.userInterface.getOnlineUsers().length > 0){
+				this.ui.writeUsers(this.userInterface.getOnlineUsers());
+		}
 		} catch (final RemoteException e) {
 			e.printStackTrace();
 		}

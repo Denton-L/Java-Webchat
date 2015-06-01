@@ -52,32 +52,28 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	private Scene chat;
 	private Scene reg;
 	private Scene msg;
-	
-	private ArrayList<Text> userList;
 
-	private String[] usersOnline = null;
-
+	private volatile boolean hasNotAdded;
+	private volatile boolean hasNotRemoved;
 	private UserClient client;
 	private MessageClient msgclient;
 	private String ip;
 	private byte[] userInstance;
 	private Stage stage;
-	
+
 	private final static Font f = Font.loadFont(
-			ClientUI.class.getResource("/SegoeUILight.ttf")
-					.toExternalForm(), 17);
-	private final static Font fLarge = Font.loadFont(
-			ClientUI.class.getResource("/SegoeUILight.ttf")
-					.toExternalForm(), 25);
+			ClientUI.class.getResource("/SegoeUILight.ttf").toExternalForm(),
+			17);
+	private final static Font fLarge = Font.loadFont(ClientUI.class
+			.getResource("/SegoeUILight.ttf").toExternalForm(), 25);
 	private final static Font fBig = Font.loadFont(
-			ClientUI.class.getResource("/SegoeUILight.ttf")
-					.toExternalForm(), 45);
+			ClientUI.class.getResource("/SegoeUILight.ttf").toExternalForm(),
+			45);
 	private final static Font font = Font.loadFont(
 			ClientUI.class.getResource("/AvenirLTStd-Light.otf")
 					.toExternalForm(), 17);
 	private final static Font font2 = Font.loadFont(
-			ClientUI.class.getResource("/NexaLight.otf").toExternalForm(),
-			17);
+			ClientUI.class.getResource("/NexaLight.otf").toExternalForm(), 17);
 
 	public void writeMsg(SortedSet<Message> messages) {
 		for (final Message message : messages) {
@@ -86,7 +82,8 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				this.userName = new Text(message.getUsername() + " said");
 				this.msgText = new Text("\"" + message.getContent() + "\"");
 				this.msgText.setWrappingWidth(527);
-				this.time = new Text("" + new Date(message.getTimestamp()).toString());
+				this.time = new Text(""
+						+ new Date(message.getTimestamp()).toString());
 				this.time.setFill(Color.GREY);
 				this.userName.setFill(Color.GREY);
 				this.time.setId("textstyle3");
@@ -99,14 +96,37 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 						.addAll(this.userName, this.msgText, this.time,
 								this.blank);
 			} catch (final Exception e) {
-				reportMessageException(e, 7);
+				reportMessageException(e);
 			}
 		}
 	}
 
 	public void writeUsers(String[] users) {
+		System.out.println(users.length);
+		if (ClientUI.this.msgScene.getBox2().getChildren().size() > 0) {
+			System.out.println("wat0.5");
+			try {
+				hasNotRemoved = true;
+				System.out.println("wat0");
+				ClientUI.this.msgScene
+						.getBox2()
+						.getChildren()
+						.remove(0,
+								ClientUI.this.msgScene.getBox2().getChildren()
+										.size());
+			} catch (final Exception e) {
+				reportRemoveUserNameException(e);
+			}
+		}
+		else 
+			hasNotRemoved = false;
+		System.out.println("wataaaa");
+		while (hasNotRemoved){
+		}
+		System.out.println("wat6");
 		for (final String userName : users) {
 			try {
+				hasNotAdded = true;
 				this.onlineUser = new Text(userName);
 				this.onlineUser.setFill(Color.WHITE);
 				this.onlineUser
@@ -114,26 +134,15 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 								+ "-fx-font-family: AvenirLTStd-Light;"
 								+ "-fx-font-size: 30;");
 				this.onlineUser.setId(userName);
-
-				if (this.usersOnline != null) {
-					final Collection<String> collection = new ArrayList<String>();
-					collection.addAll(Arrays.asList(this.usersOnline));
-					collection.addAll(Arrays.asList(users));
-					this.usersOnline = collection.toArray(new String[] {});
-				} else {
-					this.usersOnline = users;
-				}
-
+				System.out.println("wat6");
 				this.msgScene.getBox2().getChildren().add(this.onlineUser);
 
 			} catch (final Exception e) {
 				reportUserNameException(e);
 			}
+			while (hasNotAdded){
+			}
 		}
-	}
-
-	public String[] getUsers() {
-		return this.usersOnline;
 	}
 
 	public ClientUI getUI() {
@@ -144,7 +153,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		launch(args);
 	}
 
-	public void reportMessageException(final Throwable t, int x) {
+	private void reportMessageException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -157,12 +166,26 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		});
 	}
 
-	public void reportUserNameException(final Throwable t) {
+	private void reportUserNameException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				ClientUI.this.msgScene.getBox2().getChildren()
 						.add(ClientUI.this.onlineUser);
+				hasNotAdded = false;
+				System.out.println(ClientUI.this.onlineUser);
+			}
+		});
+	}
+
+	private void reportRemoveUserNameException(final Throwable t) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("wat1");
+				ClientUI.this.msgScene.getBox2().getChildren().remove(0, ClientUI.this.msgScene.getBox2().getChildren().size());
+				hasNotRemoved = false;
+				System.out.println("wat2");
 			}
 		});
 	}
@@ -225,7 +248,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 							e.printStackTrace();
 						}
 					}
-					
+
 				});
 
 		this.msgScene.getInput().addEventFilter(KeyEvent.KEY_PRESSED,
@@ -238,18 +261,18 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 											.getText().trim().isEmpty()) {
 								try {
 									ClientUI.this.msgclient
-							.sendMessage(ClientUI.this.msgScene
+											.sendMessage(ClientUI.this.msgScene
 													.getInput().getText());
 								} catch (final RemoteException e) {
 									e.printStackTrace();
 								} catch (final NotLoggedInException e) {
 									try {
 										ClientUI.this.client
-								.logout(ClientUI.this.userInstance);
+												.logout(ClientUI.this.userInstance);
 										ClientUI.this.client = null;
 										ClientUI.this.msgclient = null;
 										primaryStage
-								.setScene(ClientUI.this.serv);
+												.setScene(ClientUI.this.serv);
 										ClientUI.this.msgScene.clrAll();
 										ClientUI.this.msgclient.stopClient();
 									} catch (final RemoteException e1) {
@@ -282,6 +305,10 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent e) {
 		if (e.getSource() == this.chatScene.getEnter()) {
 			try {
+				if (client == null){
+					this.client = new UserClient(this.ip, this);
+					this.client.startClient();
+				}
 				this.userInstance = this.client.signIn(this.chatScene
 						.getUserBox().getText(), this.chatScene.getPwBox()
 						.getText().getBytes());
@@ -304,7 +331,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			try {
 				this.ip = this.servScene.getIpBox().getText();
 				this.client = new UserClient(this.ip, this);
-				this.client.startClient();
+				client = null;
 				this.servScene.clrAll();
 				this.stage.setScene(this.chat);
 			} catch (MalformedURLException | RemoteException
@@ -316,6 +343,10 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			if (this.regScene.getPwBox().getText()
 					.equals(this.regScene.getPwBox2().getText())) {
 				try {
+					if (client == null){
+						this.client = new UserClient(this.ip, this);
+						this.client.startClient();
+					}
 					if (this.client.register(this.regScene.getUserBox()
 							.getText(), this.regScene.getPwBox().getText()
 							.getBytes())) {
@@ -327,6 +358,10 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 					}
 				} catch (final RemoteException o) {
 					this.regScene.getWarning().setVisible(true);
+				} catch (MalformedURLException e1) {
+					e1.printStackTrace();
+				} catch (NotBoundException e1) {
+					e1.printStackTrace();
 				}
 			}
 		}
@@ -341,11 +376,11 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				} catch (final NotLoggedInException o) {
 					try {
 						this.client.logout(this.userInstance);
+						this.msgclient.stopClient();
 						this.client = null;
 						this.msgclient = null;
 						this.stage.setScene(this.serv);
 						this.msgScene.clrAll();
-						this.msgclient.stopClient();
 					} catch (final RemoteException e1) {
 						e1.printStackTrace();
 					}
