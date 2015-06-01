@@ -63,19 +63,19 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	private byte[] userInstance;
 	private Stage stage;
 	
-	static Font f = Font.loadFont(
+	private final static Font f = Font.loadFont(
 			ClientUI.class.getResource("/SegoeUILight.ttf")
 					.toExternalForm(), 17);
-	static Font fLarge = Font.loadFont(
+	private final static Font fLarge = Font.loadFont(
 			ClientUI.class.getResource("/SegoeUILight.ttf")
 					.toExternalForm(), 25);
-	static Font fBig = Font.loadFont(
+	private final static Font fBig = Font.loadFont(
 			ClientUI.class.getResource("/SegoeUILight.ttf")
 					.toExternalForm(), 45);
-	static Font font = Font.loadFont(
+	private final static Font font = Font.loadFont(
 			ClientUI.class.getResource("/AvenirLTStd-Light.otf")
 					.toExternalForm(), 17);
-	static Font font2 = Font.loadFont(
+	private final static Font font2 = Font.loadFont(
 			ClientUI.class.getResource("/NexaLight.otf").toExternalForm(),
 			17);
 
