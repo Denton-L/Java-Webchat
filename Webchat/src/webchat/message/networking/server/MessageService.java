@@ -3,7 +3,6 @@ package webchat.message.networking.server;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -11,6 +10,7 @@ import webchat.database.UserDatabase;
 import webchat.message.Message;
 import webchat.message.MessageComparator;
 import webchat.message.networking.MessageInterface;
+import webchat.message.networking.NotLoggedInException;
 
 /**
  * A class which handles the logic of message processing.
@@ -46,13 +46,13 @@ public class MessageService extends UnicastRemoteObject implements
 	
 	@Override
 	public void push(String content, byte[] userInstance)
-			throws RemoteException {
+			throws RemoteException, NotLoggedInException {
 		
 		String username = userDatabase
 				.getUsernameFromUserInstance(userInstance);
 		
 		if (username == null) {
-			return;
+			throw new NotLoggedInException();
 		}
 		
 		while (!messages.add(new Message(content, username, System
