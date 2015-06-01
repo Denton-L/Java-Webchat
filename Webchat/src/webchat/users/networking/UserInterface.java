@@ -23,7 +23,6 @@ public interface UserInterface extends Remote {
 	 * @return {@code true} if the registration was successful, otherwise
 	 *         {@code false}.
 	 * @throws RemoteException
-	 *             TODO
 	 */
 	boolean register(String username, byte[] passwordHash)
 			throws RemoteException;
@@ -39,7 +38,6 @@ public interface UserInterface extends Remote {
 	 * @return {@code null} if invalid sign in otherwise a {@code byte[]} which
 	 *         uniquely identifies the user
 	 * @throws RemoteException
-	 *             TODO
 	 */
 	byte[] signIn(String username, byte[] passwordHash) throws RemoteException;
 	
@@ -50,7 +48,6 @@ public interface UserInterface extends Remote {
 	 * @param userInstance
 	 *            The {@code byte[]} which will identify a user.
 	 * @throws RemoteException
-	 *             TODO
 	 */
 	void logout(byte[] userInstance) throws RemoteException;
 	

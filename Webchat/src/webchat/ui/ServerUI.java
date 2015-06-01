@@ -74,7 +74,6 @@ public class ServerUI extends Application {
 			ipaddress.setId("textstyle2");
 			vbox.getChildren().add(ipaddress);
 		} catch (final UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		addFileChooser(primaryStage, hbox1, hbox2);
@@ -194,10 +193,8 @@ public class ServerUI extends Application {
 									+ ServerUI.this.database.getName());
 							ServerUI.this.selectText.setText("");
 						} catch (final FileNotFoundException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (final IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					} else {

@@ -18,7 +18,7 @@ public class UserService extends UnicastRemoteObject implements UserInterface {
 	
 	/** Auto-generated. */
 	private static final long serialVersionUID = -7451365201964914848L;
-
+	
 	/** The length of the uniquely identifying {@code byte[]}. */
 	private final static int USER_INSTANCE_LENGTH = 0xFF;
 	
@@ -30,6 +30,7 @@ public class UserService extends UnicastRemoteObject implements UserInterface {
 	 * @param userDatabase
 	 *            The {@code UserDatabase} which this {@code UserService} is
 	 *            based on.
+	 * @throws RemoteException
 	 */
 	public UserService(UserDatabase userDatabase) throws RemoteException {
 		this.userDatabase = userDatabase;
