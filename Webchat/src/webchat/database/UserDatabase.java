@@ -27,7 +27,7 @@ public class UserDatabase {
 	private final Collection<User> users;
 	/** The location of this database. */
 	private final File file;
-
+	
 	/**
 	 * Creates a new database with no {@code User}s.
 	 */
@@ -149,6 +149,7 @@ public class UserDatabase {
 	 * {@code userInstance}.
 	 *
 	 * @param userInstance
+	 *            The {@code userInstance} to look up.
 	 * @return The username which is associated with a particular
 	 *         {@code userInstance}.
 	 */
@@ -168,16 +169,11 @@ public class UserDatabase {
 	 *
 	 * @return A {@code String[]} with usernames.
 	 */
-	public String[] getOtherUsersWithUserInstance(String[] onlineUsers) {
+	public String[] getUsersWithUserInstance() {
 		final List<String> online = new ArrayList<>();
 		for (final User user : this.users) {
 			if (user.getUserInstance() != null) {
-				if (onlineUsers == null) {
-					online.add(user.getUsername());
-				} else if (!Arrays.asList(onlineUsers).contains(
-						user.getUsername())) {
-					online.add(user.getUsername());
-				}
+				online.add(user.getUsername());
 			}
 		}
 		return online.toArray(new String[0]);

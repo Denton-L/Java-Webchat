@@ -19,9 +19,6 @@ public abstract class GenericRetriever implements Runnable {
 	
 	/**
 	 *
-	 * @param remote
-	 *            The {@code Remote} interface that this retriever interacts
-	 *            with.
 	 * @param period
 	 */
 	protected GenericRetriever(long period, ClientUI ui) {
