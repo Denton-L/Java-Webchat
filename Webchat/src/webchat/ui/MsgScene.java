@@ -27,11 +27,23 @@ import javafx.scene.text.Text;
 */
 
 public class MsgScene {
+	
+	/**
+	 * Creates a stackable box for layout purposes (inserting background image)
+	 */
 	StackPane group = new StackPane();		
+	/**
+	 * Loads and places images
+	 */
 	Image image1 = new Image("/plshelp.jpg", true);
 	ImageView imview = new ImageView();
-	
+	/**
+	 * Creates borderpane layout 
+	 */
 	BorderPane pane = new BorderPane();
+	/**
+	 * Creates scrollpane layout 
+	 */
 	ScrollPane sp2 = new ScrollPane();
 	ScrollPane sp = new ScrollPane();
 
@@ -42,17 +54,17 @@ public class MsgScene {
 	VBox subbox2 = new VBox();
 
 	BorderPane inputbox = new BorderPane();
+	
 	HBox inputbox2 = new HBox();
-
-	HBox header = new HBox();
+	BorderPane header = new BorderPane();
 
 	Text h = new Text("chat");
+	Text logout = new Text("exit");
 
 	TextArea input = new TextArea();
 	VBox msgs = new VBox();
 
 	Button enter = new Button(">");
-	Text logout = new Text("exit");
 
 	/**
 	 * Calls all other relevant MsgScene methods to create the final MsgScene.
@@ -101,18 +113,18 @@ public class MsgScene {
 	/**
 	 * Adjusts and sets up the header.
 	 */
-	public void styleHeader() {
+	public void styleHeader() 
+	{
 		h.setId("welcome");
-
 		header.setId("header");
-		header.getChildren().addAll(h);
-		header.setAlignment(Pos.CENTER);
+		header.setCenter(h);
 	}
 
 	/**
 	 * Create boxes to assist in layout work.
 	 */
-	public void createBox() {
+	public void createBox() 
+	{
 		box2.setId("msgbox");
 		box2.setPadding(new Insets(10, 10, 10, 10));
 		box2.setPrefSize(200, 600);
