@@ -12,8 +12,8 @@ import junit.framework.TestCase;
 
 public class MessageServerTest extends TestCase {
 	MessageServer server;
-
-	protected void setUp() throws Exception{
+	
+	protected void setUp() throws Exception {
 		try {
 			UserDatabase database = new UserDatabase(new File("/database.ser"));
 			server = new MessageServer(database);
@@ -23,7 +23,7 @@ public class MessageServerTest extends TestCase {
 		}
 	}
 	
-	public void testServer(){
+	public void testServer() {
 		try {
 			server.startServer();
 		} catch (MalformedURLException | RemoteException
@@ -32,5 +32,5 @@ public class MessageServerTest extends TestCase {
 			fail();
 		}
 	}
-
+	
 }

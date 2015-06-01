@@ -6,8 +6,8 @@ import junit.framework.TestCase;
 public class MessageRetreiverTest extends TestCase {
 	MessageRetriever retrieve;
 	
-	protected void setUp() throws Exception{
+	protected void setUp() throws Exception {
 		
 	}
-
+	
 }

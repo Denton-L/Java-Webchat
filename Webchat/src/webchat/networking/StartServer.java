@@ -17,10 +17,11 @@ import webchat.users.networking.server.UserServer;
  * @version 2015-05-28
  */
 public class StartServer {
-
-	public static void start(File file) throws FileNotFoundException, ClassNotFoundException, IOException, AlreadyBoundException {
-			UserDatabase userDatabase = new UserDatabase(file);
-			new MessageServer(userDatabase).startServer();
-			new UserServer(userDatabase).startServer();
+	
+	public static void start(File file) throws FileNotFoundException,
+			ClassNotFoundException, IOException, AlreadyBoundException {
+		UserDatabase userDatabase = new UserDatabase(file);
+		new MessageServer(userDatabase).startServer();
+		new UserServer(userDatabase).startServer();
 	}
 }

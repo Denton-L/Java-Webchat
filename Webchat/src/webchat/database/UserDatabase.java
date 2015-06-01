@@ -169,11 +169,12 @@ public class UserDatabase {
 			if (user.getUserInstance() != null) {
 				if (onlineUsers == null)
 					online.add(user.getUsername());
-				else if (!Arrays.asList(onlineUsers).contains(user.getUsername()))
+				else if (!Arrays.asList(onlineUsers).contains(
+						user.getUsername()))
 					online.add(user.getUsername());
 			}
 		}
-		//System.out.println("Database");
+		// System.out.println("Database");
 		return online.toArray(new String[0]);
 	}
 }

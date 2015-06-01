@@ -53,7 +53,8 @@ public class MessageClient extends GenericClient {
 		super(serverURL, MessageServer.URL_LOCATION);
 		this.messageInterface = (MessageInterface) remoteInterface;
 		this.userInstance = userInstance;
-		messageRetreiver = new MessageRetriever(messageInterface, REFRESH_RATE, ui);
+		messageRetreiver = new MessageRetriever(messageInterface, REFRESH_RATE,
+				ui);
 		this.messageThread = new Thread(messageRetreiver);
 	}
 	
@@ -76,9 +77,10 @@ public class MessageClient extends GenericClient {
 	 * 
 	 * @param message
 	 *            The content of the message which will be pushed.
-	 * @throws NotLoggedInException 
+	 * @throws NotLoggedInException
 	 */
-	public void sendMessage(String message) throws RemoteException, NotLoggedInException{
+	public void sendMessage(String message) throws RemoteException,
+			NotLoggedInException {
 		try {
 			messageInterface.push(message, userInstance);
 		} catch (RemoteException e) {

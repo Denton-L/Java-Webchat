@@ -30,7 +30,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ServerUI extends Application {
-
+	
 	Image image1 = new Image("/plshelp.jpg", true);
 	ImageView imview = new ImageView();
 	final Desktop desktop = Desktop.getDesktop();
@@ -38,39 +38,39 @@ public class ServerUI extends Application {
 	final Button openDatabase = new Button("Open database file");
 	Button createDatabase = new Button("Create database");
 	Button startServer = new Button("Start the server");
-
+	
 	Text fileText;
 	Text errorText;
 	Text selectText;
 	Text createText;
 	File database;
-
+	
 	public void start(final Stage primaryStage) {
 		primaryStage.setTitle("Server Starter");
 		StackPane group = new StackPane();
 		imview.setImage(image1);
 		imview.setFitHeight(600);
 		imview.setFitWidth(800);
-
+		
 		VBox vbox = new VBox();
 		vbox.setSpacing(15);
-
+		
 		HBox hbox1 = new HBox();
 		hbox1.setSpacing(15);
-
+		
 		HBox hbox2 = new HBox();
 		hbox2.setSpacing(15);
-
+		
 		HBox hbox3 = new HBox();
 		hbox3.setSpacing(15);
-
+		
 		GridPane pane = new GridPane();
 		pane.setAlignment(Pos.CENTER);
 		pane.add(vbox, 1, 1);
-
+		
 		group.getChildren().add(imview);
 		group.getChildren().add(pane);
-
+		
 		Text ipaddress;
 		try {
 			ipaddress = new Text("The server IP address is: "
@@ -82,19 +82,19 @@ public class ServerUI extends Application {
 			e.printStackTrace();
 		}
 		addFileChooser(primaryStage, hbox1, hbox2);
-
+		
 		fileText = new Text("No file selected");
 		fileText.setId("textstyle2");
 		hbox1.getChildren().add(fileText);
-
+		
 		createText = new Text("");
 		createText.setVisible(false);
 		createText.setId("textstyle2");
 		hbox2.getChildren().add(createText);
-
+		
 		selectText = new Text("Select a file before starting the server");
 		selectText.setId("textstyle2");
-
+		
 		vbox.getChildren().addAll(hbox1, hbox2, hbox3);
 		startServer.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -124,32 +124,31 @@ public class ServerUI extends Application {
 				}
 			}
 		});
-
-
+		
 		hbox3.getChildren().add(startServer);
-
+		
 		errorText = new Text("");
 		errorText.setVisible(false);
 		errorText.setId("textstyle2");
 		hbox3.getChildren().add(errorText);
-
+		
 		vbox.getChildren().add(selectText);
-
+		
 		final Scene scene = new Scene(group, 500, 250);
-
+		
 		scene.getStylesheets().add("/custom.css");
-
+		
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-
+	
 	private void addFileChooser(final Stage stage, HBox hbox1, HBox hbox2) {
 		// TODO check if this works for runnable jars
 		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")
 				+ "/res/"));
 		fileChooser.getExtensionFilters().add(
 				new FileChooser.ExtensionFilter("SER file", "*.ser"));
-
+		
 		openDatabase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
@@ -162,7 +161,7 @@ public class ServerUI extends Application {
 				}
 			}
 		});
-
+		
 		createDatabase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
@@ -179,7 +178,7 @@ public class ServerUI extends Application {
 							.toString()
 							.substring(database.toString().lastIndexOf('.') + 1)
 							.equals("ser")) {
-
+						
 						try {
 							new UserDatabase().saveDatabase(database);
 							createText.setText("Database file created");
@@ -198,16 +197,16 @@ public class ServerUI extends Application {
 						createText.setText("Incorrect file format");
 						createText.setVisible(true);
 					}
-
+					
 				}
-
+				
 			}
 		});
-
+		
 		hbox1.getChildren().add(openDatabase);
 		hbox2.getChildren().add(createDatabase);
 	}
-
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
