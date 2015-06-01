@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -32,15 +33,16 @@ public class ChatScene {
 	Button register = new Button();
 	VBox box = new VBox();
 	GridPane grid = new GridPane();
+	BorderPane pane = new BorderPane();
 	Image image1 = new Image("/plshelp.jpg", true);
 	ImageView imview = new ImageView();
+	StackPane group = new StackPane();		
 
 	/**
 	 * This method adds and styles the necessary elements to create the login screen. 
 	 * @return the Scene object, Login Screen 
 	 */
 	public Scene createChat() {		
-		StackPane group = new StackPane();		
         imview.setImage(image1);
         imview.setFitHeight(600);
 	    imview.setFitWidth(800);
@@ -75,10 +77,11 @@ public class ChatScene {
 
 		warning.setVisible(false);
 
-		group.getChildren().add(grid);
+		pane.setCenter(grid);
+		group.getChildren().add(pane);
 		
 		// create scene
-		Scene scene = new Scene(group, 800, 600);
+		Scene scene = new Scene(group, 800,600);
 		scene.getStylesheets().add("/custom.css");
 
 		return scene;
