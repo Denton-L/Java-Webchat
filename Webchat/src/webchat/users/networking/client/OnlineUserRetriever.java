@@ -10,7 +10,8 @@ public class OnlineUserRetriever extends GenericRetriever {
 	
 	private UserInterface userInterface;
 	
-	public OnlineUserRetriever(UserInterface userInterface, long period, ClientUI ui) {
+	public OnlineUserRetriever(UserInterface userInterface, long period,
+			ClientUI ui) {
 		super(period, ui);
 		this.userInterface = userInterface;
 	}
