@@ -24,8 +24,9 @@ public interface MessageInterface extends Remote {
 	 * @param userInstance
 	 *            The {@code byte[]} which uniquely identifies a user.
 	 * @throws RemoteException
-	 *             TODO
 	 * @throws NotLoggedInException
+	 *             Thrown when invalid an invalid {@code userInstance} has been
+	 *             passed.
 	 */
 	void push(String content, byte[] userInstance) throws RemoteException,
 			NotLoggedInException;
@@ -40,7 +41,6 @@ public interface MessageInterface extends Remote {
 	 * @return A {@code SortedSet<Message>} ordered in ascending order of their
 	 *         timestamps from when the last message was received.
 	 * @throws RemoteException
-	 *             TODO
 	 */
 	SortedSet<Message> pull(Message lastMessageReceived) throws RemoteException;
 }

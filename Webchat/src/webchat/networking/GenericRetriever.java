@@ -14,12 +14,13 @@ public abstract class GenericRetriever implements Runnable {
 	private final long period;
 	/** Indicates whether the thread is running. */
 	private volatile boolean threadRunning;
-	
+	/** The UI to be updated. */
 	protected ClientUI ui;
 	
 	/**
 	 *
-	 * @param period
+	 * @param period The length of time before sucessive refreshes.
+	 * @param ui The UI to be updated.
 	 */
 	protected GenericRetriever(long period, ClientUI ui) {
 		this.period = period;
