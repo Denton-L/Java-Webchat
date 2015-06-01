@@ -1,5 +1,6 @@
 package webchat.ui;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -7,7 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -15,21 +19,22 @@ import javafx.scene.text.Text;
 public class ServScene 
 {
 	Text title = new Text("welcome");
-	Text warning = new Text("Incorrect server IP");
+	Text warning = new Text("Incorrect address");
 	TextField ipBox = new TextField();
 	Button enter = new Button();
 	Button register = new Button();
-	VBox box = new VBox();
+	BorderPane pane = new BorderPane();
 	GridPane grid = new GridPane();
 	Image image1 = new Image("/plshelp.jpg", true);
 	ImageView imview = new ImageView();
+	StackPane group = new StackPane();	
 
 	/**
 	 * This method adds and styles the necessary elements to create the login screen. 
 	 * @return the Scene object, Login Screen 
 	 */
-	public Scene createServ() {		
-		StackPane group = new StackPane();		
+	public Scene createServ() 
+	{    
         imview.setImage(image1);
         imview.setFitHeight(600);
 	    imview.setFitWidth(800);
@@ -54,15 +59,16 @@ public class ServScene
 
 		grid.add(enter, 2, 1);
 		grid.add(warning, 1, 2);
+		
+		pane.setCenter(grid);
 
 		warning.setVisible(false);
 
-		group.getChildren().add(grid);
+		group.getChildren().add(pane);
 		
 		// create scene
 		Scene scene = new Scene(group, 800, 600);
 		scene.getStylesheets().add("/custom.css");
-
 		return scene;
 	}
 

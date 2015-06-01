@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Main Interface object
@@ -183,6 +184,10 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		reg = regScene.createReg();
 		msg = msgScene.createMsg();
 
+		StageModifier stagemod = new StageModifier(servScene, msgScene, chatScene, regScene, primaryStage);
+		stagemod.draggable();
+		stagemod.testmethod();
+		
 		this.stage = primaryStage;
 
 		primaryStage.setTitle("Web Chat");
@@ -192,18 +197,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		primaryStage.setHeight(serv.getHeight());
 		primaryStage.show();
 
-		primaryStage.heightProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldvalue,
-					Object newValue) {
-				msgScene.imview.setFitHeight(primaryStage.getHeight());
-				msgScene.imview.setFitWidth(primaryStage.getWidth());
-				regScene.imview.setFitHeight(primaryStage.getHeight());
-				regScene.imview.setFitWidth(primaryStage.getWidth());
-				chatScene.imview.setFitHeight(primaryStage.getHeight());
-				chatScene.imview.setFitWidth(primaryStage.getWidth());
-			}
-		});
 
 		chatScene.register.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -217,24 +210,9 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 
 		servScene.enter.setOnAction(this);
 
-		regScene.enter.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (regScene.pwBox.getText().equals(regScene.pwBox2.getText())) {
-					try {
-						if (client.register(regScene.userBox.getText(),
-								regScene.pwBox.getText().getBytes())) {
-							primaryStage.setScene(chat);
-							regScene.clrAll();
-							chatScene.warning.setVisible(false);
-						} else
-							regScene.warning.setVisible(true);
-					} catch (RemoteException e) {
-						regScene.warning.setVisible(true);
-					}
-				}
-			}
-		});
+		regScene.enter.setOnAction(this);
+		
+		msgScene.enter.setOnAction(this);
 
 		msgScene.logout.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
@@ -244,27 +222,13 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				msgclient.stopClient();
 				try {
 					client.logout(userInstance);
+					client = null;
+					msgclient = null;
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
 			}
 
-		});
-
-		msgScene.enter.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent actionEvent) {
-				if (msgScene.input.getText() != null
-						&& !msgScene.input.getText().trim().isEmpty()) {
-					try {
-						msgclient.sendMessage(msgScene.input.getText());
-					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					msgScene.input.clear();
-				}
-			}
 		});
 
 		msgScene.input.addEventFilter(KeyEvent.KEY_PRESSED,
@@ -289,6 +253,19 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 						}
 					}
 				});
+		
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	          public void handle(WindowEvent we) {
+	              try {
+					client.logout(userInstance);
+					client = null;
+					msgclient = null;
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	          }
+	      });
 	}
 
 	@Override
@@ -320,6 +297,33 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			} catch (MalformedURLException | RemoteException
 					| NotBoundException o) {
 				servScene.warning.setVisible(true);
+			}
+		}
+		if (e.getSource() == regScene.enter){
+			if (regScene.pwBox.getText().equals(regScene.pwBox2.getText())) {
+				try {
+					if (client.register(regScene.userBox.getText(),
+							regScene.pwBox.getText().getBytes())) {
+						stage.setScene(chat);
+						regScene.clrAll();
+						chatScene.warning.setVisible(false);
+					} else
+						regScene.warning.setVisible(true);
+				} catch (RemoteException o) {
+					regScene.warning.setVisible(true);
+				}
+			}
+		}
+		if (e.getSource() == msgScene.enter){
+			if (msgScene.input.getText() != null
+					&& !msgScene.input.getText().trim().isEmpty()) {
+				try {
+					msgclient.sendMessage(msgScene.input.getText());
+				} catch (RemoteException o) {
+					// TODO Auto-generated catch block
+					o.printStackTrace();
+				}
+				msgScene.input.clear();
 			}
 		}
 
