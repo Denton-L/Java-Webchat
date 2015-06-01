@@ -92,6 +92,10 @@
    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.7) , 8, 0.0 , 0 , 1 );
 }
 
+#welcome:hover {
+   -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.7) , 8, 0.0 , 0 , 1 );
+}
+
 #textstyle2 {
 	-fx-font-size: 20px;
    -fx-font-family: AvenirLTStd-Light;
