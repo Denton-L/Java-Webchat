@@ -56,28 +56,24 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	static Font font2 = Font.loadFont(
 			ClientUI.class.getResource("/NexaLight.otf").toExternalForm(), 17);
 
-	UserUpdate userupd = new UserUpdate(this.msgScene);
-	Messenger messenger = new Messenger(this.msgScene);
-	UserInfo userinfo = new UserInfo();
+	private Text blank;
+	private Text userName;
+	private Text msgText;
+	private Text time;
+	private Text onlineUser;
 
-	Text blank;
-	Text userName;
-	Text msgText;
-	Text time;
-	Text onlineUser;
+	private Scene serv;
+	private Scene chat;
+	private Scene reg;
+	private Scene msg;
 
-	Scene serv;
-	Scene chat;
-	Scene reg;
-	Scene msg;
+	private String[] usersOnline = null;
 
-	String[] usersOnline = null;
-
-	public UserClient client;
-	MessageClient msgclient;
-	String ip;
-	byte[] userInstance;
-	Stage stage;
+	private UserClient client;
+	private MessageClient msgclient;
+	private String ip;
+	private byte[] userInstance;
+	private Stage stage;
 
 	/**
 	 * Main method used to run the applications.
