@@ -5,10 +5,10 @@ import webchat.message.networking.client.MessageRetriever;
 
 public class MessageRetreiverTest extends TestCase {
 	MessageRetriever retrieve;
-
+	
 	@Override
 	protected void setUp() throws Exception {
-
+		
 	}
-
+	
 }

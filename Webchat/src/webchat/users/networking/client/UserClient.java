@@ -17,10 +17,10 @@ import webchat.users.networking.server.UserServer;
  * @version 2015-05-25
  */
 public class UserClient extends GenericClient {
-
+	
 	/** The time in milliseconds between sucessive message pulls. */
 	public static final long REFRESH_RATE = 5000;
-
+	
 	/**
 	 * The {@code UserInterface} which will be used to communicate with the
 	 * server.
@@ -30,7 +30,7 @@ public class UserClient extends GenericClient {
 	private final OnlineUserRetriever onlineUserRetriever;
 	/** A {@code Thread} which will be running to get online users. */
 	private final Thread userThread;
-
+	
 	/**
 	 *
 	 * @param serverURL
@@ -47,21 +47,21 @@ public class UserClient extends GenericClient {
 				REFRESH_RATE, ui);
 		this.userThread = new Thread(this.onlineUserRetriever);
 	}
-
+	
 	/**
 	 * Starts the client's thread.
 	 */
 	public void startClient() {
 		this.userThread.start();
 	}
-
+	
 	/**
 	 * Stops the client's thread safely.
 	 */
 	public void stopClient() {
 		this.onlineUserRetriever.stopThread();
 	}
-
+	
 	/**
 	 * Registers a user with the server.
 	 *
@@ -79,7 +79,7 @@ public class UserClient extends GenericClient {
 		PasswordManager.clearArray(password);
 		return this.userInterface.register(username, hashedPass);
 	}
-
+	
 	/**
 	 * Signs in a user and gets a uniquely identifying {@code byte[]}.
 	 *
@@ -97,7 +97,7 @@ public class UserClient extends GenericClient {
 		PasswordManager.clearArray(password);
 		return this.userInterface.signIn(username, hashedPass);
 	}
-
+	
 	/**
 	 * Signs out a user according to their uniquely identifying {@code byte[]}.
 	 *
@@ -107,5 +107,5 @@ public class UserClient extends GenericClient {
 	public void logout(byte[] userInstance) throws RemoteException {
 		this.userInterface.logout(userInstance);
 	}
-
+	
 }

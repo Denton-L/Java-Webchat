@@ -19,8 +19,8 @@ import webchat.message.networking.NotLoggedInException;
  * @version 2015-05-25
  */
 public class MessageService extends UnicastRemoteObject implements
-MessageInterface {
-
+		MessageInterface {
+	
 	/** Auto-generated. */
 	private static final long serialVersionUID = -1058480823173079414L;
 	/** The maximum number of messages that can be stored. */
@@ -29,42 +29,42 @@ MessageInterface {
 	private final SortedSet<Message> messages;
 	/** Holds all of the users. */
 	private final UserDatabase userDatabase;
-
+	
 	public MessageService(UserDatabase userDatabase) throws RemoteException {
 		this.userDatabase = userDatabase;
 		this.messages = Collections.synchronizedSortedSet(new TreeSet<>(
 				new MessageComparator()));
 	}
-
+	
 	@Override
 	public SortedSet<Message> pull(Message lastMessageReceived)
 			throws RemoteException {
 		final SortedSet<Message> newMessages = this.messages
 				.tailSet(lastMessageReceived);
 		newMessages.remove(lastMessageReceived);
-
+		
 		return newMessages;
 	}
-
+	
 	@Override
 	public void push(String content, byte[] userInstance)
 			throws RemoteException, NotLoggedInException {
-
+		
 		final String username = this.userDatabase
 				.getUsernameFromUserInstance(userInstance);
-
+		
 		if (username == null) {
 			throw new NotLoggedInException();
 		}
-
+		
 		while (!this.messages.add(new Message(content, username, System
 				.currentTimeMillis()))) {
 			;
 		}
-
+		
 		while (this.messages.size() > MESSAGE_BUFFER) {
 			this.messages.remove(this.messages.first());
 		}
-
+		
 	}
 }
