@@ -26,12 +26,14 @@ public class UserDatabase {
 	
 	/** The collection of all the {@code User} objects. */
 	private Collection<User> users;
-	
+	/** The location of this database. */
+	private File file;
 	/**
 	 * Creates a new database with no {@code User}s.
 	 */
 	public UserDatabase() {
-		users = new ArrayList<>();
+		this.users = new ArrayList<>();
+		this.file = null;
 	}
 	
 	/**
@@ -46,7 +48,7 @@ public class UserDatabase {
 	 */
 	public UserDatabase(File file) throws FileNotFoundException, IOException,
 			ClassNotFoundException {
-		
+		this.file = file;
 		ObjectInputStream objectInputStream = new ObjectInputStream(
 				new FileInputStream(file));
 		this.users = (Collection<User>) objectInputStream.readObject();
@@ -92,6 +94,13 @@ public class UserDatabase {
 			}
 		}
 		users.add(new User(username, passwordHash.clone()));
+		if (this.file != null) {
+			try {
+				saveDatabase(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return true;
 	}
 	
@@ -160,7 +169,7 @@ public class UserDatabase {
 	 * Returns a {@code String[]} listing all users who have a non-{@code null}
 	 * {@code userInstance}.
 	 * 
-	 * @return A {@code String[]} with usernames.s
+	 * @return A {@code String[]} with usernames.
 	 */
 	public String[] getOtherUsersWithUserInstance(String[] onlineUsers) {
 		List<String> online = new ArrayList<>();
@@ -174,7 +183,6 @@ public class UserDatabase {
 					online.add(user.getUsername());
 			}
 		}
-		// System.out.println("Database");
 		return online.toArray(new String[0]);
 	}
 }
