@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.SortedSet;
 
 import webchat.message.Message;
+import webchat.message.networking.NotLoggedInException;
 import webchat.message.networking.client.MessageClient;
 import webchat.users.networking.client.UserClient;
 import javafx.application.Application;
@@ -44,7 +45,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	final ChatScene chatScene = new ChatScene();
 	final RegScene regScene = new RegScene();
 	final MsgScene msgScene = new MsgScene();
-	
+
 	static Font f = Font.loadFont(
 			ClientUI.class.getResource("/SegoeUILight.ttf").toExternalForm(),
 			17);
@@ -59,30 +60,30 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 					.toExternalForm(), 17);
 	static Font font2 = Font.loadFont(
 			ClientUI.class.getResource("/NexaLight.otf").toExternalForm(), 17);
-	
+
 	UserUpdate userupd = new UserUpdate(msgScene);
 	Messenger messenger = new Messenger(msgScene);
 	UserInfo userinfo = new UserInfo();
-	
+
 	Text blank;
 	Text userName;
 	Text msgText;
 	Text time;
 	Text onlineUser;
-	
+
 	Scene serv;
 	Scene chat;
 	Scene reg;
 	Scene msg;
-	
+
 	String[] usersOnline = null;
-	
+
 	public UserClient client;
 	MessageClient msgclient;
 	String ip;
 	byte[] userInstance;
 	Stage stage;
-	
+
 	/**
 	 * Main method used to run the applications.
 	 * 
@@ -90,7 +91,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	 *            .
 	 * @return Nothing.
 	 */
-	
+
 	public void writeMsg(SortedSet<Message> messages) {
 		for (Message message : messages) {
 			try {
@@ -104,7 +105,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				userName.setFill(Color.GREY);
 				time.setId("textstyle3");
 				userName.setId("textstyle3");
-				
+
 				msgText.setId("messagetext");
 				msgScene.msgs.getChildren().addAll(userName, msgText, time,
 						blank);
@@ -113,7 +114,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			}
 		}
 	}
-	
+
 	public void writeUsers(String[] users) {
 		for (String userName : users) {
 			try {
@@ -124,7 +125,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 								+ "-fx-font-family: AvenirLTStd-Light;"
 								+ "-fx-font-size: 30;");
 				onlineUser.setId(userName);
-				
+
 				if (usersOnline != null) {
 					Collection<String> collection = new ArrayList<String>();
 					collection.addAll(Arrays.asList(usersOnline));
@@ -132,27 +133,27 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 					usersOnline = collection.toArray(new String[] {});
 				} else
 					usersOnline = users;
-				
+
 				msgScene.box2.getChildren().add(onlineUser);
-				
+
 			} catch (Exception e) {
 				reportUserNameException(e);
 			}
 		}
 	}
-	
+
 	public String[] getUsers() {
 		return usersOnline;
 	}
-	
+
 	public ClientUI getUI() {
 		return this;
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 	public void reportMessageException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -162,7 +163,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			}
 		});
 	}
-	
+
 	public void reportUserNameException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -171,7 +172,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			}
 		});
 	}
-	
+
 	/**
 	 * This is used to set up the application by adding event handlers to the
 	 * appropriate elements and changing the scene when necessary.
@@ -181,21 +182,21 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		chat = chatScene.createChat();
 		reg = regScene.createReg();
 		msg = msgScene.createMsg();
-		
+
 		StageModifier stagemod = new StageModifier(servScene, msgScene,
 				chatScene, regScene, primaryStage);
 		stagemod.draggable();
 		stagemod.testmethod();
-		
+
 		this.stage = primaryStage;
-		
+
 		primaryStage.setTitle("Web Chat");
 		primaryStage.setScene(serv);
 		primaryStage.setResizable(false);
 		primaryStage.setWidth(serv.getWidth());
 		primaryStage.setHeight(serv.getHeight());
 		primaryStage.show();
-		
+
 		chatScene.register.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -203,15 +204,15 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				primaryStage.setScene(reg);
 			}
 		});
-		
+
 		chatScene.enter.setOnAction(this);
-		
+
 		servScene.enter.setOnAction(this);
-		
+
 		regScene.enter.setOnAction(this);
-		
+
 		msgScene.enter.setOnAction(this);
-		
+
 		msgScene.logout.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
@@ -226,9 +227,9 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 					e.printStackTrace();
 				}
 			}
-			
+
 		});
-		
+
 		msgScene.input.addEventFilter(KeyEvent.KEY_PRESSED,
 				new EventHandler<KeyEvent>() {
 					@Override
@@ -243,6 +244,18 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 								} catch (RemoteException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
+								} catch (NotLoggedInException e) {
+									try {
+										client.logout(userInstance);
+										client = null;
+										msgclient = null;
+										primaryStage.setScene(serv);
+										msgScene.clrAll();
+										msgclient.stopClient();
+									} catch (RemoteException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
 								}
 								msgScene.input.clear();
 							}
@@ -251,7 +264,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 						}
 					}
 				});
-		
+
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				try {
@@ -265,7 +278,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			}
 		});
 	}
-	
+
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getSource() == chatScene.enter) {
@@ -320,10 +333,22 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				} catch (RemoteException o) {
 					// TODO Auto-generated catch block
 					o.printStackTrace();
+				} catch (NotLoggedInException o) {
+					try {
+						client.logout(userInstance);
+						client = null;
+						msgclient = null;
+						stage.setScene(serv);
+						msgScene.clrAll();
+						msgclient.stopClient();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				msgScene.input.clear();
 			}
 		}
-		
+
 	}
 }
