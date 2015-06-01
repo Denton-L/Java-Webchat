@@ -15,7 +15,7 @@ import webchat.message.Message;
  * @version 2015-05-23
  */
 public interface MessageInterface extends Remote {
-
+	
 	/**
 	 * Pushes a message to the server.
 	 *
@@ -28,8 +28,8 @@ public interface MessageInterface extends Remote {
 	 * @throws NotLoggedInException
 	 */
 	void push(String content, byte[] userInstance) throws RemoteException,
-	NotLoggedInException;
-
+			NotLoggedInException;
+	
 	/**
 	 * Pulls all messages received since the last message received.
 	 *

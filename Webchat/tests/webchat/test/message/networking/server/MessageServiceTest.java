@@ -9,16 +9,16 @@ import webchat.message.networking.server.MessageService;
 
 public class MessageServiceTest extends TestCase {
 	MessageService service;
-
+	
 	@Override
 	protected void setUp() throws RemoteException, Exception {
 		final UserDatabase database = new UserDatabase(
 				new File("/database.ser"));
 		this.service = new MessageService(database);
 	}
-
+	
 	public void testPull() {
 		// TODO figure out testing here
 	}
-
+	
 }

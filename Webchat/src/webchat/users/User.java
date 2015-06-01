@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @version 2015-05-25
  */
 public class User implements Serializable {
-
+	
 	/** Auto-generated. */
 	private static final long serialVersionUID = -6730725189246949458L;
 	/** The user's username. */
@@ -23,7 +23,7 @@ public class User implements Serializable {
 	 * instance.
 	 */
 	private byte[] userInstance;
-
+	
 	/**
 	 *
 	 * @param username
@@ -35,21 +35,21 @@ public class User implements Serializable {
 		this.username = username;
 		this.passwordHash = passwordHash;
 	}
-
+	
 	public String getUsername() {
 		return this.username;
 	}
-
+	
 	public byte[] getPasswordHash() {
 		return this.passwordHash;
 	}
-
+	
 	public byte[] getUserInstance() {
 		return this.userInstance;
 	}
-
+	
 	public void setUserInstance(byte[] userInstance) {
 		this.userInstance = userInstance;
 	}
-
+	
 }
