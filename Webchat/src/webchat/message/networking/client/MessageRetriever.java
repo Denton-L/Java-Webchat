@@ -10,19 +10,19 @@ import webchat.ui.ClientUI;
 
 /**
  * An implementation of {@code Runnable} which fetches messages from the server.
- * 
+ *
  * @author Denton Liu
  * @version 2015-05-23
  */
 public class MessageRetriever extends GenericRetriever {
-	
+
 	/** The last message received. */
 	private Message lastMessage;
 	/** The {@code MessageInterface} from the server which will be called. */
-	private MessageInterface messageInterface;
-	
+	private final MessageInterface messageInterface;
+
 	/**
-	 * 
+	 *
 	 * @param messageInterface
 	 *            The {@code MessageInterface} which is provided by the server.
 	 * @param period
@@ -34,22 +34,22 @@ public class MessageRetriever extends GenericRetriever {
 		this.messageInterface = messageInterface;
 		this.lastMessage = null;
 	}
-	
+
 	@Override
 	public void retrieve() {
 		SortedSet<Message> messages;
 		try {
-			messages = messageInterface.pull(lastMessage);
-		} catch (RemoteException e) {
+			messages = this.messageInterface.pull(this.lastMessage);
+		} catch (final RemoteException e) {
 			messages = null;
 			e.printStackTrace();
 		}
 		if (messages != null) {
 			if (!messages.isEmpty()) {
-				lastMessage = messages.last();
-				ui.writeMsg(messages);
+				this.lastMessage = messages.last();
+				this.ui.writeMsg(messages);
 			}
 		}
 	}
-	
+
 }

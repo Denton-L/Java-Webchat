@@ -8,14 +8,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.SortedSet;
 
-import webchat.message.Message;
-import webchat.message.networking.NotLoggedInException;
-import webchat.message.networking.client.MessageClient;
-import webchat.users.networking.client.UserClient;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -27,12 +21,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import webchat.message.Message;
+import webchat.message.networking.NotLoggedInException;
+import webchat.message.networking.client.MessageClient;
+import webchat.users.networking.client.UserClient;
 
 /**
  * Main Interface object
- * 
+ *
  * Takes care of interaction between GUI objects and event handling.
- * 
+ *
  * @author Jing Yi Xie
  * @version 1.0
  */
@@ -45,7 +43,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	final ChatScene chatScene = new ChatScene();
 	final RegScene regScene = new RegScene();
 	final MsgScene msgScene = new MsgScene();
-
+	
 	static Font f = Font.loadFont(
 			ClientUI.class.getResource("/SegoeUILight.ttf").toExternalForm(),
 			17);
@@ -57,298 +55,312 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			45);
 	static Font font = Font.loadFont(
 			ClientUI.class.getResource("/AvenirLTStd-Light.otf")
-					.toExternalForm(), 17);
+			.toExternalForm(), 17);
 	static Font font2 = Font.loadFont(
 			ClientUI.class.getResource("/NexaLight.otf").toExternalForm(), 17);
-
-	UserUpdate userupd = new UserUpdate(msgScene);
-	Messenger messenger = new Messenger(msgScene);
+	
+	UserUpdate userupd = new UserUpdate(this.msgScene);
+	Messenger messenger = new Messenger(this.msgScene);
 	UserInfo userinfo = new UserInfo();
-
+	
 	Text blank;
 	Text userName;
 	Text msgText;
 	Text time;
 	Text onlineUser;
-
+	
 	Scene serv;
 	Scene chat;
 	Scene reg;
 	Scene msg;
-
+	
 	String[] usersOnline = null;
-
+	
 	public UserClient client;
 	MessageClient msgclient;
 	String ip;
 	byte[] userInstance;
 	Stage stage;
-
+	
 	/**
 	 * Main method used to run the applications.
-	 * 
+	 *
 	 * @param Unused
 	 *            .
 	 * @return Nothing.
 	 */
-
+	
 	public void writeMsg(SortedSet<Message> messages) {
-		for (Message message : messages) {
+		for (final Message message : messages) {
 			try {
-				blank = new Text();
-				userName = new Text(message.getUsername() + " said");
-				msgText = new Text("\"" + message.getContent() + "\"");
-				msgText.setWrappingWidth(527);
-				time = new Text("" + message.getTimestamp()); // TODO make this
-																// actual time
-				time.setFill(Color.GREY);
-				userName.setFill(Color.GREY);
-				time.setId("textstyle3");
-				userName.setId("textstyle3");
-
-				msgText.setId("messagetext");
-				msgScene.msgs.getChildren().addAll(userName, msgText, time,
-						blank);
-			} catch (Exception e) {
+				this.blank = new Text();
+				this.userName = new Text(message.getUsername() + " said");
+				this.msgText = new Text("\"" + message.getContent() + "\"");
+				this.msgText.setWrappingWidth(527);
+				this.time = new Text("" + message.getTimestamp()); // TODO make
+																	// this
+																	// actual
+																	// time
+				this.time.setFill(Color.GREY);
+				this.userName.setFill(Color.GREY);
+				this.time.setId("textstyle3");
+				this.userName.setId("textstyle3");
+				
+				this.msgText.setId("messagetext");
+				this.msgScene.msgs.getChildren().addAll(this.userName,
+						this.msgText, this.time, this.blank);
+			} catch (final Exception e) {
 				reportMessageException(e);
 			}
 		}
 	}
-
+	
 	public void writeUsers(String[] users) {
-		for (String userName : users) {
+		for (final String userName : users) {
 			try {
-				onlineUser = new Text(userName);
-				onlineUser.setFill(Color.WHITE);
-				onlineUser
-						.setStyle("-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.8) , 5, 0.0 , 0 , 1);"
-								+ "-fx-font-family: AvenirLTStd-Light;"
-								+ "-fx-font-size: 30;");
-				onlineUser.setId(userName);
-
-				if (usersOnline != null) {
-					Collection<String> collection = new ArrayList<String>();
-					collection.addAll(Arrays.asList(usersOnline));
+				this.onlineUser = new Text(userName);
+				this.onlineUser.setFill(Color.WHITE);
+				this.onlineUser
+				.setStyle("-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.8) , 5, 0.0 , 0 , 1);"
+						+ "-fx-font-family: AvenirLTStd-Light;"
+						+ "-fx-font-size: 30;");
+				this.onlineUser.setId(userName);
+				
+				if (this.usersOnline != null) {
+					final Collection<String> collection = new ArrayList<String>();
+					collection.addAll(Arrays.asList(this.usersOnline));
 					collection.addAll(Arrays.asList(users));
-					usersOnline = collection.toArray(new String[] {});
-				} else
-					usersOnline = users;
-
-				msgScene.box2.getChildren().add(onlineUser);
-
-			} catch (Exception e) {
+					this.usersOnline = collection.toArray(new String[] {});
+				} else {
+					this.usersOnline = users;
+				}
+				
+				this.msgScene.box2.getChildren().add(this.onlineUser);
+				
+			} catch (final Exception e) {
 				reportUserNameException(e);
 			}
 		}
 	}
-
+	
 	public String[] getUsers() {
-		return usersOnline;
+		return this.usersOnline;
 	}
-
+	
 	public ClientUI getUI() {
 		return this;
 	}
-
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
-
+	
 	public void reportMessageException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				msgScene.msgs.getChildren().addAll(userName, msgText, time,
-						blank);
+				ClientUI.this.msgScene.msgs.getChildren().addAll(
+						ClientUI.this.userName, ClientUI.this.msgText,
+						ClientUI.this.time, ClientUI.this.blank);
 			}
 		});
 	}
-
+	
 	public void reportUserNameException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				msgScene.box2.getChildren().add(onlineUser);
+				ClientUI.this.msgScene.box2.getChildren().add(
+						ClientUI.this.onlineUser);
 			}
 		});
 	}
-
+	
 	/**
 	 * This is used to set up the application by adding event handlers to the
 	 * appropriate elements and changing the scene when necessary.
 	 */
+	@Override
 	public void start(final Stage primaryStage) {
-		serv = servScene.createServ();
-		chat = chatScene.createChat();
-		reg = regScene.createReg();
-		msg = msgScene.createMsg();
-
-		StageModifier stagemod = new StageModifier(servScene, msgScene,
-				chatScene, regScene, primaryStage);
+		this.serv = this.servScene.createServ();
+		this.chat = this.chatScene.createChat();
+		this.reg = this.regScene.createReg();
+		this.msg = this.msgScene.createMsg();
+		
+		final StageModifier stagemod = new StageModifier(this.servScene,
+				this.msgScene, this.chatScene, this.regScene, primaryStage);
 		stagemod.draggable();
 		stagemod.testmethod();
-
+		
 		this.stage = primaryStage;
-
+		
 		primaryStage.setTitle("Web Chat");
-		primaryStage.setScene(serv);
+		primaryStage.setScene(this.serv);
 		primaryStage.setResizable(false);
-		primaryStage.setWidth(serv.getWidth());
-		primaryStage.setHeight(serv.getHeight());
+		primaryStage.setWidth(this.serv.getWidth());
+		primaryStage.setHeight(this.serv.getHeight());
 		primaryStage.show();
-
-		chatScene.register.setOnAction(new EventHandler<ActionEvent>() {
+		
+		this.chatScene.register.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				chatScene.clrAll();
-				primaryStage.setScene(reg);
+				ClientUI.this.chatScene.clrAll();
+				primaryStage.setScene(ClientUI.this.reg);
 			}
 		});
-
-		chatScene.enter.setOnAction(this);
-
-		servScene.enter.setOnAction(this);
-
-		regScene.enter.setOnAction(this);
-
-		msgScene.enter.setOnAction(this);
-
-		msgScene.logout.setOnMousePressed(new EventHandler<MouseEvent>() {
+		
+		this.chatScene.enter.setOnAction(this);
+		
+		this.servScene.enter.setOnAction(this);
+		
+		this.regScene.enter.setOnAction(this);
+		
+		this.msgScene.enter.setOnAction(this);
+		
+		this.msgScene.logout.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				primaryStage.setScene(serv);
-				msgScene.clrAll();
-				msgclient.stopClient();
+				primaryStage.setScene(ClientUI.this.serv);
+				ClientUI.this.msgScene.clrAll();
+				ClientUI.this.msgclient.stopClient();
 				try {
-					client.logout(userInstance);
-					client = null;
-					msgclient = null;
-				} catch (RemoteException e) {
+					ClientUI.this.client.logout(ClientUI.this.userInstance);
+					ClientUI.this.client = null;
+					ClientUI.this.msgclient = null;
+				} catch (final RemoteException e) {
 					e.printStackTrace();
 				}
 			}
-
+			
 		});
-
-		msgScene.input.addEventFilter(KeyEvent.KEY_PRESSED,
+		
+		this.msgScene.input.addEventFilter(KeyEvent.KEY_PRESSED,
 				new EventHandler<KeyEvent>() {
-					@Override
-					public void handle(KeyEvent ke) {
-						if (ke.getCode().equals(KeyCode.ENTER)) {
-							if (msgScene.input.getText() != null
-									&& !msgScene.input.getText().trim()
-											.isEmpty()) {
-								try {
-									msgclient.sendMessage(msgScene.input
-											.getText());
-								} catch (RemoteException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								} catch (NotLoggedInException e) {
-									try {
-										client.logout(userInstance);
-										client = null;
-										msgclient = null;
-										primaryStage.setScene(serv);
-										msgScene.clrAll();
-										msgclient.stopClient();
-									} catch (RemoteException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-								}
-								msgScene.input.clear();
+			@Override
+			public void handle(KeyEvent ke) {
+				if (ke.getCode().equals(KeyCode.ENTER)) {
+					if (ClientUI.this.msgScene.input.getText() != null
+							&& !ClientUI.this.msgScene.input.getText()
+											.trim().isEmpty()) {
+						try {
+							ClientUI.this.msgclient
+											.sendMessage(ClientUI.this.msgScene.input
+													.getText());
+						} catch (final RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (final NotLoggedInException e) {
+							try {
+								ClientUI.this.client
+												.logout(ClientUI.this.userInstance);
+								ClientUI.this.client = null;
+								ClientUI.this.msgclient = null;
+								primaryStage
+												.setScene(ClientUI.this.serv);
+								ClientUI.this.msgScene.clrAll();
+								ClientUI.this.msgclient.stopClient();
+							} catch (final RemoteException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
 							}
-							// call messenger for message;
-							ke.consume();
 						}
+						ClientUI.this.msgScene.input.clear();
 					}
-				});
-
+					// call messenger for message;
+					ke.consume();
+				}
+			}
+		});
+		
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
 			public void handle(WindowEvent we) {
 				try {
-					client.logout(userInstance);
-					client = null;
-					msgclient = null;
-				} catch (RemoteException e) {
+					ClientUI.this.client.logout(ClientUI.this.userInstance);
+					ClientUI.this.client = null;
+					ClientUI.this.msgclient = null;
+				} catch (final RemoteException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
+	
 	@Override
 	public void handle(ActionEvent e) {
-		if (e.getSource() == chatScene.enter) {
+		if (e.getSource() == this.chatScene.enter) {
 			try {
-				userInstance = client.signIn(chatScene.userBox.getText(),
-						chatScene.pwBox.getText().getBytes());
-				if (userInstance != null) {
-					msgclient = new MessageClient(ip, userInstance, this);
-					msgclient.startClient();
-					stage.setScene(msg);
-					chatScene.clrAll();
-				} else
-					chatScene.warning.setVisible(true);
-			} catch (RemoteException o) {
-				chatScene.warning.setVisible(true);
+				this.userInstance = this.client.signIn(this.chatScene.userBox
+						.getText(), this.chatScene.pwBox.getText().getBytes());
+				if (this.userInstance != null) {
+					this.msgclient = new MessageClient(this.ip,
+							this.userInstance, this);
+					this.msgclient.startClient();
+					this.stage.setScene(this.msg);
+					this.chatScene.clrAll();
+				} else {
+					this.chatScene.warning.setVisible(true);
+				}
+			} catch (final RemoteException o) {
+				this.chatScene.warning.setVisible(true);
 			} catch (MalformedURLException | NotBoundException o) {
 				o.printStackTrace();
 			}
 		}
-		if (e.getSource() == servScene.enter) {
+		if (e.getSource() == this.servScene.enter) {
 			try {
-				ip = servScene.ipBox.getText();
-				client = new UserClient(ip, this);
-				client.startClient();
-				servScene.clrAll();
-				stage.setScene(chat);
+				this.ip = this.servScene.ipBox.getText();
+				this.client = new UserClient(this.ip, this);
+				this.client.startClient();
+				this.servScene.clrAll();
+				this.stage.setScene(this.chat);
 			} catch (MalformedURLException | RemoteException
 					| NotBoundException o) {
-				servScene.warning.setVisible(true);
+				this.servScene.warning.setVisible(true);
 			}
 		}
-		if (e.getSource() == regScene.enter) {
-			if (regScene.pwBox.getText().equals(regScene.pwBox2.getText())) {
+		if (e.getSource() == this.regScene.enter) {
+			if (this.regScene.pwBox.getText().equals(
+					this.regScene.pwBox2.getText())) {
 				try {
-					if (client.register(regScene.userBox.getText(),
-							regScene.pwBox.getText().getBytes())) {
-						stage.setScene(chat);
-						regScene.clrAll();
-						chatScene.warning.setVisible(false);
-					} else
-						regScene.warning.setVisible(true);
-				} catch (RemoteException o) {
-					regScene.warning.setVisible(true);
+					if (this.client.register(this.regScene.userBox.getText(),
+							this.regScene.pwBox.getText().getBytes())) {
+						this.stage.setScene(this.chat);
+						this.regScene.clrAll();
+						this.chatScene.warning.setVisible(false);
+					} else {
+						this.regScene.warning.setVisible(true);
+					}
+				} catch (final RemoteException o) {
+					this.regScene.warning.setVisible(true);
 				}
 			}
 		}
-		if (e.getSource() == msgScene.enter) {
-			if (msgScene.input.getText() != null
-					&& !msgScene.input.getText().trim().isEmpty()) {
+		if (e.getSource() == this.msgScene.enter) {
+			if (this.msgScene.input.getText() != null
+					&& !this.msgScene.input.getText().trim().isEmpty()) {
 				try {
-					msgclient.sendMessage(msgScene.input.getText());
-				} catch (RemoteException o) {
+					this.msgclient.sendMessage(this.msgScene.input.getText());
+				} catch (final RemoteException o) {
 					// TODO Auto-generated catch block
 					o.printStackTrace();
-				} catch (NotLoggedInException o) {
+				} catch (final NotLoggedInException o) {
 					try {
-						client.logout(userInstance);
-						client = null;
-						msgclient = null;
-						stage.setScene(serv);
-						msgScene.clrAll();
-						msgclient.stopClient();
-					} catch (RemoteException e1) {
+						this.client.logout(this.userInstance);
+						this.client = null;
+						this.msgclient = null;
+						this.stage.setScene(this.serv);
+						this.msgScene.clrAll();
+						this.msgclient.stopClient();
+					} catch (final RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
-				msgScene.input.clear();
+				this.msgScene.input.clear();
 			}
 		}
-
+		
 	}
 }
