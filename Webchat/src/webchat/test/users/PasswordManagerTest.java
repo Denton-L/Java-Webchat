@@ -14,26 +14,26 @@ public class PasswordManagerTest extends TestCase {
 			122, 80, -101, -116, -4, -60, -4, 67 };
 	String username = "test";
 	boolean testbool;
-
+	
 	protected void setUp() throws Exception {
 		for (int i = 0; i < password.length; i++)
 			password[i] = 1;
 		testbool = true;
 	}
-
+	
 	public void testClearArray() {
 		PasswordManager.clearArray(testArray);
 		for (int i = 0; i < cleared.length; i++)
 			if (cleared[i] != testArray[i])
 				fail();
 	}
-
+	
 	public void testServerHashing() throws Exception {
 		byte[] result1 = PasswordManager.serverHash(password, username);
 		setUp();
 		byte[] result2 = PasswordManager.serverHash(password, username);
 		byte[] result3 = PasswordManager.serverHash(cleared, username);
-		for (int i = 0; i < result1.length; i++){
+		for (int i = 0; i < result1.length; i++) {
 			if (result1[i] != result2[i])
 				fail(result1[i] + " " + result2[i] + " " + i);
 			else if (result1[i] != result3[i])
@@ -43,13 +43,13 @@ public class PasswordManagerTest extends TestCase {
 			fail("Hash wasn't properly generated");
 		
 	}
-
+	
 	public void testClientHashing() throws Exception {
 		byte[] result1 = PasswordManager.clientHash(password, username);
 		setUp();
 		byte[] result2 = PasswordManager.clientHash(password, username);
 		byte[] result3 = PasswordManager.clientHash(cleared, username);
-		for (int i = 0; i < result1.length; i++){
+		for (int i = 0; i < result1.length; i++) {
 			if (result1[i] != result2[i] || result1[i] != expectedClientHash[i])
 				fail(result1[i] + " " + result2[i] + " "
 						+ expectedClientHash[i] + " " + i);
@@ -60,5 +60,5 @@ public class PasswordManagerTest extends TestCase {
 			fail("Hash wasn't properly generated");
 		
 	}
-
+	
 }

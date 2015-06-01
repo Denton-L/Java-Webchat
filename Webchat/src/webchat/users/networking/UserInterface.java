@@ -24,9 +24,11 @@ public interface UserInterface extends Remote {
 	 *            The password after it has been hashed.
 	 * @return {@code true} if the registration was successful, otherwise
 	 *         {@code false}.
-	 * @throws RemoteException TODO
+	 * @throws RemoteException
+	 *             TODO
 	 */
-	boolean register(String username, byte[] passwordHash) throws RemoteException;
+	boolean register(String username, byte[] passwordHash)
+			throws RemoteException;
 	
 	/**
 	 * Signs in a user and returns a {@code byte[]} which will be
@@ -38,7 +40,8 @@ public interface UserInterface extends Remote {
 	 *            The password after it has been hashed.
 	 * @return {@code null} if invalid sign in otherwise a {@code byte[]} which
 	 *         uniquely identifies the user
-	 * @throws RemoteException TODO
+	 * @throws RemoteException
+	 *             TODO
 	 */
 	byte[] signIn(String username, byte[] passwordHash) throws RemoteException;
 	
@@ -48,7 +51,8 @@ public interface UserInterface extends Remote {
 	 * 
 	 * @param userInstance
 	 *            The {@code byte[]} which will identify a user.
-	 * @throws RemoteException TODO
+	 * @throws RemoteException
+	 *             TODO
 	 */
 	void logout(byte[] userInstance) throws RemoteException;
 	
