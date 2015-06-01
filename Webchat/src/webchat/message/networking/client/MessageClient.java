@@ -51,7 +51,7 @@ public class MessageClient extends GenericClient {
 	public MessageClient(String serverURL, byte[] userInstance, ClientUI ui)
 			throws MalformedURLException, NotBoundException, RemoteException {
 		super(serverURL, MessageServer.URL_LOCATION);
-		this.messageInterface = (MessageInterface) remoteInterface;
+		this.messageInterface = (MessageInterface) getRemoteInterface();
 		this.userInstance = userInstance;
 		messageRetreiver = new MessageRetriever(messageInterface, REFRESH_RATE,
 				ui);
@@ -81,10 +81,6 @@ public class MessageClient extends GenericClient {
 	 */
 	public void sendMessage(String message) throws RemoteException,
 			NotLoggedInException {
-		try {
-			messageInterface.push(message, userInstance);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		messageInterface.push(message, userInstance);
 	}
 }
