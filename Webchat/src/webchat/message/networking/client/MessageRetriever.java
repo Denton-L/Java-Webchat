@@ -15,12 +15,12 @@ import webchat.ui.ClientUI;
  * @version 2015-05-23
  */
 public class MessageRetriever extends GenericRetriever {
-
+	
 	/** The last message received. */
 	private Message lastMessage;
 	/** The {@code MessageInterface} from the server which will be called. */
 	private final MessageInterface messageInterface;
-
+	
 	/**
 	 *
 	 * @param messageInterface
@@ -34,7 +34,7 @@ public class MessageRetriever extends GenericRetriever {
 		this.messageInterface = messageInterface;
 		this.lastMessage = null;
 	}
-
+	
 	@Override
 	public void retrieve() {
 		SortedSet<Message> messages;
@@ -51,5 +51,5 @@ public class MessageRetriever extends GenericRetriever {
 			}
 		}
 	}
-
+	
 }

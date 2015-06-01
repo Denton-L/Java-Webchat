@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  */
 public class Message implements Serializable {
-
+	
 	/** Auto-generated. */
 	private static final long serialVersionUID = -6462903128109313504L;
 	/** A {@code String} containing the message content. */
@@ -20,7 +20,7 @@ public class Message implements Serializable {
 	private final String username;
 	/** The time of when the server receives this transmission. */
 	private final long timestamp;
-
+	
 	/**
 	 * @param content
 	 *            A {@code String} containing the message content.
@@ -35,7 +35,7 @@ public class Message implements Serializable {
 		this.username = username;
 		this.timestamp = timestamp;
 	}
-
+	
 	/**
 	 *
 	 * @return A {@code String} containing the message content.
@@ -43,7 +43,7 @@ public class Message implements Serializable {
 	public String getContent() {
 		return this.content;
 	}
-
+	
 	/**
 	 *
 	 * @return A {@code String} containing the username of the message sender.
@@ -51,7 +51,7 @@ public class Message implements Serializable {
 	public String getUsername() {
 		return this.username;
 	}
-
+	
 	/**
 	 *
 	 * @return The time when the server receives this transmission.
@@ -59,5 +59,5 @@ public class Message implements Serializable {
 	public long getTimestamp() {
 		return this.timestamp;
 	}
-
+	
 }

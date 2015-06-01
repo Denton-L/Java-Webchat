@@ -11,7 +11,7 @@ import webchat.message.networking.server.MessageServer;
 
 public class MessageServerTest extends TestCase {
 	MessageServer server;
-
+	
 	@Override
 	protected void setUp() throws Exception {
 		try {
@@ -23,7 +23,7 @@ public class MessageServerTest extends TestCase {
 			fail();
 		}
 	}
-
+	
 	public void testServer() {
 		try {
 			this.server.startServer();
@@ -33,5 +33,5 @@ public class MessageServerTest extends TestCase {
 			fail();
 		}
 	}
-
+	
 }
