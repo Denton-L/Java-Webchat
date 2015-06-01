@@ -27,7 +27,7 @@ import webchat.networking.StartServer;
 
 public class ServerUI extends Application {
 	
-	private final Image image1 = new Image("/plshelp.jpg", true);
+	private final Image image1 = new Image("/background.jpg", true);
 	private final ImageView imview = new ImageView();
 	private final FileChooser fileChooser = new FileChooser();
 	private final Button openDatabase = new Button("Open database file");
