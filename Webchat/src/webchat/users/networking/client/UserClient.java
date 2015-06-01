@@ -39,8 +39,8 @@ public class UserClient extends GenericClient {
 	 * @throws NotBoundException
 	 * @throws RemoteException
 	 */
-	public UserClient(String serverURL, ClientUI ui) throws MalformedURLException,
-			NotBoundException, RemoteException {
+	public UserClient(String serverURL, ClientUI ui)
+			throws MalformedURLException, NotBoundException, RemoteException {
 		super(serverURL, UserServer.URL_LOCATION);
 		this.userInterface = (UserInterface) remoteInterface;
 		this.onlineUserRetriever = new OnlineUserRetriever(userInterface,
@@ -52,7 +52,7 @@ public class UserClient extends GenericClient {
 		userThread.start();
 	}
 	
-	public void stopClient(){
+	public void stopClient() {
 		onlineUserRetriever.stopThread();
 	}
 	

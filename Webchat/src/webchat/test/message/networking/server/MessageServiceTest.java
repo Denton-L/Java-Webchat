@@ -12,16 +12,14 @@ import junit.framework.Assert;
 
 public class MessageServiceTest extends TestCase {
 	MessageService service;
-
-	protected void setUp() throws RemoteException, Exception{
+	
+	protected void setUp() throws RemoteException, Exception {
 		UserDatabase database = new UserDatabase(new File("/database.ser"));
 		service = new MessageService(database);
 	}
 	
-	public void testPull(){
-		//TODO figure out testing here
+	public void testPull() {
+		// TODO figure out testing here
 	}
-
 	
-
 }

@@ -15,21 +15,20 @@ public class UserClientTest extends TestCase {
 	boolean setUpIsDone = true;
 	
 	protected void setUp() throws Exception {
-		if (setUpIsDone){
+		if (setUpIsDone) {
 			UserDatabase database = new UserDatabase(new File("/database.ser"));
 			UserServer server = new UserServer(database);
 			server.startServer();
-			//client = new UserClient(InetAddress.getLocalHost().getHostAddress());
-			//TODO fix this
+			// client = new
+			// UserClient(InetAddress.getLocalHost().getHostAddress());
+			// TODO fix this
 		}
 		
 		setUpIsDone = false;
 	}
 	
-	public void testCreation(){
-		//Note is blank because only needs to be created
+	public void testCreation() {
+		// Note is blank because only needs to be created
 	}
-
 	
-
 }
