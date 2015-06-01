@@ -28,8 +28,6 @@ public class MessageService extends UnicastRemoteObject implements
 	/** Holds all of the users. */
 	private UserDatabase userDatabase;
 	
-	private boolean why = false;
-	
 	public MessageService(UserDatabase userDatabase) throws RemoteException {
 		this.userDatabase = userDatabase;
 		this.messages = Collections.synchronizedSortedSet(new TreeSet<>(
