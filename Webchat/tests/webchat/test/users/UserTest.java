@@ -1,27 +1,27 @@
 package webchat.test.users;
 
-import webchat.users.User;
 import junit.framework.TestCase;
-import junit.framework.Assert;
+import webchat.users.User;
 
 public class UserTest extends TestCase {
 	User user;
 	String username = "test";
 	byte[] passwordHash = { 1, 1, 1, 1, 1 };
 	byte[] userInstance = { 2, 2, 2, 2, 2 };
-	
+
+	@Override
 	protected void setUp() throws Exception {
-		user = new User(username, passwordHash);
+		this.user = new User(this.username, this.passwordHash);
 	}
-	
+
 	public void testGetMethods() {
-		assertSame(username, user.getUsername());
-		assertEquals(passwordHash, user.getPasswordHash());
+		assertSame(this.username, this.user.getUsername());
+		assertEquals(this.passwordHash, this.user.getPasswordHash());
 	}
-	
+
 	public void testUserInstance() {
-		user.setUserInstance(userInstance);
-		assertEquals(userInstance, user.getUserInstance());
+		this.user.setUserInstance(this.userInstance);
+		assertEquals(this.userInstance, this.user.getUserInstance());
 	}
-	
+
 }

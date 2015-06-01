@@ -10,18 +10,18 @@ import java.rmi.registry.Registry;
 
 /**
  * A generic RMI client from which other clients will inherit.
- * 
+ *
  * @author Denton Liu
  * @author Filip Francetic
  * @version 2015-05-25
  */
 public abstract class GenericClient {
-	
+
 	/** The {@code Remote} class which this client will accept. */
-	private Remote remoteInterface;
-	
+	private final Remote remoteInterface;
+
 	/**
-	 * 
+	 *
 	 * @param serverURL
 	 *            The location of the server.
 	 * @param sublocation
@@ -33,12 +33,12 @@ public abstract class GenericClient {
 	public GenericClient(String serverURL, String sublocation)
 			throws MalformedURLException, RemoteException, NotBoundException {
 		System.setSecurityManager(new RMISecurityManager());
-		
-		Registry registry = LocateRegistry.getRegistry(serverURL);
-		remoteInterface = (Remote) registry.lookup(sublocation);
+
+		final Registry registry = LocateRegistry.getRegistry(serverURL);
+		this.remoteInterface = registry.lookup(sublocation);
 	}
-	
+
 	protected Remote getRemoteInterface() {
-		return remoteInterface;
+		return this.remoteInterface;
 	}
 }
