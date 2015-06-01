@@ -12,27 +12,27 @@ import webchat.users.networking.server.UserServer;
 
 /**
  * The client which will communicate with {@code UserClient}.
- * 
+ *
  * @author Denton Liu
  * @version 2015-05-25
  */
 public class UserClient extends GenericClient {
-	
+
 	/** The time in milliseconds between sucessive message pulls. */
 	public static final long REFRESH_RATE = 5000;
-	
+
 	/**
 	 * The {@code UserInterface} which will be used to communicate with the
 	 * server.
 	 */
-	private UserInterface userInterface;
+	private final UserInterface userInterface;
 	/** The {@code Runnable} which will contain the logic to find online users. */
-	private OnlineUserRetriever onlineUserRetriever;
+	private final OnlineUserRetriever onlineUserRetriever;
 	/** A {@code Thread} which will be running to get online users. */
-	private Thread userThread;
-	
+	private final Thread userThread;
+
 	/**
-	 * 
+	 *
 	 * @param serverURL
 	 *            The URL of the server.
 	 * @throws MalformedURLException
@@ -43,28 +43,28 @@ public class UserClient extends GenericClient {
 			throws MalformedURLException, NotBoundException, RemoteException {
 		super(serverURL, UserServer.URL_LOCATION);
 		this.userInterface = (UserInterface) getRemoteInterface();
-		this.onlineUserRetriever = new OnlineUserRetriever(userInterface,
+		this.onlineUserRetriever = new OnlineUserRetriever(this.userInterface,
 				REFRESH_RATE, ui);
-		this.userThread = new Thread(onlineUserRetriever);
+		this.userThread = new Thread(this.onlineUserRetriever);
 	}
-	
+
 	/**
 	 * Starts the client's thread.
 	 */
 	public void startClient() {
-		userThread.start();
+		this.userThread.start();
 	}
-	
+
 	/**
 	 * Stops the client's thread safely.
 	 */
 	public void stopClient() {
-		onlineUserRetriever.stopThread();
+		this.onlineUserRetriever.stopThread();
 	}
-	
+
 	/**
 	 * Registers a user with the server.
-	 * 
+	 *
 	 * @param username
 	 *            The username.
 	 * @param password
@@ -74,14 +74,15 @@ public class UserClient extends GenericClient {
 	 */
 	public boolean register(String username, byte[] password)
 			throws RemoteException {
-		byte[] hashedPass = PasswordManager.clientHash(password, username);
+		final byte[] hashedPass = PasswordManager
+				.clientHash(password, username);
 		PasswordManager.clearArray(password);
-		return userInterface.register(username, hashedPass);
+		return this.userInterface.register(username, hashedPass);
 	}
-	
+
 	/**
 	 * Signs in a user and gets a uniquely identifying {@code byte[]}.
-	 * 
+	 *
 	 * @param username
 	 *            The username to sign in.
 	 * @param password
@@ -91,19 +92,20 @@ public class UserClient extends GenericClient {
 	 */
 	public byte[] signIn(String username, byte[] password)
 			throws RemoteException {
-		byte[] hashedPass = PasswordManager.clientHash(password, username);
+		final byte[] hashedPass = PasswordManager
+				.clientHash(password, username);
 		PasswordManager.clearArray(password);
-		return userInterface.signIn(username, hashedPass);
+		return this.userInterface.signIn(username, hashedPass);
 	}
-	
+
 	/**
 	 * Signs out a user according to their uniquely identifying {@code byte[]}.
-	 * 
+	 *
 	 * @param userInstance
 	 *            The uniquely identifying {@code byte[]} to sign out.
 	 */
 	public void logout(byte[] userInstance) throws RemoteException {
-		userInterface.logout(userInstance);
+		this.userInterface.logout(userInstance);
 	}
-	
+
 }
