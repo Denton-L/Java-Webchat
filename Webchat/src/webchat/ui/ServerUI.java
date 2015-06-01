@@ -158,6 +158,7 @@ public class ServerUI extends Application {
 				if (database != null) {
 					fileText.setText("File chosen: " + database.getName());
 					selectText.setText("");
+					createText.setText("");
 				}
 			}
 		});
