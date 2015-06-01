@@ -144,7 +144,8 @@ public class ServerUI extends Application {
 		// TODO check if this works for runnable jars
 		this.fileChooser.getExtensionFilters().add(
 				new FileChooser.ExtensionFilter("SER file", "*.ser"));
-
+		this.fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/res/"));
+		
 		this.openDatabase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
