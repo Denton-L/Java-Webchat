@@ -5,18 +5,18 @@ import javafx.scene.text.Text;
 import webchat.message.Message;
 
 public class Messenger {
-
+	
 	private final MsgScene msgScene;
-
+	
 	public Messenger(MsgScene rscene) {
 		this.msgScene = rscene;
 	}
-
+	
 	public void getUser(String username) {
 	}
-
+	
 	public void writeMsg(Message message) {
-
+		
 		final Text blank = new Text();
 		final Text user = new Text(message.getUsername() + " said");
 		final Text msg = new Text("\"" + message.getContent() + "\"");
@@ -26,10 +26,10 @@ public class Messenger {
 		user.setFill(Color.GREY);
 		time.setId("textstyle3");
 		user.setId("textstyle3");
-
+		
 		msg.setId("messagetext");
-
-		this.msgScene.msgs.getChildren().addAll(user, msg, time, blank);
+		
+		this.msgScene.getMsgs().getChildren().addAll(user, msg, time, blank);
 	}
-
+	
 }

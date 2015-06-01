@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
  * @version 2015-05-25
  */
 public interface UserInterface extends Remote {
-
+	
 	/**
 	 * Causes a user to be registered with the username and password hash
 	 * specified.
@@ -27,7 +27,7 @@ public interface UserInterface extends Remote {
 	 */
 	boolean register(String username, byte[] passwordHash)
 			throws RemoteException;
-
+	
 	/**
 	 * Signs in a user and returns a {@code byte[]} which will be
 	 * used to uniquely identify the user to the server.
@@ -42,7 +42,7 @@ public interface UserInterface extends Remote {
 	 *             TODO
 	 */
 	byte[] signIn(String username, byte[] passwordHash) throws RemoteException;
-
+	
 	/**
 	 * Causes the identifying {@code byte[]} to become removed from the database
 	 * and blocking further communication using that identifier.
@@ -53,7 +53,7 @@ public interface UserInterface extends Remote {
 	 *             TODO
 	 */
 	void logout(byte[] userInstance) throws RemoteException;
-
+	
 	/**
 	 * Gets a list of users online.
 	 *
@@ -61,5 +61,5 @@ public interface UserInterface extends Remote {
 	 * @throws RemoteException
 	 */
 	String[] getOtherOnlineUsers(String[] users) throws RemoteException;
-
+	
 }

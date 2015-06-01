@@ -18,7 +18,7 @@ import webchat.ui.ClientUI;
  * @version 2015-05-23
  */
 public class MessageClient extends GenericClient {
-
+	
 	/**
 	 * The {@code MessageInterface} which will be used to communicate with the
 	 * server.
@@ -33,10 +33,10 @@ public class MessageClient extends GenericClient {
 	 * server.
 	 */
 	private final byte[] userInstance;
-
+	
 	/** The time in milliseconds between sucessive message pulls. */
 	public static final long REFRESH_RATE = 50;
-
+	
 	/**
 	 *
 	 * @param serverURL
@@ -57,21 +57,21 @@ public class MessageClient extends GenericClient {
 				REFRESH_RATE, ui);
 		this.messageThread = new Thread(this.messageRetreiver);
 	}
-
+	
 	/**
 	 * Starts the client's thread.
 	 */
 	public void startClient() {
 		this.messageThread.start();
 	}
-
+	
 	/**
 	 * Stops the client's thread safely.
 	 */
 	public void stopClient() {
 		this.messageRetreiver.stopThread();
 	}
-
+	
 	/**
 	 * Pushes a message to the server.
 	 *
@@ -80,7 +80,7 @@ public class MessageClient extends GenericClient {
 	 * @throws NotLoggedInException
 	 */
 	public void sendMessage(String message) throws RemoteException,
-	NotLoggedInException {
+			NotLoggedInException {
 		this.messageInterface.push(message, this.userInstance);
 	}
 }

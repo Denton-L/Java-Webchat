@@ -11,7 +11,7 @@ public class UserClientTest extends TestCase {
 	UserServer server;
 	UserClient client;
 	boolean setUpIsDone = true;
-
+	
 	@Override
 	protected void setUp() throws Exception {
 		if (this.setUpIsDone) {
@@ -23,12 +23,12 @@ public class UserClientTest extends TestCase {
 			// UserClient(InetAddress.getLocalHost().getHostAddress());
 			// TODO fix this
 		}
-
+		
 		this.setUpIsDone = false;
 	}
-
+	
 	public void testCreation() {
 		// Note is blank because only needs to be created
 	}
-
+	
 }

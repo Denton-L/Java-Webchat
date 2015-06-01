@@ -1,6 +1,5 @@
 package webchat.ui;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,21 +26,20 @@ import webchat.database.UserDatabase;
 import webchat.networking.StartServer;
 
 public class ServerUI extends Application {
+	
+	private final Image image1 = new Image("/plshelp.jpg", true);
+	private final ImageView imview = new ImageView();
+	private final FileChooser fileChooser = new FileChooser();
+	private final Button openDatabase = new Button("Open database file");
+	private final Button createDatabase = new Button("Create database");
+	private final Button startServer = new Button("Start the server");
 
-	Image image1 = new Image("/plshelp.jpg", true);
-	ImageView imview = new ImageView();
-	final Desktop desktop = Desktop.getDesktop();
-	final FileChooser fileChooser = new FileChooser();
-	final Button openDatabase = new Button("Open database file");
-	Button createDatabase = new Button("Create database");
-	Button startServer = new Button("Start the server");
-
-	Text fileText;
-	Text errorText;
-	Text selectText;
-	Text createText;
-	File database;
-
+	private Text fileText;
+	private Text errorText;
+	private Text selectText;
+	private Text createText;
+	private File database;
+	
 	@Override
 	public void start(final Stage primaryStage) {
 		primaryStage.setTitle("Server Starter");
@@ -49,26 +47,26 @@ public class ServerUI extends Application {
 		this.imview.setImage(this.image1);
 		this.imview.setFitHeight(600);
 		this.imview.setFitWidth(800);
-
+		
 		final VBox vbox = new VBox();
 		vbox.setSpacing(15);
-
+		
 		final HBox hbox1 = new HBox();
 		hbox1.setSpacing(15);
-
+		
 		final HBox hbox2 = new HBox();
 		hbox2.setSpacing(15);
-
+		
 		final HBox hbox3 = new HBox();
 		hbox3.setSpacing(15);
-
+		
 		final GridPane pane = new GridPane();
 		pane.setAlignment(Pos.CENTER);
 		pane.add(vbox, 1, 1);
-
+		
 		group.getChildren().add(this.imview);
 		group.getChildren().add(pane);
-
+		
 		Text ipaddress;
 		try {
 			ipaddress = new Text("The server IP address is: "
@@ -80,19 +78,19 @@ public class ServerUI extends Application {
 			e.printStackTrace();
 		}
 		addFileChooser(primaryStage, hbox1, hbox2);
-
+		
 		this.fileText = new Text("No file selected");
 		this.fileText.setId("textstyle2");
 		hbox1.getChildren().add(this.fileText);
-
+		
 		this.createText = new Text("");
 		this.createText.setVisible(false);
 		this.createText.setId("textstyle2");
 		hbox2.getChildren().add(this.createText);
-
+		
 		this.selectText = new Text("Select a file before starting the server");
 		this.selectText.setId("textstyle2");
-
+		
 		vbox.getChildren().addAll(hbox1, hbox2, hbox3);
 		this.startServer.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -103,19 +101,19 @@ public class ServerUI extends Application {
 						ServerUI.this.selectText.setText("Server started");
 					} catch (final FileNotFoundException e1) {
 						ServerUI.this.errorText
-								.setText("File could not be found");
+						.setText("File could not be found");
 						ServerUI.this.errorText.setVisible(true);
 						e1.printStackTrace();
 					} catch (final ClassNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (final IOException e1) {
 						ServerUI.this.errorText
-								.setText("Database could not be loaded");
+						.setText("Database could not be loaded");
 						ServerUI.this.errorText.setVisible(true);
 						e1.printStackTrace();
 					} catch (final AlreadyBoundException e1) {
 						ServerUI.this.errorText
-								.setText("Server could not be started");
+						.setText("Server could not be started");
 						ServerUI.this.errorText.setVisible(true);
 						e1.printStackTrace();
 					}
@@ -125,29 +123,29 @@ public class ServerUI extends Application {
 				}
 			}
 		});
-
+		
 		hbox3.getChildren().add(this.startServer);
-
+		
 		this.errorText = new Text("");
 		this.errorText.setVisible(false);
 		this.errorText.setId("textstyle2");
 		hbox3.getChildren().add(this.errorText);
-
+		
 		vbox.getChildren().add(this.selectText);
-
+		
 		final Scene scene = new Scene(group, 500, 250);
-
+		
 		scene.getStylesheets().add("/custom.css");
-
+		
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-
+	
 	private void addFileChooser(final Stage stage, HBox hbox1, HBox hbox2) {
 		// TODO check if this works for runnable jars
 		this.fileChooser.getExtensionFilters().add(
 				new FileChooser.ExtensionFilter("SER file", "*.ser"));
-
+		
 		this.openDatabase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
@@ -162,7 +160,7 @@ public class ServerUI extends Application {
 				}
 			}
 		});
-
+		
 		this.createDatabase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
@@ -183,14 +181,14 @@ public class ServerUI extends Application {
 							.toString()
 							.substring(
 									ServerUI.this.database.toString()
-											.lastIndexOf('.') + 1)
-							.equals("ser")) {
-
+									.lastIndexOf('.') + 1)
+									.equals("ser")) {
+						
 						try {
 							new UserDatabase()
-									.saveDatabase(ServerUI.this.database);
+							.saveDatabase(ServerUI.this.database);
 							ServerUI.this.createText
-									.setText("Database file created");
+							.setText("Database file created");
 							ServerUI.this.createText.setVisible(true);
 							ServerUI.this.fileText.setText("File chosen: "
 									+ ServerUI.this.database.getName());
@@ -204,19 +202,19 @@ public class ServerUI extends Application {
 						}
 					} else {
 						ServerUI.this.createText
-								.setText("Incorrect file format");
+						.setText("Incorrect file format");
 						ServerUI.this.createText.setVisible(true);
 					}
-
+					
 				}
-
+				
 			}
 		});
-
+		
 		hbox1.getChildren().add(this.openDatabase);
 		hbox2.getChildren().add(this.createDatabase);
 	}
-
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -9,14 +9,14 @@ import webchat.ui.ClientUI;
  * @version 2015-05-31
  */
 public abstract class GenericRetriever implements Runnable {
-
+	
 	/** The time in milliseconds between successive message fetches. */
 	private final long period;
 	/** Indicates whether the thread is running. */
 	private volatile boolean threadRunning;
-
+	
 	protected ClientUI ui;
-
+	
 	/**
 	 *
 	 * @param remote
@@ -29,12 +29,12 @@ public abstract class GenericRetriever implements Runnable {
 		this.threadRunning = true;
 		this.ui = ui;
 	}
-
+	
 	/**
 	 * The method which will contain the retrieval logic.
 	 */
 	protected abstract void retrieve();
-
+	
 	/**
 	 * Throwing an {@code InterruptedException} will cause the thread to refresh
 	 * instantaneously.
@@ -50,7 +50,7 @@ public abstract class GenericRetriever implements Runnable {
 			}
 		}
 	}
-
+	
 	/**
 	 * Halts the thread on the next loop iteration.
 	 */
