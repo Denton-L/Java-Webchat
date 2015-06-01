@@ -27,6 +27,8 @@ public class MessageRetriever extends GenericRetriever {
 	 *            The {@code MessageInterface} which is provided by the server.
 	 * @param period
 	 *            The time in milliseconds between successive message fetches.
+	 * @param ui
+	 *            The UI which will be updated.
 	 */
 	public MessageRetriever(MessageInterface messageInterface, long period,
 			ClientUI ui) {

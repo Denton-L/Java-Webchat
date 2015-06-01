@@ -22,6 +22,7 @@ public class UserServer extends GenericServer {
 	 *
 	 * @param userDatabase
 	 *            The {@code UserDatabase} which this server is based on.
+	 * @throws RemoteException
 	 */
 	public UserServer(UserDatabase userDatabase) throws RemoteException {
 		super(URL_LOCATION, new UserService(userDatabase));
