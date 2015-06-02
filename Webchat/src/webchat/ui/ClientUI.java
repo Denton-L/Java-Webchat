@@ -146,8 +146,6 @@ public class ClientUI extends Application  implements EventHandler<ActionEvent> 
 		return this;
 	}
 	
-	public ClientUI() throws InterruptedException{
-	}
 
 	public static void main(String[] args) {
 		launch(args);
