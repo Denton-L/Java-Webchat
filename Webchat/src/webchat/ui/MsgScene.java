@@ -84,7 +84,7 @@ public class MsgScene {
 	/**
 	 * Text to exit
 	 */
-	private Text logout = new Text("exit");
+	private Text logout = new Text("logout");
 	
 	/**
 	 * Input box for user to enter text.
