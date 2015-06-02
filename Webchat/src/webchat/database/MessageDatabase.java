@@ -7,22 +7,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import webchat.message.Message;
-import webchat.users.User;
+import webchat.message.MessageComparator;
 
 public class MessageDatabase {
 	
 	// Collection of Message object of user
-	private Collection<Message> message;
+	private SortedSet<Message> message;
+	// The maximum number of messages held
+	public static final int MESSAGE_BUFFER = 0xFFF;
 	
 	// Create a a new empty database
 	public MessageDatabase() {
-		message = new ArrayList<>();
+		message = new TreeSet<>(new MessageComparator());
 	}
 	
 	// Create new code from serialized Collection<Message> from code
@@ -31,13 +31,9 @@ public class MessageDatabase {
 		
 		ObjectInputStream objectInputStream = new ObjectInputStream(
 				new FileInputStream(file));
-		this.message = (Collection<Message>) objectInputStream.readObject();
+		this.message = (SortedSet<Message>) objectInputStream.readObject();
 		objectInputStream.close();
 		
-		// clears MessageInterface
-		for (Iterator<Message> message = message.iterator(); message.hasNext();) {
-			message.next().setUserInstance(null);
-		}
 	}
 	
 	// Saved database
@@ -50,30 +46,12 @@ public class MessageDatabase {
 	}
 	
 	// Adds Message
-	public boolean addMessage(String username, byte[] passwordHash) {
-		for (Iterator<User> iterator = message.iterator(); iterator.hasNext();) {
-			if (iterator.next().getContent().equals(username)) {
-				return false;
-			}
+	public void addMessage(String content, String username) {
+		while (message.add(new Message(content, username, System
+				.currentTimeMillis())))
+			;
+		while (message.size() > MESSAGE_BUFFER) {
+			message.remove(message.first());
 		}
-		message.add(new Message(username, content));
-		return true;
-	}
-	
-	// Get Message from a timestamp
-	public String getContentFromTimestamp(long[] timestamp) {
-		for (Iterator<User> iterator = message.iterator(); iterator.hasNext();) {
-			Message message = iterator.next();
-			if (Arrays.equals(message.getContent(), content)) {
-				return message.getContent();
-			}
-		}
-		
-		return null;
-	}
-	
-	// Purge Messages
-	public String purgeMessages() {
-		
 	}
 }
