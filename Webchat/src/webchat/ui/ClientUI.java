@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -202,7 +203,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		primaryStage.setResizable(false);
 		primaryStage.setWidth(this.serv.getWidth());
 		primaryStage.setHeight(this.serv.getHeight());
-		//primaryStage.getIcons().add(new Image("/IMAGEGOESHERE.jpg" ));
+		primaryStage.getIcons().add(new Image("/ChatIcon.png" ));
 		primaryStage.show();
 
 		this.loginScene.getRegister().setOnAction(
