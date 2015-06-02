@@ -26,7 +26,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.stage.StageStyle;
 import webchat.database.UserDatabase;
 import webchat.networking.StartServer;
