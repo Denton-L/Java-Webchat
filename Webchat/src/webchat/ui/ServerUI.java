@@ -28,23 +28,46 @@ import javafx.stage.StageStyle;
 import webchat.database.UserDatabase;
 import webchat.networking.StartServer;
 
+/**
+ * The server UI to display server information.
+ *
+ * @author Jing Yi Xie
+ * @version 2015-05-25
+ */
 public class ServerUI extends Application {
-	
+	/** Image to place in the background.
+	 */
 	private final Image image1 = new Image("/background.jpg", true);
+	/**Imageview node to hold image.
+	 */
 	private final ImageView imview = new ImageView();
+	/**File chooser for users to get files from system.*/
 	private final FileChooser fileChooser = new FileChooser();
+	/**Button to open database*/
 	private final Button openDatabase = new Button("Open database file");
+	/**Button to create database*/
 	private final Button createDatabase = new Button("Create database");
+	/**Button to start server*/
 	private final Button startServer = new Button("Start the server");
 
+	/**Text to display file*/
 	private Text fileText;
+	/**Text to display error*/
 	private Text errorText;
+	/**Text to display*/
 	private Text selectText;
+	/**Text to display*/
 	private Text createText;
+	/**The database file*/
 	private File database;
+	/**The variable that works with dragging the interface.*/
 	private double xvar;
+	/**The variable that works with dragging the interface.*/
 	private double yvar;
 	
+	/**
+	 * Start method for the scene.
+	 */
 	@Override
 	public void start(final Stage primaryStage) {
 		primaryStage.setTitle("Server Starter");
@@ -194,6 +217,12 @@ public class ServerUI extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * 
+	 * @param stage The stage where the scenes are placed.
+	 * @param hbox1 The horizontal box for layout purposes.
+	 * @param hbox2 The second horizontal box for layout purposes.
+	 */
 	private void addFileChooser(final Stage stage, HBox hbox1, HBox hbox2) {
 		// TODO check if this works for runnable jars
 		this.fileChooser.getExtensionFilters().add(
@@ -266,6 +295,10 @@ public class ServerUI extends Application {
 		hbox2.getChildren().add(this.createDatabase);
 	}
 	
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
