@@ -13,8 +13,8 @@ import webchat.ui.ClientUI;
 /**
  * The client which will communicate with {@code MessageServer}.
  *
- * @author Filip Francetic
  * @author Denton Liu
+ * @author Filip Francetic
  * @version 2015-05-23
  */
 public class MessageClient extends GenericClient {
