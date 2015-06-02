@@ -147,7 +147,7 @@ public class ChatScene {
 
 	/**
 	 * 
-	 * @param enter
+	 * @param pane
 	 *            A pane to deal with layout.
 	 */
 	public void setPane(BorderPane pane) {
@@ -188,7 +188,7 @@ public class ChatScene {
 
 	/**
 	 * 
-	 * @return enter A Button to change scenes.
+	 * @return pwBox A Button to change scenes.
 	 */
 	public PasswordField getPwBox() {
 		return this.pwBox;
@@ -196,7 +196,7 @@ public class ChatScene {
 
 	/**
 	 * 
-	 * @param enter A Button to change scenes.
+	 * @param pwBox A password field for the user to enter password.
 	 */
 	public void setPwBox(PasswordField pwBox) {
 		this.pwBox = pwBox;
@@ -204,7 +204,7 @@ public class ChatScene {
 
 	/**
 	 * 
-	 * @return enter A user field to receive input.
+	 * @return userBox A user field to receive input.
 	 */
 	public TextField getUserBox() {
 		return this.userBox;
@@ -212,7 +212,7 @@ public class ChatScene {
 
 	/**
 	 * 
-	 * @param enter A user field to receive input.
+	 * @param userBox A user field to receive input.
 	 */
 	public void setUserBox(TextField userBox) {
 		this.userBox = userBox;
