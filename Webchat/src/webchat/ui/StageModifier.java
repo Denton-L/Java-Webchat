@@ -116,8 +116,8 @@ public class StageModifier {
        close.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				System.exit(0);
 				stage.close();
+				System.exit(0);
 			}
 
 		});
