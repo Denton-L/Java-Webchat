@@ -11,8 +11,8 @@ import webchat.ui.ClientUI;
 /**
  * An implementation of {@code Runnable} which fetches messages from the server.
  *
- * @author Filip Francetic
  * @author Denton Liu
+ * @author Filip Francetic
  * @version 2015-05-23
  */
 public class MessageRetriever extends GenericRetriever {

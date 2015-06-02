@@ -34,8 +34,8 @@ import webchat.networking.StartServer;
 /**
  * The server UI to display server information.
  *
- * @author Filip Francetic
  * @author Jing Yi Xie
+ * @author Filip Francetic
  * @version 2015-05-25
  */
 public class ServerUI extends Application {

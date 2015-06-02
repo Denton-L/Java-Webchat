@@ -16,8 +16,8 @@ import webchat.users.networking.server.UserServer;
  * Creates and starts the servers so they can receive message and user requests.
  * The location of the database should be passed as an argument.
  *
- * @author Filip Francetic
  * @author Denton Liu
+ * @author Filip Francetic
  * @version 2015-05-28
  */
 

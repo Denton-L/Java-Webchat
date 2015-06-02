@@ -10,8 +10,8 @@ import webchat.message.Message;
  * An abstract interface which will allow messages to be sent between the client
  * and the server through the RMI protocol.
  *
- * @author Filip Francetic
  * @author Denton Liu
+ * @author Filip Francetic
  * @version 2015-05-23
  */
 public interface MessageInterface extends Remote {

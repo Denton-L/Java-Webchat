@@ -13,8 +13,8 @@ import webchat.users.networking.server.UserServer;
 /**
  * The client which will communicate with {@code UserClient}.
  *
- * @author Filip Francetic
  * @author Denton Liu
+ * @author Filip Francetic
  * @version 2015-05-25
  */
 public class UserClient extends GenericClient {

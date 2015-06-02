@@ -11,8 +11,8 @@ import webchat.users.networking.UserInterface;
 /**
  * A class which handles the logic of user processing.
  *
- * @author Filip Francetic
  * @author Denton Liu
+ * @author Filip Francetic
  * @version 2015-05-25
  */
 public class UserService extends UnicastRemoteObject implements UserInterface {
