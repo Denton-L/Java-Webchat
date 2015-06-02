@@ -19,8 +19,10 @@ public abstract class GenericRetriever implements Runnable {
 	
 	/**
 	 *
-	 * @param period The length of time before sucessive refreshes.
-	 * @param ui The UI to be updated.
+	 * @param period
+	 *            The length of time before sucessive refreshes.
+	 * @param ui
+	 *            The UI to be updated.
 	 */
 	protected GenericRetriever(long period, ClientUI ui) {
 		this.period = period;
@@ -44,6 +46,7 @@ public abstract class GenericRetriever implements Runnable {
 				retrieve();
 				Thread.sleep(this.period);
 			} catch (final InterruptedException e) {
+				Thread.interrupted();
 				continue;
 			}
 		}
