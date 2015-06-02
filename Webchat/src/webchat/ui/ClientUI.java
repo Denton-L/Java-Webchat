@@ -36,7 +36,7 @@ import webchat.users.networking.client.UserClient;
  * @version 1.0
  */
 
-public class ClientUI extends Application implements EventHandler<ActionEvent> {
+public class ClientUI extends Application  implements EventHandler<ActionEvent> {
 	private final ServScene servScene = new ServScene();
 	private final LoginScene loginScene = new LoginScene();
 	private final RegScene regScene = new RegScene();
@@ -144,6 +144,9 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 
 	public ClientUI getUI() {
 		return this;
+	}
+	
+	public ClientUI() throws InterruptedException{
 	}
 
 	public static void main(String[] args) {
@@ -297,7 +300,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	}
 
 	@Override
-	public void handle(ActionEvent e) {
+	public void handle(ActionEvent e){
 		if (e.getSource() == this.loginScene.getEnter()) {
 			try {
 				if (client == null){
