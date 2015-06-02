@@ -11,6 +11,7 @@ import webchat.users.networking.UserInterface;
 /**
  * A class which handles the logic of user processing.
  *
+ * @author Filip Francetic
  * @author Denton Liu
  * @version 2015-05-25
  */

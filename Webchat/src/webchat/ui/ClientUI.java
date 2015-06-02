@@ -28,6 +28,7 @@ import webchat.users.networking.client.UserClient;
 /**
  * Takes care of interaction between GUI objects and event handling.
  *
+ * @author Filip Francetic
  * @author Jing Yi Xie
  * @version 2015-05-25
  */

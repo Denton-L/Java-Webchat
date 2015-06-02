@@ -11,8 +11,8 @@ import java.rmi.registry.Registry;
 /**
  * A generic RMI client from which other clients will inherit.
  *
- * @author Denton Liu
  * @author Filip Francetic
+ * @author Denton Liu
  * @version 2015-05-25
  */
 public abstract class GenericClient {

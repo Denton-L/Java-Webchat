@@ -13,6 +13,7 @@ import webchat.users.networking.server.UserServer;
 /**
  * The client which will communicate with {@code UserClient}.
  *
+ * @author Filip Francetic
  * @author Denton Liu
  * @version 2015-05-25
  */
