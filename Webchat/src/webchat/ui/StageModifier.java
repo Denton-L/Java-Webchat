@@ -1,9 +1,5 @@
 package webchat.ui;
 
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-
-import webchat.networking.StartServer;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

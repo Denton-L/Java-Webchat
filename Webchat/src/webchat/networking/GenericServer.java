@@ -10,7 +10,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
-import java.rmi.server.UnicastRemoteObject;
 
 /**
  * A generic RMI server from which other clients will inherit.
