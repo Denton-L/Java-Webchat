@@ -190,7 +190,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		this.msg = this.msgScene.createMsg();
 
 		final StageModifier stagemod = new StageModifier(this.serv, this.login,
-				this.reg, this.servScene, this.msgScene, this.loginScene,
+				this.reg, this.msg, this.servScene, this.msgScene, this.loginScene,
 				this.regScene, primaryStage);
 		stagemod.draggable();
 		stagemod.testmethod();
