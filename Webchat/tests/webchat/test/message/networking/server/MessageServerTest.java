@@ -15,11 +15,12 @@ public class MessageServerTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		try {
-			final UserDatabase database = new UserDatabase(new File(
-					"/database.ser"));
+			File file = new File("testFile.ser");
+			file.deleteOnExit();
+			new UserDatabase().saveDatabase(file);
+			final UserDatabase database = new UserDatabase(file);
 			this.server = new MessageServer(database);
 		} catch (final RemoteException e) {
-			// TODO Auto-generated catch block
 			fail();
 		}
 	}
@@ -29,7 +30,6 @@ public class MessageServerTest extends TestCase {
 			this.server.startServer();
 		} catch (MalformedURLException | RemoteException
 				| AlreadyBoundException e) {
-			// TODO Auto-generated catch block
 			fail();
 		}
 	}
