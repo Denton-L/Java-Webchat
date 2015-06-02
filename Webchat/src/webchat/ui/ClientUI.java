@@ -198,7 +198,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		try {
 			this.client.logout(this.userInstance);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
