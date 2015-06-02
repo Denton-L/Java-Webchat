@@ -15,8 +15,8 @@ import java.rmi.server.UnicastRemoteObject;
 /**
  * A generic RMI server from which other clients will inherit.
  *
- * @author Denton Liu
  * @author Filip Francetic
+ * @author Denton Liu
  * @version 2015-05-25
  */
 public abstract class GenericServer {

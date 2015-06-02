@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
  * An abstract interface which will allow user related operations to
  * occur through the RMI protocol.
  *
+ * @author Filip Francetic
  * @author Denton Liu
  * @version 2015-05-25
  */

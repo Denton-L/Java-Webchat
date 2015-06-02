@@ -11,6 +11,7 @@ import webchat.ui.ClientUI;
 /**
  * An implementation of {@code Runnable} which fetches messages from the server.
  *
+ * @author Filip Francetic
  * @author Denton Liu
  * @version 2015-05-23
  */
