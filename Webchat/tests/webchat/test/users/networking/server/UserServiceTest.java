@@ -2,11 +2,10 @@ package webchat.test.users.networking.server;
 
 import java.io.File;
 import java.rmi.RemoteException;
-import java.util.TreeSet;
 
+import junit.framework.TestCase;
 import webchat.database.UserDatabase;
 import webchat.users.networking.server.UserService;
-import junit.framework.TestCase;
 
 public class UserServiceTest extends TestCase {
 	private File file;
