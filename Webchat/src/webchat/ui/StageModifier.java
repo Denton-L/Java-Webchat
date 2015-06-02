@@ -3,6 +3,7 @@ package webchat.ui;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -12,16 +13,22 @@ import javafx.stage.StageStyle;
 public class StageModifier {
 	private final ServScene servscene;
 	private final MsgScene msgscene;
-	private final LoginScene chatscene;
+	private final LoginScene loginscene;
 	private final RegScene regscene;
 	private final Stage stage;
+	private final Scene reg;
+	private final Scene serv;
+	private final Scene login;
 	private double xvar, yvar;
 	
-	public StageModifier(ServScene servscene1, MsgScene msgscene1,
-			LoginScene chatscene1, RegScene regscene1, Stage stage1) {
+	public StageModifier(Scene serv1, Scene login1, Scene reg1, ServScene servscene1, MsgScene msgscene1,
+			LoginScene loginscene1, RegScene regscene1, Stage stage1) {
+		this.reg = reg1;
+		this.serv = serv1;
+		this.login = login1;
 		this.servscene = servscene1;
 		this.msgscene = msgscene1;
-		this.chatscene = chatscene1;
+		this.loginscene = loginscene1;
 		this.regscene = regscene1;
 		this.stage = stage1;
 	}
@@ -29,39 +36,56 @@ public class StageModifier {
 	public void testmethod() {
 		this.servscene.getPane().setTop(createTitlebar());
 		this.regscene.getBpane().setTop(createTitlebar());
-		this.chatscene.getPane().setTop(createTitlebar());
+		this.loginscene.getPane().setTop(createTitlebar());
 		this.msgscene.getHeader().setRight(createTitlebar());
 	}
 	
-	public HBox createTitlebar() {
-		final Text close = new Text("x");
-		final Text min = new Text("_");
+	public HBox createTitlebar()
+	{
+		Text back = new Text("<");
+		Text close = new Text("x");
+		Text min = new Text("_");
 		close.setId("welcome");
 		min.setId("welcome");
+		back.setId("welcome");
 		close.setStyle("-fx-font-size: 30");
 		min.setStyle("-fx-font-size: 30");
-		final HBox titlebar = new HBox();
-		HBox.setMargin(close, new Insets(0, 10, 0, 15));
-		HBox.setMargin(min, new Insets(0, 0, 0, 15));
+		back.setStyle("-fx-font-size: 35");
+		HBox titlebar = new HBox();
+		HBox.setMargin(close, new Insets(0,10,0,15));
+		HBox.setMargin(min, new Insets(0,0,0,15));
+		HBox.setMargin(back, new Insets(7,0,0,12));
 		titlebar.setAlignment(Pos.CENTER_RIGHT);
-		titlebar.getChildren().addAll(min, close);
-		
-		close.setOnMousePressed(new EventHandler<MouseEvent>() {
+		titlebar.getChildren().addAll(back,min,close);
+
+        
+       close.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				StageModifier.this.stage.close();
+				stage.close();
 			}
-			
+
 		});
-		
-		min.setOnMousePressed(new EventHandler<MouseEvent>() {
+       
+       min.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				StageModifier.this.stage.setIconified(true);
+				stage.setIconified(true);
 			}
-			
+
 		});
-		
+       
+       back.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				if (stage.getScene() == login)
+				stage.setScene(serv);
+				else if (stage.getScene() == reg)
+				stage.setScene(login);
+			}
+
+		});
+        
 		return titlebar;
 	}
 	
@@ -88,7 +112,7 @@ public class StageModifier {
 					}
 				});
 		
-		this.chatscene.getGroup().setOnMousePressed(
+		this.loginscene.getGroup().setOnMousePressed(
 				new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event) {
@@ -97,7 +121,7 @@ public class StageModifier {
 					}
 				});
 		
-		this.chatscene.getGroup().setOnMouseDragged(
+		this.loginscene.getGroup().setOnMouseDragged(
 				new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event) {
