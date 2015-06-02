@@ -66,6 +66,7 @@ public class StageModifier {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				stage.close();
+				System.exit(0);
 			}
 
 		});
