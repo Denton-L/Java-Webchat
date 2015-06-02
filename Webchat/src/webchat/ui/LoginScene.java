@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
  * @version 1.0
  */
 
-public class ChatScene {
+public class LoginScene {
 	
 	private final Text title = new Text("welcome");
 	private Text warning = new Text("Username and/or password incorrect");
