@@ -190,16 +190,25 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		}
 	}
 
-	/**
-	 * 
-	 * @return usersOnline Users currently online.
-	 */
-	/**
-	 * 
-	 * @return
-	 */
 	public ClientUI getUI() {
 		return this;
+	}
+	
+	public void logout(){
+		try {
+			this.client.logout(this.userInstance);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public UserClient getClient() {
+		return client;
+	}
+
+	public byte[] getUserInstance() {
+		return userInstance;
 	}
 
 	/**
@@ -275,7 +284,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 
 		final StageModifier stagemod = new StageModifier(this.serv, this.login,
 				this.reg, this.msg, this.servScene, this.msgScene, this.loginScene,
-				this.regScene, primaryStage);
+				this.regScene, primaryStage, this);
 		stagemod.draggable();
 		stagemod.testmethod();
 
