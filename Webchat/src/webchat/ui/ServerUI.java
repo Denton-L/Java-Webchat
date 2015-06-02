@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.stage.StageStyle;
 import webchat.database.UserDatabase;
 import webchat.networking.StartServer;
@@ -64,7 +65,6 @@ public class ServerUI extends Application {
 	private double xvar;
 	/**The variable that works with dragging the interface.*/
 	private double yvar;
-	
 	/**
 	 * Start method for the scene.
 	 */
@@ -209,12 +209,20 @@ public class ServerUI extends Application {
 		
 		vbox.getChildren().add(this.selectText);
 		
-		final Scene scene = new Scene(group, 380, 280);
+		final Scene scene = new Scene(group, 405, 270);
 		
 		scene.getStylesheets().add("/custom.css");
 		
 		primaryStage.setScene(scene);
+		primaryStage.getIcons().add(new Image("/ServerIcon.png" ));
 		primaryStage.show();
+
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent we) {
+				System.exit(0);
+			}
+		});
 	}
 	
 	/**
@@ -227,7 +235,8 @@ public class ServerUI extends Application {
 		// TODO check if this works for runnable jars
 		this.fileChooser.getExtensionFilters().add(
 				new FileChooser.ExtensionFilter("SER file", "*.ser"));
-		
+		this.fileChooser.setInitialDirectory(new File(System
+				.getProperty("user.home")));
 		this.openDatabase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {

@@ -3,9 +3,6 @@ package webchat.ui;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.SortedSet;
 
@@ -14,6 +11,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -43,7 +41,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	/**
 	 * The login page for the client interface.
 	 */
-	private final ChatScene chatScene = new ChatScene();
+	private final LoginScene loginScene = new LoginScene();
 	/**
 	 * The registration page for the client interface.
 	 */
@@ -81,7 +79,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	/**
 	 * The scene to create the chat page.
 	 */
-	private Scene chat;
+	private Scene login;
 	/**
 	 * The scene to create the registration page.
 	 */
@@ -94,8 +92,8 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	/**
 	 * A string array to hold online users.
 	 */
-	private String[] usersOnline = null;
-
+	private volatile boolean hasNotAdded;
+	private volatile boolean hasNotRemoved;
 	/**
 	 * {@code UserClient} instance.
 	 */
@@ -152,8 +150,28 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	 * @param users An array to hold the users online.
 	 */
 	public void writeUsers(String[] users) {
+		if (ClientUI.this.msgScene.getBox2().getChildren().size() > 0) {
+			try {
+				hasNotRemoved = true;
+				ClientUI.this.msgScene
+						.getBox2()
+						.getChildren()
+						.remove(0,
+								ClientUI.this.msgScene.getBox2().getChildren()
+										.size());
+				hasNotRemoved = false;
+			} catch (final Exception e) {
+				reportRemoveUserNameException(e);
+			}
+		} else
+			hasNotRemoved = false;
+
+		while (hasNotRemoved) {
+		}
+
 		for (final String userName : users) {
 			try {
+				hasNotAdded = true;
 				this.onlineUser = new Text(userName);
 				this.onlineUser.setFill(Color.WHITE);
 				this.onlineUser
@@ -161,33 +179,20 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 								+ "-fx-font-family: AvenirLTStd-Light;"
 								+ "-fx-font-size: 30;");
 				this.onlineUser.setId(userName);
-
-				if (this.usersOnline != null) {
-					final Collection<String> collection = new ArrayList<String>();
-					collection.addAll(Arrays.asList(this.usersOnline));
-					collection.addAll(Arrays.asList(users));
-					this.usersOnline = collection.toArray(new String[] {});
-				} else {
-					this.usersOnline = users;
-				}
-
 				this.msgScene.getBox2().getChildren().add(this.onlineUser);
-
+				hasNotAdded = false;
 			} catch (final Exception e) {
 				reportUserNameException(e);
 			}
+			while (hasNotAdded) {
+			}
 		}
-		throw new RuntimeException("Hey Fil, fix this!");
 	}
 
 	/**
 	 * 
 	 * @return usersOnline Users currently online.
 	 */
-	public String[] getUsers() {
-		return this.usersOnline;
-	}
-
 	/**
 	 * 
 	 * @return
@@ -208,7 +213,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	 * 
 	 * @param t
 	 */
-	public void reportMessageException(final Throwable t) {
+	private void reportMessageException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -225,12 +230,28 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	 * 
 	 * @param t
 	 */
-	public void reportUserNameException(final Throwable t) {
+	private void reportUserNameException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				ClientUI.this.msgScene.getBox2().getChildren()
 						.add(ClientUI.this.onlineUser);
+				hasNotAdded = false;
+			}
+		});
+	}
+
+	private void reportRemoveUserNameException(final Throwable t) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				ClientUI.this.msgScene
+						.getBox2()
+						.getChildren()
+						.remove(0,
+								ClientUI.this.msgScene.getBox2().getChildren()
+										.size());
+				hasNotRemoved = false;
 			}
 		});
 	}
@@ -247,12 +268,12 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				.toExternalForm(), 10);
 
 		this.serv = this.servScene.createServ();
-		this.chat = this.chatScene.createChat();
+		this.login = this.loginScene.createChat();
 		this.reg = this.regScene.createReg();
 		this.msg = this.msgScene.createMsg();
 
-		final StageModifier stagemod = new StageModifier(this.serv, this.chat,
-				this.reg, this.servScene, this.msgScene, this.chatScene,
+		final StageModifier stagemod = new StageModifier(this.serv, this.login,
+				this.reg, this.msg, this.servScene, this.msgScene, this.loginScene,
 				this.regScene, primaryStage);
 		stagemod.draggable();
 		stagemod.testmethod();
@@ -264,18 +285,20 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		primaryStage.setResizable(false);
 		primaryStage.setWidth(this.serv.getWidth());
 		primaryStage.setHeight(this.serv.getHeight());
+		primaryStage.getIcons().add(new Image("/ClientIcon.png" ));
 		primaryStage.show();
 
-		this.chatScene.getRegister().setOnAction(
+		
+		this.loginScene.getRegister().setOnAction(
 				new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent event) {
-						ClientUI.this.chatScene.clrAll();
+						ClientUI.this.loginScene.clrAll();
 						primaryStage.setScene(ClientUI.this.reg);
 					}
 				});
 
-		this.chatScene.getEnter().setOnAction(this);
+		this.loginScene.getEnter().setOnAction(this);
 
 		this.servScene.getEnter().setOnAction(this);
 
@@ -287,7 +310,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent mouseEvent) {
-						primaryStage.setScene(ClientUI.this.serv);
+						primaryStage.setScene(ClientUI.this.login);
 						ClientUI.this.msgScene.clrAll();
 						ClientUI.this.msgclient.stopClient();
 						try {
@@ -323,7 +346,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 										ClientUI.this.client = null;
 										ClientUI.this.msgclient = null;
 										primaryStage
-												.setScene(ClientUI.this.serv);
+												.setScene(ClientUI.this.login);
 										ClientUI.this.msgScene.clrAll();
 										ClientUI.this.msgclient.stopClient();
 									} catch (final RemoteException e1) {
@@ -342,9 +365,12 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			@Override
 			public void handle(WindowEvent we) {
 				try {
-					ClientUI.this.client.logout(ClientUI.this.userInstance);
+					if (ClientUI.this.client != null){
+						ClientUI.this.client.logout(ClientUI.this.userInstance);
+					}
 					ClientUI.this.client = null;
 					ClientUI.this.msgclient = null;
+					System.exit(0);
 				} catch (final RemoteException e) {
 					e.printStackTrace();
 				}
@@ -357,22 +383,27 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	 */
 	@Override
 	public void handle(ActionEvent e) {
-		if (e.getSource() == this.chatScene.getEnter()) {
+		if (e.getSource() == this.loginScene.getEnter()) {
 			try {
-				this.userInstance = this.client.signIn(this.chatScene
-						.getUserBox().getText(), this.chatScene.getPwBox()
+				if (client == null) {
+					this.client = new UserClient(this.ip, this);
+					this.client.startClient();
+				}
+				this.userInstance = this.client.signIn(this.loginScene
+						.getUserBox().getText(), this.loginScene.getPwBox()
 						.getText().getBytes());
 				if (this.userInstance != null) {
 					this.msgclient = new MessageClient(this.ip,
 							this.userInstance, this);
 					this.msgclient.startClient();
 					this.stage.setScene(this.msg);
-					this.chatScene.clrAll();
+					this.loginScene.clrAll();
+					client.refreshUsers();
 				} else {
-					this.chatScene.getWarning().setVisible(true);
+					this.loginScene.getWarning().setVisible(true);
 				}
 			} catch (final RemoteException o) {
-				this.chatScene.getWarning().setVisible(true);
+				this.loginScene.getWarning().setVisible(true);
 			} catch (MalformedURLException | NotBoundException o) {
 				o.printStackTrace();
 			}
@@ -381,9 +412,9 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			try {
 				this.ip = this.servScene.getIpBox().getText();
 				this.client = new UserClient(this.ip, this);
-				this.client.startClient();
+				client = null;
 				this.servScene.clrAll();
-				this.stage.setScene(this.chat);
+				this.stage.setScene(this.login);
 			} catch (MalformedURLException | RemoteException
 					| NotBoundException o) {
 				this.servScene.getWarning().setVisible(true);
@@ -393,17 +424,25 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			if (this.regScene.getPwBox().getText()
 					.equals(this.regScene.getPwBox2().getText())) {
 				try {
+					if (client == null) {
+						this.client = new UserClient(this.ip, this);
+						this.client.startClient();
+					}
 					if (this.client.register(this.regScene.getUserBox()
 							.getText(), this.regScene.getPwBox().getText()
 							.getBytes())) {
-						this.stage.setScene(this.chat);
+						this.stage.setScene(this.login);
 						this.regScene.clrAll();
-						this.chatScene.getWarning().setVisible(false);
+						this.loginScene.getWarning().setVisible(false);
 					} else {
 						this.regScene.getWarning().setVisible(true);
 					}
 				} catch (final RemoteException o) {
 					this.regScene.getWarning().setVisible(true);
+				} catch (MalformedURLException e1) {
+					e1.printStackTrace();
+				} catch (NotBoundException e1) {
+					e1.printStackTrace();
 				}
 			}
 		}
@@ -418,11 +457,11 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				} catch (final NotLoggedInException o) {
 					try {
 						this.client.logout(this.userInstance);
+						this.msgclient.stopClient();
 						this.client = null;
 						this.msgclient = null;
-						this.stage.setScene(this.serv);
+						this.stage.setScene(this.login);
 						this.msgScene.clrAll();
-						this.msgclient.stopClient();
 					} catch (final RemoteException e1) {
 						e1.printStackTrace();
 					}
@@ -430,5 +469,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				this.msgScene.getInput().clear();
 			}
 		}
+
 	}
 }
