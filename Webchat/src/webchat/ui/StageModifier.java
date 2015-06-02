@@ -10,17 +10,62 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * Work with stage and scenes together.
+ *
+ * @author Jing Yi Xie
+ * @version 2015-05-25
+ */
 public class StageModifier {
+	
+	/**
+	 * The server page.
+	 */
 	private final ServScene servscene;
+	/**
+	 * The message page.
+	 */
 	private final MsgScene msgscene;
+	/**
+	 * The login page.
+	 */
 	private final ChatScene chatscene;
+	/**
+	 * The registration page.
+	 */
 	private final RegScene regscene;
+	/**
+	 * The top level container of the interface.
+	 */
 	private final Stage stage;
+	/**
+	 * The registration scene.
+	 */
 	private final Scene reg;
+	/**
+	 * The server scene.
+	 */
 	private final Scene serv;
+	/**
+	 * The login scene.
+	 */
 	private final Scene login;
+	/**
+	 * The variables to deal with dragging the window.
+	 */
 	private double xvar, yvar;
 	
+	/**
+	 * 
+	 * @param serv1 The server scene.
+	 * @param login1 The login scene.
+	 * @param reg1 The registration scene.
+	 * @param servscene1 The server page.
+	 * @param msgscene1 The message page.
+	 * @param chatscene1 The login page.
+	 * @param regscene1 The registration page.
+	 * @param stage1 The top level container.
+	 */
 	public StageModifier(Scene serv1, Scene login1, Scene reg1, ServScene servscene1, MsgScene msgscene1,
 			ChatScene chatscene1, RegScene regscene1, Stage stage1) {
 		this.reg = reg1;
@@ -33,6 +78,9 @@ public class StageModifier {
 		this.stage = stage1;
 	}
 	
+	/**
+	 * Set the titlebar on all scenes.
+	 */
 	public void testmethod() {
 		this.servscene.getPane().setTop(createTitlebar());
 		this.regscene.getBpane().setTop(createTitlebar());
@@ -40,6 +88,9 @@ public class StageModifier {
 		this.msgscene.getHeader().setRight(createTitlebar());
 	}
 	
+	/**
+	 * Create titlebar to be placed.
+	 */
 	public HBox createTitlebar()
 	{
 		Text back = new Text("<");
@@ -89,6 +140,9 @@ public class StageModifier {
 		return titlebar;
 	}
 	
+	/**
+	 * Set all scenes as draggable.
+	 */
 	public void draggable() {
 		this.stage.initStyle(StageStyle.UNDECORATED);
 		
