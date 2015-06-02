@@ -18,58 +18,93 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /**
- * MsgScene object
- *
  * Creates and deals with the messaging scene.
  *
  * @author Jing Yi Xie
- * @version 1.0
+ * @version 2015-05-25
  */
 
 public class MsgScene {
 	
 	/**
-	 * Creates a stackable box for layout purposes (inserting background image)
+	 * Creates a stackable box for layout purposes (inserting background image).
 	 */
 	private StackPane group = new StackPane();
 	/**
-	 * Loads and places images
+	 * Loads and places images.
 	 */
 	private final Image image1 = new Image("/background.jpg", true);
+	/**
+	 * Loads images.
+	 */
 	private final ImageView imview = new ImageView();
 	/**
-	 * Creates borderpane layout
+	 * Creates borderpane layout.
 	 */
 	private final BorderPane pane = new BorderPane();
 	/**
-	 * Creates scrollpane layout
+	 * Creates scrollpane layout.
 	 */
 	private final ScrollPane sp2 = new ScrollPane();
+	/**
+	 * Creates scrollpane layout.
+	 */
 	private final ScrollPane sp = new ScrollPane();
-	
+	/**
+	 * A vertical box placed on the left.
+	 */
 	private VBox box2 = new VBox();
+	/**
+	 * A vertical box placed on the right.
+	 */
 	private final VBox subbox = new VBox();
+	/**
+	 * A vertical box left.
+	 */
 	private final VBox subbox2 = new VBox();
 	
+	/**
+	 * Deal with layout.
+	 */
 	private final BorderPane inputbox = new BorderPane();
 	
+	/**
+	 * A horizontal box placed on the right.
+	 */
 	private final HBox inputbox2 = new HBox();
+	/**
+	 * Deal with layout.
+	 */
 	private BorderPane header = new BorderPane();
 	
+	/**
+	 * Text to title the chat.
+	 */
 	private final Text h = new Text("chat");
+	/**
+	 * Text to exit
+	 */
 	private Text logout = new Text("exit");
 	
+	/**
+	 * Input box for user to enter text.
+	 */
 	private TextArea input = new TextArea();
+	/**
+	 * A vertical box to hold messages.
+	 */
 	public VBox msgs = new VBox();
 	
+	/**
+	 * An enter button to enter message.
+	 */
 	private Button enter = new Button(">");
 	
 	/**
-	 * Calls all other relevant MsgScene methods to create the final MsgScene.
-	 *
-	 * @return A Scene object.
+	 * Creates a message page for client interface
+	 * 
+	 * @return scene 
 	 */
-	
 	public Scene createMsg() {
 		
 		styleHeader();
@@ -204,58 +239,114 @@ public class MsgScene {
 		this.getInput().clear();
 	}
 	
+	/**
+	 * 
+	 * @return box2 The layout box to the left.
+	 */
 	public VBox getBox2() {
 		return this.box2;
 	}
 	
+	/**
+	 * 
+	 * @param box2 The layout box to the left.
+	 */
 	public void setBox2(VBox box2) {
 		this.box2 = box2;
 	}
 	
+	/**
+	 * 
+	 * @return msgs The container for messages.
+	 */
 	public VBox getMsgs() {
 		return this.msgs;
 	}
 	
+	/**
+	 * 
+	 * @param msgs The container for messages.
+	 */
 	public void setMsgs(VBox msgs) {
 		this.msgs = msgs;
 	}
 	
+	/**
+	 * 
+	 * @return enter The button to head to the next page.
+	 */
 	public Button getEnter() {
 		return this.enter;
 	}
 	
+	/**
+	 * 
+	 * @param enter The enter button to go to next page.
+	 */
 	public void setEnter(Button enter) {
 		this.enter = enter;
 	}
 	
+	/**
+	 * 
+	 * @return logout The logout button to exit the page.
+	 */
 	public Text getLogout() {
 		return this.logout;
 	}
 	
+	/**
+	 * 
+	 * @param logout The logout button to exit the page.
+	 */
 	public void setLogout(Text logout) {
 		this.logout = logout;
 	}
 	
+	/**
+	 * 
+	 * @return input The input for the user to enter text.
+	 */
 	public TextArea getInput() {
 		return this.input;
 	}
 	
+	/**
+	 * 
+	 * @param input The input for the user to enter text.
+	 */
 	public void setInput(TextArea input) {
 		this.input = input;
 	}
 	
+	/**
+	 * 
+	 * @return The header that displays the text.
+	 */
 	public BorderPane getHeader() {
 		return this.header;
 	}
 	
+	/**
+	 * 
+	 * @param header The header that displays the text.
+	 */
 	public void setHeader(BorderPane header) {
 		this.header = header;
 	}
 	
+	/**
+	 * 
+	 * @return group The stackpane that layers the nodes.
+	 */
 	public StackPane getGroup() {
 		return this.group;
 	}
 	
+	/**
+	 * 
+	 * @param group The stackpane that layers the nodes.
+	 */
 	public void setGroup(StackPane group) {
 		this.group = group;
 	}
