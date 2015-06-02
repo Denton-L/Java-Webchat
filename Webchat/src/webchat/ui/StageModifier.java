@@ -63,7 +63,6 @@ public class StageModifier {
 	 * @param reg1 The registration scene.
 	 * @param servscene1 The server page.
 	 * @param msgscene1 The message page.
-	 * @param chatscene1 The login page.
 	 * @param regscene1 The registration page.
 	 * @param stage1 The top level container.
 	 */
