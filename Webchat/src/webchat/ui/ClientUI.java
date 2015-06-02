@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -33,7 +34,7 @@ import webchat.users.networking.client.UserClient;
  * @version 1.0
  */
 
-public class ClientUI extends Application  implements EventHandler<ActionEvent> {
+public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	private final ServScene servScene = new ServScene();
 	private final LoginScene loginScene = new LoginScene();
 	private final RegScene regScene = new RegScene();
@@ -112,13 +113,12 @@ public class ClientUI extends Application  implements EventHandler<ActionEvent> 
 			} catch (final Exception e) {
 				reportRemoveUserNameException(e);
 			}
-		}
-		else 
+		} else
 			hasNotRemoved = false;
-		
-		while (hasNotRemoved){
+
+		while (hasNotRemoved) {
 		}
-	
+
 		for (final String userName : users) {
 			try {
 				hasNotAdded = true;
@@ -134,7 +134,7 @@ public class ClientUI extends Application  implements EventHandler<ActionEvent> 
 			} catch (final Exception e) {
 				reportUserNameException(e);
 			}
-			while (hasNotAdded){
+			while (hasNotAdded) {
 			}
 		}
 	}
@@ -142,7 +142,6 @@ public class ClientUI extends Application  implements EventHandler<ActionEvent> 
 	public ClientUI getUI() {
 		return this;
 	}
-	
 
 	public static void main(String[] args) {
 		launch(args);
@@ -176,7 +175,12 @@ public class ClientUI extends Application  implements EventHandler<ActionEvent> 
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				ClientUI.this.msgScene.getBox2().getChildren().remove(0, ClientUI.this.msgScene.getBox2().getChildren().size());
+				ClientUI.this.msgScene
+						.getBox2()
+						.getChildren()
+						.remove(0,
+								ClientUI.this.msgScene.getBox2().getChildren()
+										.size());
 				hasNotRemoved = false;
 			}
 		});
@@ -188,13 +192,19 @@ public class ClientUI extends Application  implements EventHandler<ActionEvent> 
 	 */
 	@Override
 	public void start(final Stage primaryStage) {
+		Font.loadFont(ClientUI.class.getResource("/AvenirLTStd-Light.otf")
+				.toExternalForm(), 10);
+		Font.loadFont(ClientUI.class.getResource("/NexaLight.otf")
+				.toExternalForm(), 10);
+
 		this.serv = this.servScene.createServ();
 		this.login = this.loginScene.createChat();
 		this.reg = this.regScene.createReg();
 		this.msg = this.msgScene.createMsg();
 
-		final StageModifier stagemod = new StageModifier(this.servScene,
-				this.msgScene, this.loginScene, this.regScene, primaryStage);
+		final StageModifier stagemod = new StageModifier(this.serv, this.login,
+				this.reg, this.servScene, this.msgScene, this.loginScene,
+				this.regScene, primaryStage);
 		stagemod.draggable();
 		stagemod.testmethod();
 
@@ -205,6 +215,7 @@ public class ClientUI extends Application  implements EventHandler<ActionEvent> 
 		primaryStage.setResizable(false);
 		primaryStage.setWidth(this.serv.getWidth());
 		primaryStage.setHeight(this.serv.getHeight());
+		primaryStage.getIcons().add(new Image("file:/background.jpg"));
 		primaryStage.show();
 
 		this.loginScene.getRegister().setOnAction(
@@ -295,10 +306,10 @@ public class ClientUI extends Application  implements EventHandler<ActionEvent> 
 	}
 
 	@Override
-	public void handle(ActionEvent e){
+	public void handle(ActionEvent e) {
 		if (e.getSource() == this.loginScene.getEnter()) {
 			try {
-				if (client == null){
+				if (client == null) {
 					this.client = new UserClient(this.ip, this);
 					this.client.startClient();
 				}
@@ -336,7 +347,7 @@ public class ClientUI extends Application  implements EventHandler<ActionEvent> 
 			if (this.regScene.getPwBox().getText()
 					.equals(this.regScene.getPwBox2().getText())) {
 				try {
-					if (client == null){
+					if (client == null) {
 						this.client = new UserClient(this.ip, this);
 						this.client.startClient();
 					}
