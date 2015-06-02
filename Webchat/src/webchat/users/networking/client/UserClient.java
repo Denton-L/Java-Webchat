@@ -113,4 +113,10 @@ public class UserClient extends GenericClient {
 		this.userInterface.logout(userInstance);
 	}
 	
+	/**
+	 * Causes the client to instantly update the users online.
+	 */
+	public void refreshUsers() {
+		userThread.interrupt();
+	}
 }
