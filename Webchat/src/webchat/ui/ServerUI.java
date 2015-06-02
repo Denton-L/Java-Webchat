@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
-import java.rmi.RemoteException;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
