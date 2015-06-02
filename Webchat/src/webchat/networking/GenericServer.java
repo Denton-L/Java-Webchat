@@ -67,6 +67,5 @@ public abstract class GenericServer {
 	
 	public void shutDown() throws AccessException, RemoteException, NotBoundException {
 		registry.unbind(this.location);
-		//UnicastRemoteObject.unexportObject(this.binding,true);
 	}
 }

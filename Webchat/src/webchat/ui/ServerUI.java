@@ -98,7 +98,6 @@ public class ServerUI extends Application {
 		hbox3.setSpacing(15);
 
 		final GridPane pane = new GridPane();
-		// pane.setAlignment(Pos.CENTER);
 		pane.setPadding(new Insets(0, 0, 15, 15));
 		pane.add(vbox, 1, 1);
 
