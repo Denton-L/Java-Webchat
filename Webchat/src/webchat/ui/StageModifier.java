@@ -19,14 +19,16 @@ public class StageModifier {
 	private final Scene reg;
 	private final Scene serv;
 	private final Scene login;
+	private final Scene msg;
 	private double xvar, yvar;
 	
-	public StageModifier(Scene serv1, Scene login1, Scene reg1, ServScene servscene1, MsgScene msgscene1,
+	public StageModifier(Scene serv1, Scene login1, Scene reg1, Scene msg1, ServScene servscene1, MsgScene msgscene1,
 			LoginScene loginscene1, RegScene regscene1, Stage stage1) {
 
 		this.reg = reg1;
 		this.serv = serv1;
 		this.login = login1;
+		this.msg = msg1;
 		this.servscene = servscene1;
 		this.msgscene = msgscene1;
 		this.loginscene = loginscene1;
@@ -82,6 +84,8 @@ public class StageModifier {
 				if (stage.getScene() == login)
 				stage.setScene(serv);
 				else if (stage.getScene() == reg)
+				stage.setScene(login);
+				else if (stage.getScene() == msg)
 				stage.setScene(login);
 			}
 
