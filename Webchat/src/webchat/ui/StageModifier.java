@@ -23,6 +23,7 @@ public class StageModifier {
 	
 	public StageModifier(Scene serv1, Scene login1, Scene reg1, ServScene servscene1, MsgScene msgscene1,
 			LoginScene loginscene1, RegScene regscene1, Stage stage1) {
+
 		this.reg = reg1;
 		this.serv = serv1;
 		this.login = login1;
