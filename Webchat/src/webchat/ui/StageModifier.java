@@ -29,7 +29,7 @@ public class StageModifier {
 	/**
 	 * The login page.
 	 */
-	private final ChatScene chatscene;
+	private final LoginScene loginscene;
 	/**
 	 * The registration page.
 	 */
@@ -50,6 +50,7 @@ public class StageModifier {
 	 * The login scene.
 	 */
 	private final Scene login;
+	private final Scene msg;
 	/**
 	 * The variables to deal with dragging the window.
 	 */
@@ -66,14 +67,16 @@ public class StageModifier {
 	 * @param regscene1 The registration page.
 	 * @param stage1 The top level container.
 	 */
-	public StageModifier(Scene serv1, Scene login1, Scene reg1, ServScene servscene1, MsgScene msgscene1,
-			ChatScene chatscene1, RegScene regscene1, Stage stage1) {
+	public StageModifier(Scene serv1, Scene login1, Scene reg1, Scene msg1, ServScene servscene1, MsgScene msgscene1,
+			LoginScene loginscene1, RegScene regscene1, Stage stage1) {
+
 		this.reg = reg1;
 		this.serv = serv1;
 		this.login = login1;
+		this.msg = msg1;
 		this.servscene = servscene1;
 		this.msgscene = msgscene1;
-		this.chatscene = chatscene1;
+		this.loginscene = loginscene1;
 		this.regscene = regscene1;
 		this.stage = stage1;
 	}
@@ -84,7 +87,7 @@ public class StageModifier {
 	public void testmethod() {
 		this.servscene.getPane().setTop(createTitlebar());
 		this.regscene.getBpane().setTop(createTitlebar());
-		this.chatscene.getPane().setTop(createTitlebar());
+		this.loginscene.getPane().setTop(createTitlebar());
 		this.msgscene.getHeader().setRight(createTitlebar());
 	}
 	
@@ -114,6 +117,7 @@ public class StageModifier {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				stage.close();
+				System.exit(0);
 			}
 
 		});
@@ -132,6 +136,8 @@ public class StageModifier {
 				if (stage.getScene() == login)
 				stage.setScene(serv);
 				else if (stage.getScene() == reg)
+				stage.setScene(login);
+				else if (stage.getScene() == msg)
 				stage.setScene(login);
 			}
 
@@ -166,7 +172,7 @@ public class StageModifier {
 					}
 				});
 		
-		this.chatscene.getGroup().setOnMousePressed(
+		this.loginscene.getGroup().setOnMousePressed(
 				new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event) {
@@ -175,7 +181,7 @@ public class StageModifier {
 					}
 				});
 		
-		this.chatscene.getGroup().setOnMouseDragged(
+		this.loginscene.getGroup().setOnMouseDragged(
 				new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event) {
