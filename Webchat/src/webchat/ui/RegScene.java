@@ -14,31 +14,62 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 /**
- * RegScene Object
- *
  * Creates and deals with the registration scene.
  *
  * @author Jing Yi Xie
- * @version 1.0
+ * @version 2015-05-25
  */
 
 public class RegScene {
+	/**
+	 * The text warning that appears when there is unexpected input.
+	 */
 	private Text warning = new Text("Error with input information!");
+	/**
+	 * The title of the page.
+	 */
 	private final Text title1 = new Text("register");
+	/**
+	 * The textfield to receive the username.
+	 */
 	private TextField userBox = new TextField();
+	/**
+	 * The textfield to receive the password.
+	 */
 	private PasswordField pwBox = new PasswordField();
+	/**
+	 * The textfield to receive confirmation of the password.
+	 */
 	private PasswordField pwBox2 = new PasswordField();
+	/**
+	 * The enter button to change the scene.
+	 */
 	private Button enter = new Button();
+	/**
+	 * The layout pane to work with layouts.
+	 */
 	private BorderPane bpane = new BorderPane();
+	/**
+	 * The layout pane to work with layouts.
+	 */
 	private final GridPane pane = new GridPane();
+	/**
+	 * The background image.
+	 */
 	private final Image image1 = new Image("/background.jpg", true);
+	/**
+	 * The image view node to display the bg image.
+	 */
 	private final ImageView imview = new ImageView();
+	/**
+	 * The stack pane that allows nodes to placed on top of one another.
+	 */
 	private StackPane group = new StackPane();
 	
 	/**
 	 * Sets up elements as necessary in order to create the registration scene.
 	 *
-	 * @return A Scene object.
+	 * @return scene The registration scene for the client interface.
 	 */
 	public Scene createReg() {
 		
@@ -95,58 +126,114 @@ public class RegScene {
 		this.getPwBox().setText("");
 	}
 	
+	/**
+	 * 
+	 * @return enter The button to change scenes.
+	 */
 	public Button getEnter() {
 		return this.enter;
 	}
 	
+	/**
+	 * 
+	 * @param enter The button to change scenes.
+	 */
 	public void setEnter(Button enter) {
 		this.enter = enter;
 	}
 	
+	/**
+	 * 
+	 * @return warning The text that appears when unexpected input is received.
+	 */
 	public Text getWarning() {
 		return this.warning;
 	}
 	
+	/**
+	 * 
+	 * @param warning The text that appears when unexpected input is received.
+	 */
 	public void setWarning(Text warning) {
 		this.warning = warning;
 	}
 	
+	/**
+	 * 
+	 * @return bpane The borderpane to deal with layouts.
+	 */
 	public BorderPane getBpane() {
 		return this.bpane;
 	}
-	
+
+	/**
+	 * 
+	 * @param bpane The borderpane to deal with layouts.
+	 */
 	public void setBpane(BorderPane bpane) {
 		this.bpane = bpane;
 	}
 	
+	/**
+	 * 
+	 * @return group The stack pane to allow nodes to be placed atop one another.
+	 */
 	public StackPane getGroup() {
 		return this.group;
 	}
 	
+	/**
+	 * 
+	 * @param group The stack pane to allow nodes to be placed atop one another.
+	 */
 	public void setGroup(StackPane group) {
 		this.group = group;
 	}
 	
+	/**
+	 * 
+	 * @return pwBox2 The password field for users to confirm.
+	 */
 	public PasswordField getPwBox2() {
 		return this.pwBox2;
 	}
 	
+	/**
+	 * 
+	 * @param pwBox2 The password box for users to confirm.
+	 */
 	public void setPwBox2(PasswordField pwBox2) {
 		this.pwBox2 = pwBox2;
 	}
 	
+	/**
+	 * 
+	 * @return pwBox The password box for users to enter password.
+	 */
 	public PasswordField getPwBox() {
 		return this.pwBox;
 	}
 	
+	/**
+	 * 
+	 * @param pwBox The password box for users to enter password.
+	 */
 	public void setPwBox(PasswordField pwBox) {
 		this.pwBox = pwBox;
 	}
 	
+	/**
+	 * 
+	 * @return userBox The textfield for users to enter username.
+	 */
 	public TextField getUserBox() {
 		return this.userBox;
 	}
 	
+	/**
+	 * 
+	 * @param userBox The textfield for users to enter username.
+	 */
 	public void setUserBox(TextField userBox) {
 		this.userBox = userBox;
 	}
