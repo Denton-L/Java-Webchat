@@ -191,7 +191,7 @@ public class ServerUI extends Application {
 		scene.getStylesheets().add("/custom.css");
 		
 		primaryStage.setScene(scene);
-		primaryStage.getIcons().add(new Image("/ChatIcon.png" ));
+		primaryStage.getIcons().add(new Image("/ServerIcon.png" ));
 		primaryStage.show();
 
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

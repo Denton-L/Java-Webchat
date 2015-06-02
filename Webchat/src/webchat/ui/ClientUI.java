@@ -203,7 +203,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		primaryStage.setResizable(false);
 		primaryStage.setWidth(this.serv.getWidth());
 		primaryStage.setHeight(this.serv.getHeight());
-		primaryStage.getIcons().add(new Image("/ChatIcon.png" ));
+		primaryStage.getIcons().add(new Image("/ClientIcon.png" ));
 		primaryStage.show();
 
 		
