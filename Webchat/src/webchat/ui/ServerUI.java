@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import webchat.database.UserDatabase;
 import webchat.networking.StartServer;
 
@@ -39,8 +41,6 @@ public class ServerUI extends Application {
 	private Text selectText;
 	private Text createText;
 	private File database;
-	
-	
 
 	@Override
 	public void start(final Stage primaryStage) {
@@ -140,14 +140,22 @@ public class ServerUI extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
+
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent we) {
+				System.exit(0);
+			}
+		});
 	}
 
 	private void addFileChooser(final Stage stage, HBox hbox1, HBox hbox2) {
 		// TODO check if this works for runnable jars
 		this.fileChooser.getExtensionFilters().add(
 				new FileChooser.ExtensionFilter("SER file", "*.ser"));
-		this.fileChooser.setInitialDirectory(new File(System.getProperty("user.dir") + "/res/"));
-		
+		this.fileChooser.setInitialDirectory(new File(System
+				.getProperty("user.dir") + "/res/"));
+
 		this.openDatabase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {

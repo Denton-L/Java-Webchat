@@ -288,6 +288,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 					ClientUI.this.client.logout(ClientUI.this.userInstance);
 					ClientUI.this.client = null;
 					ClientUI.this.msgclient = null;
+					System.exit(0);
 				} catch (final RemoteException e) {
 					e.printStackTrace();
 				}
