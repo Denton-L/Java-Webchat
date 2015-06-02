@@ -56,6 +56,8 @@ public class StageModifier {
 	 */
 	private double xvar, yvar;
 	
+	private final ClientUI ui;
+	
 	/**
 	 * 
 	 * @param serv1 The server scene.
@@ -67,7 +69,7 @@ public class StageModifier {
 	 * @param stage1 The top level container.
 	 */
 	public StageModifier(Scene serv1, Scene login1, Scene reg1, Scene msg1, ServScene servscene1, MsgScene msgscene1,
-			LoginScene loginscene1, RegScene regscene1, Stage stage1) {
+			LoginScene loginscene1, RegScene regscene1, Stage stage1, ClientUI ui) {
 
 		this.reg = reg1;
 		this.serv = serv1;
@@ -78,6 +80,7 @@ public class StageModifier {
 		this.loginscene = loginscene1;
 		this.regscene = regscene1;
 		this.stage = stage1;
+		this.ui = ui;
 	}
 	
 	/**
@@ -116,6 +119,9 @@ public class StageModifier {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				stage.close();
+				if (ui.getClient() != null){
+					ui.logout();
+				}
 				System.exit(0);
 			}
 
