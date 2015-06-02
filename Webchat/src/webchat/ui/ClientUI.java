@@ -206,6 +206,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		primaryStage.getIcons().add(new Image("/ChatIcon.png" ));
 		primaryStage.show();
 
+		
 		this.loginScene.getRegister().setOnAction(
 				new EventHandler<ActionEvent>() {
 					@Override
@@ -282,7 +283,9 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 			@Override
 			public void handle(WindowEvent we) {
 				try {
-					ClientUI.this.client.logout(ClientUI.this.userInstance);
+					if (ClientUI.this.client != null){
+						ClientUI.this.client.logout(ClientUI.this.userInstance);
+					}
 					ClientUI.this.client = null;
 					ClientUI.this.msgclient = null;
 					System.exit(0);
@@ -310,6 +313,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 					this.msgclient.startClient();
 					this.stage.setScene(this.msg);
 					this.loginScene.clrAll();
+					client.refreshUsers();
 				} else {
 					this.loginScene.getWarning().setVisible(true);
 				}
