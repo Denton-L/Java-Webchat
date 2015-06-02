@@ -1,5 +1,9 @@
 package webchat.ui;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+import webchat.networking.StartServer;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -50,7 +54,7 @@ public class StageModifier {
 	 * The login scene.
 	 */
 	private final Scene login;
-	private final Scene msg;
+	private  Scene msg;
 	/**
 	 * The variables to deal with dragging the window.
 	 */

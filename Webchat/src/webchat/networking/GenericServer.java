@@ -1,13 +1,16 @@
 package webchat.networking;
 
 import java.net.MalformedURLException;
+import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  * A generic RMI server from which other clients will inherit.
@@ -24,6 +27,8 @@ public abstract class GenericServer {
 	private final Remote binding;
 	
 	private static boolean registryNotStarted = true;
+	
+	Registry registry;
 	
 	/**
 	 * @param location
@@ -56,7 +61,12 @@ public abstract class GenericServer {
 		} catch (final ExportException e) {
 			registryNotStarted = false;
 		}
-		final Registry registry = LocateRegistry.getRegistry();
+		registry = LocateRegistry.getRegistry();
 		registry.rebind(this.location, this.binding);
+	}
+	
+	public void shutDown() throws AccessException, RemoteException, NotBoundException {
+		registry.unbind(this.location);
+		//UnicastRemoteObject.unexportObject(this.binding,true);
 	}
 }
