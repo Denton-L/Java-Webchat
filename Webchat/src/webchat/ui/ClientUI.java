@@ -28,39 +28,99 @@ import webchat.message.networking.client.MessageClient;
 import webchat.users.networking.client.UserClient;
 
 /**
- * Main Interface object
- *
  * Takes care of interaction between GUI objects and event handling.
  *
  * @author Jing Yi Xie
- * @version 1.0
+ * @version 2015-05-25
  */
 
 public class ClientUI extends Application implements EventHandler<ActionEvent> {
+
+	/**
+	 * The server page for the client interface.
+	 */
 	private final ServScene servScene = new ServScene();
+	/**
+	 * The login page for the client interface.
+	 */
 	private final ChatScene chatScene = new ChatScene();
+	/**
+	 * The registration page for the client interface.
+	 */
 	private final RegScene regScene = new RegScene();
+	/**
+	 * The message page for the client interface.
+	 */
 	private final MsgScene msgScene = new MsgScene();
 
+	/**
+	 * A text for spacing messages.
+	 */
 	private Text blank;
+	/**
+	 * A text for storing username.
+	 */
 	private Text userName;
+	/**
+	 * A text for storing messages.
+	 */
 	private Text msgText;
+	/**
+	 * A text for storing time.
+	 */
 	private Text time;
+	/**
+	 * A text for specifying an online user.
+	 */
 	private Text onlineUser;
 
+	/**
+	 * The scene to create the server page.
+	 */
 	private Scene serv;
+	/**
+	 * The scene to create the chat page.
+	 */
 	private Scene chat;
+	/**
+	 * The scene to create the registration page.
+	 */
 	private Scene reg;
+	/**
+	 * The scene to create the message page.
+	 */
 	private Scene msg;
 
+	/**
+	 * A string array to hold online users.
+	 */
 	private String[] usersOnline = null;
 
+	/**
+	 * {@code UserClient} instance.
+	 */
 	private UserClient client;
+	/**
+	 * {@code MessageClient} instance.
+	 */
 	private MessageClient msgclient;
+	/**
+	 * Store ip address in string.
+	 */
 	private String ip;
+	/**
+	 * Byte array to track users.
+	 */
 	private byte[] userInstance;
+	/**
+	 * Stage to store an object of type stage.
+	 */
 	private Stage stage;
 
+	/**
+	 * 
+	 * @param messages Holds the username, timestamp and message of sent data.
+	 */
 	public void writeMsg(SortedSet<Message> messages) {
 		for (final Message message : messages) {
 			try {
@@ -68,7 +128,8 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				this.userName = new Text(message.getUsername() + " said");
 				this.msgText = new Text("\"" + message.getContent() + "\"");
 				this.msgText.setWrappingWidth(527);
-				this.time = new Text("" + new Date(message.getTimestamp()).toString());
+				this.time = new Text(""
+						+ new Date(message.getTimestamp()).toString());
 				this.time.setFill(Color.GREY);
 				this.userName.setFill(Color.GREY);
 				this.time.setId("textstyle3");
@@ -86,6 +147,10 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		}
 	}
 
+	/**
+	 * 
+	 * @param users An array to hold the users online.
+	 */
 	public void writeUsers(String[] users) {
 		for (final String userName : users) {
 			try {
@@ -115,18 +180,34 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		throw new RuntimeException("Hey Fil, fix this!");
 	}
 
+	/**
+	 * 
+	 * @return usersOnline Users currently online.
+	 */
 	public String[] getUsers() {
 		return this.usersOnline;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ClientUI getUI() {
 		return this;
 	}
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
 
+	/**
+	 * 
+	 * @param t
+	 */
 	public void reportMessageException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -140,6 +221,10 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		});
 	}
 
+	/**
+	 * 
+	 * @param t
+	 */
 	public void reportUserNameException(final Throwable t) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -156,16 +241,19 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	 */
 	@Override
 	public void start(final Stage primaryStage) {
-		Font.loadFont(ClientUI.class.getResource("/AvenirLTStd-Light.otf").toExternalForm(), 10);
-		Font.loadFont(ClientUI.class.getResource("/NexaLight.otf").toExternalForm(), 10);
-		
+		Font.loadFont(ClientUI.class.getResource("/AvenirLTStd-Light.otf")
+				.toExternalForm(), 10);
+		Font.loadFont(ClientUI.class.getResource("/NexaLight.otf")
+				.toExternalForm(), 10);
+
 		this.serv = this.servScene.createServ();
 		this.chat = this.chatScene.createChat();
 		this.reg = this.regScene.createReg();
 		this.msg = this.msgScene.createMsg();
 
-		final StageModifier stagemod = new StageModifier(this.serv, this.chat, this.reg, this.servScene,
-				this.msgScene, this.chatScene, this.regScene, primaryStage);
+		final StageModifier stagemod = new StageModifier(this.serv, this.chat,
+				this.reg, this.servScene, this.msgScene, this.chatScene,
+				this.regScene, primaryStage);
 		stagemod.draggable();
 		stagemod.testmethod();
 
@@ -211,7 +299,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 							e.printStackTrace();
 						}
 					}
-					
+
 				});
 
 		this.msgScene.getInput().addEventFilter(KeyEvent.KEY_PRESSED,
@@ -224,18 +312,18 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 											.getText().trim().isEmpty()) {
 								try {
 									ClientUI.this.msgclient
-							.sendMessage(ClientUI.this.msgScene
+											.sendMessage(ClientUI.this.msgScene
 													.getInput().getText());
 								} catch (final RemoteException e) {
 									e.printStackTrace();
 								} catch (final NotLoggedInException e) {
 									try {
 										ClientUI.this.client
-								.logout(ClientUI.this.userInstance);
+												.logout(ClientUI.this.userInstance);
 										ClientUI.this.client = null;
 										ClientUI.this.msgclient = null;
 										primaryStage
-								.setScene(ClientUI.this.serv);
+												.setScene(ClientUI.this.serv);
 										ClientUI.this.msgScene.clrAll();
 										ClientUI.this.msgclient.stopClient();
 									} catch (final RemoteException e1) {
@@ -264,6 +352,9 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		});
 	}
 
+	/**
+	 * Action handler
+	 */
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getSource() == this.chatScene.getEnter()) {
