@@ -38,7 +38,7 @@ import webchat.users.networking.client.UserClient;
 
 public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	private final ServScene servScene = new ServScene();
-	private final ChatScene chatScene = new ChatScene();
+	private final LoginScene loginScene = new LoginScene();
 	private final RegScene regScene = new RegScene();
 	private final MsgScene msgScene = new MsgScene();
 
@@ -49,7 +49,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	private Text onlineUser;
 
 	private Scene serv;
-	private Scene chat;
+	private Scene login;
 	private Scene reg;
 	private Scene msg;
 
@@ -102,28 +102,26 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	}
 
 	public void writeUsers(String[] users) {
-		System.out.println(users.length);
 		if (ClientUI.this.msgScene.getBox2().getChildren().size() > 0) {
-			System.out.println("wat0.5");
 			try {
 				hasNotRemoved = true;
-				System.out.println("wat0");
 				ClientUI.this.msgScene
 						.getBox2()
 						.getChildren()
 						.remove(0,
 								ClientUI.this.msgScene.getBox2().getChildren()
 										.size());
+				hasNotRemoved = false;
 			} catch (final Exception e) {
 				reportRemoveUserNameException(e);
 			}
 		}
 		else 
 			hasNotRemoved = false;
-		System.out.println("wataaaa");
+		
 		while (hasNotRemoved){
 		}
-		System.out.println("wat6");
+	
 		for (final String userName : users) {
 			try {
 				hasNotAdded = true;
@@ -134,9 +132,8 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 								+ "-fx-font-family: AvenirLTStd-Light;"
 								+ "-fx-font-size: 30;");
 				this.onlineUser.setId(userName);
-				System.out.println("wat6");
 				this.msgScene.getBox2().getChildren().add(this.onlineUser);
-
+				hasNotAdded = false;
 			} catch (final Exception e) {
 				reportUserNameException(e);
 			}
@@ -173,7 +170,6 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				ClientUI.this.msgScene.getBox2().getChildren()
 						.add(ClientUI.this.onlineUser);
 				hasNotAdded = false;
-				System.out.println(ClientUI.this.onlineUser);
 			}
 		});
 	}
@@ -182,10 +178,8 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("wat1");
 				ClientUI.this.msgScene.getBox2().getChildren().remove(0, ClientUI.this.msgScene.getBox2().getChildren().size());
 				hasNotRemoved = false;
-				System.out.println("wat2");
 			}
 		});
 	}
@@ -197,12 +191,12 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	@Override
 	public void start(final Stage primaryStage) {
 		this.serv = this.servScene.createServ();
-		this.chat = this.chatScene.createChat();
+		this.login = this.loginScene.createChat();
 		this.reg = this.regScene.createReg();
 		this.msg = this.msgScene.createMsg();
 
 		final StageModifier stagemod = new StageModifier(this.servScene,
-				this.msgScene, this.chatScene, this.regScene, primaryStage);
+				this.msgScene, this.loginScene, this.regScene, primaryStage);
 		stagemod.draggable();
 		stagemod.testmethod();
 
@@ -215,16 +209,16 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		primaryStage.setHeight(this.serv.getHeight());
 		primaryStage.show();
 
-		this.chatScene.getRegister().setOnAction(
+		this.loginScene.getRegister().setOnAction(
 				new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent event) {
-						ClientUI.this.chatScene.clrAll();
+						ClientUI.this.loginScene.clrAll();
 						primaryStage.setScene(ClientUI.this.reg);
 					}
 				});
 
-		this.chatScene.getEnter().setOnAction(this);
+		this.loginScene.getEnter().setOnAction(this);
 
 		this.servScene.getEnter().setOnAction(this);
 
@@ -236,7 +230,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent mouseEvent) {
-						primaryStage.setScene(ClientUI.this.serv);
+						primaryStage.setScene(ClientUI.this.login);
 						ClientUI.this.msgScene.clrAll();
 						ClientUI.this.msgclient.stopClient();
 						try {
@@ -272,7 +266,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 										ClientUI.this.client = null;
 										ClientUI.this.msgclient = null;
 										primaryStage
-												.setScene(ClientUI.this.serv);
+												.setScene(ClientUI.this.login);
 										ClientUI.this.msgScene.clrAll();
 										ClientUI.this.msgclient.stopClient();
 									} catch (final RemoteException e1) {
@@ -303,26 +297,26 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent e) {
-		if (e.getSource() == this.chatScene.getEnter()) {
+		if (e.getSource() == this.loginScene.getEnter()) {
 			try {
 				if (client == null){
 					this.client = new UserClient(this.ip, this);
 					this.client.startClient();
 				}
-				this.userInstance = this.client.signIn(this.chatScene
-						.getUserBox().getText(), this.chatScene.getPwBox()
+				this.userInstance = this.client.signIn(this.loginScene
+						.getUserBox().getText(), this.loginScene.getPwBox()
 						.getText().getBytes());
 				if (this.userInstance != null) {
 					this.msgclient = new MessageClient(this.ip,
 							this.userInstance, this);
 					this.msgclient.startClient();
 					this.stage.setScene(this.msg);
-					this.chatScene.clrAll();
+					this.loginScene.clrAll();
 				} else {
-					this.chatScene.getWarning().setVisible(true);
+					this.loginScene.getWarning().setVisible(true);
 				}
 			} catch (final RemoteException o) {
-				this.chatScene.getWarning().setVisible(true);
+				this.loginScene.getWarning().setVisible(true);
 			} catch (MalformedURLException | NotBoundException o) {
 				o.printStackTrace();
 			}
@@ -333,7 +327,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 				this.client = new UserClient(this.ip, this);
 				client = null;
 				this.servScene.clrAll();
-				this.stage.setScene(this.chat);
+				this.stage.setScene(this.login);
 			} catch (MalformedURLException | RemoteException
 					| NotBoundException o) {
 				this.servScene.getWarning().setVisible(true);
@@ -350,9 +344,9 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 					if (this.client.register(this.regScene.getUserBox()
 							.getText(), this.regScene.getPwBox().getText()
 							.getBytes())) {
-						this.stage.setScene(this.chat);
+						this.stage.setScene(this.login);
 						this.regScene.clrAll();
-						this.chatScene.getWarning().setVisible(false);
+						this.loginScene.getWarning().setVisible(false);
 					} else {
 						this.regScene.getWarning().setVisible(true);
 					}
@@ -379,7 +373,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 						this.msgclient.stopClient();
 						this.client = null;
 						this.msgclient = null;
-						this.stage.setScene(this.serv);
+						this.stage.setScene(this.login);
 						this.msgScene.clrAll();
 					} catch (final RemoteException e1) {
 						e1.printStackTrace();

@@ -12,13 +12,13 @@ import javafx.stage.StageStyle;
 public class StageModifier {
 	private final ServScene servscene;
 	private final MsgScene msgscene;
-	private final ChatScene chatscene;
+	private final LoginScene chatscene;
 	private final RegScene regscene;
 	private final Stage stage;
 	private double xvar, yvar;
 	
 	public StageModifier(ServScene servscene1, MsgScene msgscene1,
-			ChatScene chatscene1, RegScene regscene1, Stage stage1) {
+			LoginScene chatscene1, RegScene regscene1, Stage stage1) {
 		this.servscene = servscene1;
 		this.msgscene = msgscene1;
 		this.chatscene = chatscene1;
