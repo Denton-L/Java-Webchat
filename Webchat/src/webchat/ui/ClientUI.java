@@ -11,7 +11,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -59,19 +58,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 	private byte[] userInstance;
 	private Stage stage;
 
-	private final static Font f = Font.loadFont(
-			ClientUI.class.getResource("/SegoeUILight.ttf").toExternalForm(),
-			17);
-	private final static Font fLarge = Font.loadFont(ClientUI.class
-			.getResource("/SegoeUILight.ttf").toExternalForm(), 25);
-	private final static Font fBig = Font.loadFont(
-			ClientUI.class.getResource("/SegoeUILight.ttf").toExternalForm(),
-			45);
-	private final static Font font = Font.loadFont(
-			ClientUI.class.getResource("/AvenirLTStd-Light.otf")
-					.toExternalForm(), 17);
-	private final static Font font2 = Font.loadFont(
-			ClientUI.class.getResource("/NexaLight.otf").toExternalForm(), 17);
+
 
 	public void writeMsg(SortedSet<Message> messages) {
 		for (final Message message : messages) {
