@@ -139,7 +139,7 @@ public class ServerUI extends Application {
 		scene.getStylesheets().add("/custom.css");
 
 		primaryStage.setScene(scene);
-		primaryStage.getIcons().add(new Image("file:/background.jpg"));
+		//primaryStage.getIcons().add(new Image("/IMAGEGOESHERE.jpg" ));
 		primaryStage.show();
 
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
