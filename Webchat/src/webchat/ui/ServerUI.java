@@ -123,7 +123,6 @@ public class ServerUI extends Application {
 					try {
 						StartServer.stop();
 					} catch (RemoteException | NotBoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -245,7 +244,6 @@ public class ServerUI extends Application {
 	 *            The second horizontal box for layout purposes.
 	 */
 	private void addFileChooser(final Stage stage, HBox hbox1, HBox hbox2) {
-		// TODO check if this works for runnable jars
 		this.fileChooser.getExtensionFilters().add(
 				new FileChooser.ExtensionFilter("SER file", "*.ser"));
 		this.fileChooser.setInitialDirectory(new File(System
