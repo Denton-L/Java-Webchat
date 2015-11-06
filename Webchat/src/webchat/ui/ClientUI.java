@@ -290,7 +290,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		this.stage = primaryStage;
 
 		primaryStage.setTitle("Web Chat");
-		primaryStage.setScene(this.serv);
+		primaryStage.setScene(this.msg);
 		primaryStage.setResizable(false);
 		primaryStage.setWidth(this.serv.getWidth());
 		primaryStage.setHeight(this.serv.getHeight());
