@@ -21,11 +21,8 @@ Finally, in order to check for any updates in the state of the chat, the project
 Some more minor changes:
 
 * More instructions in the UI.
-
 * Add UI indicator of which user is currently logged in.
-
 * Refactoring so that the project isn't over-abstracted.
-
 * Including a logoff prompt.
 
 ## Contributors
