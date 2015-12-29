@@ -32,8 +32,8 @@ Some more minor changes:
 
 ## Contributors
 
-* @Filip-F (Filip Francetic)
+* [Filip Francetic](https://github.com/Filip-F)
 
-* @Denton-L (Denton Liu)
+* [Denton Liu](https://github.com/Denton-L)
 
-* @xiejxie (Jing Yi Xie)
+* [Jing Yi Xie](https://github.com/xiejxie)
