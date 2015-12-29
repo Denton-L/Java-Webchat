@@ -276,10 +276,10 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		Font.loadFont(ClientUI.class.getResource("/NexaLight.otf")
 				.toExternalForm(), 10);
 
-		this.serv = this.servScene.createServ();
-		this.login = this.loginScene.createChat();
+		this.serv = this.servScene.createServ(); 
 		this.reg = this.regScene.createReg();
 		this.msg = this.msgScene.createMsg();
+		this.login = this.loginScene.createChat();
 
 		final StageModifier stagemod = new StageModifier(this.serv, this.login,
 				this.reg, this.msg, this.servScene, this.msgScene, this.loginScene,
@@ -290,7 +290,7 @@ public class ClientUI extends Application implements EventHandler<ActionEvent> {
 		this.stage = primaryStage;
 
 		primaryStage.setTitle("Web Chat");
-		primaryStage.setScene(this.msg);
+		primaryStage.setScene(this.serv);
 		primaryStage.setResizable(false);
 		primaryStage.setWidth(this.serv.getWidth());
 		primaryStage.setHeight(this.serv.getHeight());
