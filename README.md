@@ -6,11 +6,9 @@ Java-Webchat was designed and created as the final project of ICS4U1, grade 12 c
 
 Over the course of this project, there were many choices as to the design of this program. This application uses RMI as the communication protocol between the server and the clients. In addition to this, user security is protected from database breaches as user credentials are encrypted using a salted SHA-256 hash. Finally, JavaFX was employed to render the UI as it gives a modern and very aesthetically pleasing design.
 
-![Image of Chat Interface](/DemoImages/chatting.png)
-
-![Image of Login Interface](/DemoImages/login.png)
-
-![Image of Server Interface](/DemoImages/server.png)
+<img src="/DemoImages/chatting.png" alt="Image of Chat Interface" width=33% />
+<img src="/DemoImages/login.png" alt="Image of Login Interface" width=33% />
+<img src="/DemoImages/server.png" alt="Image of Server Interface" width=33% />
 
 ## Improvements
 
