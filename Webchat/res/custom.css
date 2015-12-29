@@ -1,6 +1,5 @@
-.text-field:focused 
-{
-    -fx-focus-color: transparent;
+.text-field:focused {
+	-fx-focus-color: transparent;
 }
 
 .text-field {
@@ -9,39 +8,39 @@
 	-fx-background-radius: 0;
 	-fx-background-color: rgba(255, 255, 255, 0.1);
 	-fx-prompt-text-fill:#666666;
-    -fx-text-box-border: transparent; 
+	-fx-text-box-border: transparent; 
 }
 
 #pane {
-    -fx-background-image: url("background.jpg");
-    -fx-background-repeat: stretch;   
-    -fx-background-size: 900 506;
-    -fx-background-position: center center;
-    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+	-fx-background-image: url("background.jpg");
+	-fx-background-repeat: stretch;	
+	-fx-background-size: 900 506;
+	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
 }
 
-.button 
-{
+.button {
 	-fx-border-width: 1.5;
 	-fx-border-color: white;
 	-fx-font-size: 18;
 	-fx-font-family: 'Verdana';
 	-fx-background-color: rgba(0,0,0,0);
-    -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.8) , 5, 0.0 , 0 , 1 );
-	}
+	-fx-text-fill: white;
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.8) , 5, 0.0 , 0 , 1 );
+}
 
 .button:hover {
 	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.8) , 5, 0.0 , 0 , 1 );
 }
 
 .thumb {
-		-fx-border-color: transparent;
-		-fx-background-radius:0;
-	    -fx-background-color: #767676;
-	    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.0) , 5, 0.0 , 0 , 1 );
-	
+	-fx-border-color: transparent;
+	-fx-background-radius:0;
+	-fx-background-color: #767676;
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.0) , 5, 0.0 , 0 , 1 );
+
 }
+
 .scroll-bar:vertical .track {
 	-fx-border-color: transparent;
 	-fx-background-color:white;
@@ -56,56 +55,56 @@
 }
 
 .scroll-pane:text-area {
-			-fx-background: transparent;
+	-fx-background: transparent;
 }
 
 .scroll-pane {
-				-fx-background-color: white;
-				-fx-background:transparent;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
+	-fx-background-color: white;
+	-fx-background:transparent;
+	-fx-background-insets: 0;
+	-fx-padding: 0;
 }
 
 .scroll-pane .corner {
 	-fx-control-inner-background: transparent;
-				-fx-background-color: transparent;
-				-fx-background:transparent;
-    -fx-background-insets: 0;
+	-fx-background-color: transparent;
+	-fx-background:transparent;
+	-fx-background-insets: 0;
 }
 
 .scroll-pane {
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background: transparent;   
-    -fx-background-color: rgba(255,255,255,0.1);    
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+	-fx-background: transparent;	
+	-fx-background-color: rgba(255,255,255,0.1);	
 }
 
 .scroll-pane:focused, .scroll-pane .corner {
-    -fx-background-insets: 0;
+	-fx-background-insets: 0;
 }
 
 
 #welcome {
 	-fx-font-size: 50px;
-   -fx-font-family: NexaLight;
-   -fx-fill: #FFFFFF;
-   -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.7) , 8, 0.0 , 0 , 1 );
+	-fx-font-family: NexaLight;
+	-fx-fill: #FFFFFF;
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.7) , 8, 0.0 , 0 , 1 );
 }
 
 #welcome:hover {
-   -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.7) , 8, 0.0 , 0 , 1 );
+	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.7) , 8, 0.0 , 0 , 1 );
 }
 
 #textstyle2 {
 	-fx-font-size: 20px;
-   -fx-font-family: AvenirLTStd-Light;
-   -fx-fill: #FFFFFF;
-   -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.9) , 8, 0.0 , 0 , 1 );
+	-fx-font-family: AvenirLTStd-Light;
+	-fx-fill: #FFFFFF;
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.9) , 8, 0.0 , 0 , 1 );
 }
 
 #textstyle3 {
 	-fx-font-size: 20px;
-   -fx-font-family: AvenirLTStd-Light;
+	-fx-font-family: AvenirLTStd-Light;
 }
 
 
@@ -115,16 +114,16 @@
 }
 
 #username:hover {
--fx-fill: white;
--fx-effect: dropshadow( gaussian, rgba(255,255,255,0.7) , 8, 0.0 , 0 , 1 );	
+	-fx-fill: white;
+	-fx-effect: dropshadow( gaussian, rgba(255,255,255,0.7) , 8, 0.0 , 0 , 1 );	
 }
 
 #username {
--fx-fill: white;
+	-fx-fill: white;
 }
 
 #usernameoff {
--fx-fill:grey;
+	-fx-fill:grey;
 }
 
 
@@ -133,18 +132,17 @@
 }
 
 #sp2 {
-	 -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background: transparent;
-    -fx-background-color: transparent;
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+	-fx-background: transparent;
+	-fx-background-color: transparent;
 }
 
 #header {
 	-fx-background-color: rgba(0,0,0,0.3);
 }
 
-#inputbox 
-{
+#inputbox {
 	-fx-font-family: AvenirLTStd-Light;
 	-fx-font-size:20;
 	-fx-prompt-text-fill:white;
@@ -152,11 +150,10 @@
 	-fx-background-color: transparent;
 	-fx-border-width: 0;
 	-fx-border-color: white;
--fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.8), 6, 0.0 , 0 , 1 );
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.8), 6, 0.0 , 0 , 1 );
 }
 
-#inputbox .content, #inputbox .scroll-pane, #msgboxs .content, #msgboxs .scroll-pane
-{
+#inputbox .content, #inputbox .scroll-pane, #msgboxs .content, #msgboxs .scroll-pane {
 	-fx-background-color:transparent;
 }
 
@@ -168,25 +165,22 @@
 	-fx-font-family: AvenirLTStd-Light;
 	-fx-font-size: 23;
 	-fx-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.8), 6, 0.0 , 0 , 1 );
-	
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.8), 6, 0.0 , 0 , 1 );
+
 }
 
-#logout
-{
+#logout {
 	-fx-font-family: AvenirLTStd-Light;
 	-fx-font-size: 40;
 	-fx-fill: white;
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.7) , 8, 0.0 , 0 , 1 );
 }
 
-#logout:hover
-{
+#logout:hover {
 	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.7) , 8, 0.0 , 0 , 1 );
 }
 
-#enterbut
-{
+#enterbut {
 	-fx-font-family: AvenirLTStd-Light;
 	-fx-border-width: 1.5;
 	-fx-border-color: transparent;
@@ -195,7 +189,6 @@
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.7) , 8, 0.0 , 0 , 1 );
 }
 
-#enterbut:hover
-{
+#enterbut:hover {
 	-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.7) , 8, 0.0 , 0 , 1 );
 }
