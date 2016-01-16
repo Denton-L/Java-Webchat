@@ -1,6 +1,6 @@
 # Java-Webchat
 ## Description
-Java-Webchat was designed and created as the final project of ICS4U1, grade 12 computer science. It was designed as a small and portable chat application which also incorporated many skills that we accrued over the course of the year.
+Java-Webchat was designed and created as a small and portable chat application which served as a means to learn network protocols and as useful practice in Java.  
 
 Over the course of this project, there were many choices as to the design of this program. This application uses RMI as the communication protocol between the server and the clients. In addition to this, user security is protected from database breaches as user credentials are encrypted using a salted SHA-256 hash. Finally, JavaFX was employed to render the UI as it gives a modern and very aesthetically pleasing design.
 
